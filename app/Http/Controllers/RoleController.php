@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\RoleRepository;
+use App\Rules\ForeignKeyRule;
 
 class RoleController extends BaseController
 {
@@ -50,11 +51,9 @@ class RoleController extends BaseController
     protected function validator_delete(array $data)
     {
 		Log::info('Execute Role delete validator.');
-        return Validator::make($data, [
-			'id' => [Rule::exists('profilerole')->where(function ($query) {
-					$query->where('role_id', $data['id']);
-				}),
-			],
+        Log::info('ID: '.$data['id']);
+		return Validator::make($data, [
+			'id' => [new ForeignKeyRule($this->repository, $data),],
 		]);
     }
 	

@@ -28,6 +28,7 @@
 							<input type="hidden" id="_method" name="_method" value="{{ $method }}">
 							<span class="navbar-text text-dark">@lang('messages.ProfilesRoles')</span>
 							<input type="hidden" id="page" name="page" value="{{ $page }}">
+							<input type="hidden" id="id" name="id" value="">
 							@foreach ($filters->keys() as $filterKey)
 								@if ($filterKey == 'profile_id_filter')
 									{{ Form::select($filterKey, $profiles, $filters->get($filterKey), ['autofocus', 'placeholder' => 'Pick a profile...', 'class' => 'form-control mr-sm-2'])}}
@@ -42,6 +43,20 @@
 				</div>
 				<div class="row">
 					<div class="container">
+						@if(isset($status))
+							<div class="alert alert-success">
+								{{ $status }}
+							</div>
+						@endif
+						@if ($errors->any())
+							<div class="alert alert-danger">
+								<ul>
+									@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+						@endif
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover">
 								<thead>

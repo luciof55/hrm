@@ -14,8 +14,9 @@ class AddProfileToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('profile_id')->after('id');
+			$table->unsignedInteger('profile_id')->after('id');
 			$table->foreign('profile_id')->references('id')->on('profiles');
+			$table->softDeletes();
         });
     }
 

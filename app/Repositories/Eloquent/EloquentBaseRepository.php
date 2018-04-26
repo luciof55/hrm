@@ -112,10 +112,14 @@ class EloquentBaseRepository extends AbstractRepository
 				$command->restore();
 				Log::info('Profile Restore.');
 			} else {
+				$this->softDeleteCascade($command);
 				$command->delete();
 				Log::info('Profile Deleted.');
 			}
 		}
+	}
+	
+	protected function softDeleteCascade($command) {
 	}
 	
 	protected function addNestedFilters($query, $filterAttributes) {

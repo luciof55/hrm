@@ -83,6 +83,7 @@ function crud() {
 			action = action.replace("|id|", id);
 			method = $(e.relatedTarget).data('method');
 			$('#_method').val(method);
+			$('#id').val(id);
 			$('#actionForm').attr('action', action);
 			$('#button_confirm_modal').show();
 			//alert('Set done: ' + $('#_method').val());

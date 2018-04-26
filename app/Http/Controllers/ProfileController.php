@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ProfileRepository;
+use App\Rules\ForeignKeyRule;
 
 class ProfileController extends BaseController
 {
@@ -50,11 +51,9 @@ class ProfileController extends BaseController
     protected function validator_delete(array $data)
     {
 		Log::info('Execute Profile delete validator.');
-        return Validator::make($data, [
-			'id' => [Rule::exists('user')->where(function ($query) {
-					$query->where('profile_id', $data['id']);
-				}),
-			],
+        Log::info('ID: '.$data['id']);
+		return Validator::make($data, [
+			'id' => [new ForeignKeyRule($this->repository, $data),],
 		]);
     }
 	

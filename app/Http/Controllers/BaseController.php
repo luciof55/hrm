@@ -21,7 +21,7 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(\Illuminate\Http\Request $request)
+    public function index(\Illuminate\Http\Request $request, $message = null)
     {
 		$collectionView = collect([]);
 		$entity = $this->getRouteResource();
@@ -65,10 +65,12 @@ class BaseController extends Controller
 		$collectionView->put('page', $page);
 		$collectionView->put('method', 'GET');
 		$collectionView->put('action', action($this->getIndexActionName()));
+		$collectionView->put('status', $message);
 		
 		$this->referenceData($request, $collectionView);
 		
 		Log::info('End Execute, return view '. $this->getIndexView());
+		
 		return view($this->getIndexView(), $collectionView->all());
     }
 
@@ -120,7 +122,7 @@ class BaseController extends Controller
 			Log::info('Execute '. $entity.' store.');
 			$this->validator_create($request->all())->validate();
 			$this->repository->create($request->all());
-			return $this->index($request);
+			return $this->index($request, 'Successfully saved!');
 		} catch (Exception $e) {
 			$collectionStore->put('alertSuccess', 'ERROR');
 			$collectionStore->put('command', $this->getCommand($request));
@@ -214,7 +216,7 @@ class BaseController extends Controller
 			$this->validator_update($request->all())->validate();
 			$id = $request->input('id');
 			$this->repository->update($id, $request->all());
-			return $this->index($request);
+			return $this->index($request, 'Successfully updated!');
 		} catch (Exception $e) {
 			$collectionUpdate->put('alertSuccess', 'ERROR');
 			$collectionUpdate->put('command', $this->getCommand($request));
@@ -240,8 +242,11 @@ class BaseController extends Controller
 			$id = substr($url, strrpos($url, '/') + 1);
 			//Log::info('ID: '. $id);
 			$this->repository->updateSoftDelete($id);
+			$message = 'Successfully updated!';
+		} else {
+			$message = null;
 		}
-		return $this->index($request);
+		return $this->index($request, $message);
     }
 	
 	/**
@@ -259,7 +264,7 @@ class BaseController extends Controller
 			$validator->validate();
 		}
 		$this->repository->forceDelete($id);
-		return $this->index($request);
+		return $this->index($request, 'Successfully deleted!');
     }
 	
 	public function getPageSize() {

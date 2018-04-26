@@ -47494,8 +47494,9 @@ module.exports = Component.exports
 			method = $(e.relatedTarget).data('method');
 			$('#_method').val(method);
 			$('#actionForm').attr('action', action);
+			$('#id').val(id);
 			$('#button_confirm_modal').show();
-			//alert('Set done: ' + $('#_method').val());
+			alert('Set done: ' + action);
 		};
 	});
 

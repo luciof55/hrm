@@ -43,11 +43,24 @@ class Role extends Model
 	
 	public function profilesroles()
     {
-        return $this->hasMany('App\ProfilesRoles');
+        return $this->hasMany('App\ProfileRole');
     }
+	
+	public function privileges()
+    {
+        return $this->hasMany('App\Privilege');
+    }
+	
+	public function profiles() {
+		return $this->belongsToMany('App\Profile', 'profiles_roles');
+	}
 	
 	public function resources() {
 		return $this->belongsToMany('App\Resource', 'privileges');
+	}
+	
+	public function canDelete() {
+		return $this->profiles->isEmpty() && $this->resources->isEmpty();
 	}
 	
 	public function getOrderAttributes() {

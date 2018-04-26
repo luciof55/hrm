@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 		Validator::extend('MultipleUniqueRule', 'MultipleUniqueRule@passes');
+		Validator::extend('ForeignKeyRule', 'ForeignKeyRule@passes');
     }
 
     /**

@@ -22,7 +22,26 @@
                             </div>
                         </div>
 						
-						<div class="container">
+						<div class="form-group row">
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover">
+									<thead>
+									  <tr>
+										<th>@lang('messages.Profiles')</th>
+									  </tr>
+									</thead>
+									<tbody>
+										@foreach ($command->profiles as $profile)
+											<tr id="profile_{{$profile->id}}">
+												<td>{{ $profile->name}}</td>
+											</tr>
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+						</div>
+						
+						 <div class="form-group row">
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
 									<thead>
@@ -42,7 +61,7 @@
 						</div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-10">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('messages.Cancel')
                                 </button>
