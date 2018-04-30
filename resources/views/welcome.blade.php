@@ -15,9 +15,9 @@
 		</div>
 	</div>
 	<div class="col-md-10">
-		@if(isset($status))
+		@if (session('unauthorized'))
 			<div class="alert alert-danger">
-				{{ $status }}
+				{{ session('unauthorized') }}
 			</div>
 		@endif
 	</div>
