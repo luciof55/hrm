@@ -52,7 +52,7 @@
 									<tbody>
 										@foreach ($command->resources as $resource)
 											<tr id="resource_{{$resource->id}}">
-												<td>{{ $resource->name}}</td>
+												<td>{{ $resource->display_name}}</td>
 											</tr>
 										@endforeach
 									</tbody>
@@ -61,11 +61,7 @@
 						</div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-10">
-                                <button type="submit" class="btn btn-primary">
-                                    @lang('messages.Cancel')
-                                </button>
-                            </div>
+                            @include('admin.down_buttons', ['btn_save' => false])
                         </div>
                     </form>
                 </div>

@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Profile;
+use App\Model\Profile;
 use App\Repositories\Contracts\ProfileRepository;
 
 class EloquentProfileRepository extends EloquentBaseRepository implements ProfileRepository
@@ -13,7 +13,7 @@ class EloquentProfileRepository extends EloquentBaseRepository implements Profil
     }
 	
 	public function getInstance() {
-		return new \App\Profile();
+		return new Profile();
 	}
 	
 	protected function softDeleteCascade($profile) {

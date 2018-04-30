@@ -18,7 +18,7 @@
                         <div class="form-group row">
                             <label for="resource" class="col-md-4 col-form-label text-md-right">@lang('messages.Resource')</label>
                             <div class="col-md-6">
-                                <input id="resource" type="text" class="form-control" name="resource" value="{{ $command->resource->name }}" autofocus readonly>
+                                <input id="resource" type="text" class="form-control" name="resource" value="{{ $command->resource->display_name }}" autofocus readonly>
                             </div>
                         </div>
 						
@@ -30,11 +30,7 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    @lang('messages.Cancel')
-                                </button>
-                            </div>
+                            @include('admin.down_buttons', ['btn_save' => false])
                         </div>
                     </form>
                 </div>

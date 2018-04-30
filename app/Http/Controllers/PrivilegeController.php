@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Privilege;
+use App\Model\Privilege;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -64,12 +64,12 @@ class PrivilegeController extends BaseController
      * @param  \Illuminate\Support\Collection  $collection
      */
 	protected function referenceData(\Illuminate\Http\Request $request, \Illuminate\Support\Collection $collection) {
-		$resources = $this->resourceRepository->select(['id', 'name']);
+		$resources = $this->resourceRepository->select(['id', 'display_name']);
 		$roles = $this->roleRepository->select(['id', 'name']);
 		
 		$select_resource = collect([]);
 		foreach ($resources as $resource) {
-			$select_resource->put($resource->id, $resource->name);
+			$select_resource->put($resource->id, $resource->display_name);
 		}
 		$collection->put('resources', $select_resource);
 		
@@ -90,7 +90,7 @@ class PrivilegeController extends BaseController
 		$this->repository = $repository;
 		$this->resourceRepository = $resourceRepository;
 		$this->roleRepository = $roleRepository;
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 	
 	public function getPageSize() {

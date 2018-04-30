@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ProfileRole;
+use App\Model\ProfileRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -90,7 +90,7 @@ class ProfileRoleController extends BaseController
 		$this->repository = $repository;
 		$this->profileRepository = $profileRepository;
 		$this->roleRepository = $roleRepository;
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 	
 	public function getPageSize() {

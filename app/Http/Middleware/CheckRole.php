@@ -16,8 +16,8 @@ class CheckRole
      */
     public function handle($request, Closure $next, $role)
     {
-        if (! $request->user()->hasRole($role)) {
-            // Redirect...
+        if (! $request->user()->profile->roles->resources->contains($role)) {
+             return view('welcome', ['status' => 'This action is unauthorized.']);
         }
 
         return $next($request);

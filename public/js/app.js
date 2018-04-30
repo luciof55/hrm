@@ -47419,10 +47419,25 @@ module.exports = Component.exports
 			$('#' + array_id[0] + '_' + old_id).removeClass('table-active');
 			if (old_id == array_id[1]) {
 				_values_id[variable_name] = null;
+				$('#button_view').addClass('disabled');
+				$('#button_edit').addClass('disabled');
+				$('#button_enable').addClass('disabled');
+				$('#button_remove').addClass('disabled');
 				return;
 			};
 		};
 		_values_id[variable_name] = array_id[1];
+		$('#button_view').removeClass('disabled');
+		$('#button_edit').removeClass('disabled');
+		$('#button_enable').removeClass('disabled');
+		$('#button_remove').removeClass('disabled');
+
+		if ($('#' + id).hasClass('table-danger')) {
+			$('#button_enable').text('Habilitar');
+		} else {
+			$('#button_enable').text('Deshabilitar');
+		}
+
 		$('#' + id).addClass('table-active');
 	};
 
@@ -47493,10 +47508,10 @@ module.exports = Component.exports
 			action = action.replace("|id|", id);
 			method = $(e.relatedTarget).data('method');
 			$('#_method').val(method);
-			$('#actionForm').attr('action', action);
 			$('#id').val(id);
+			$('#actionForm').attr('action', action);
 			$('#button_confirm_modal').show();
-			alert('Set done: ' + action);
+			//alert('Set done: ' + $('#_method').val());
 		};
 	});
 

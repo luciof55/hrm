@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
@@ -43,20 +43,20 @@ class Role extends Model
 	
 	public function profilesroles()
     {
-        return $this->hasMany('App\ProfileRole');
+        return $this->hasMany('App\Model\ProfileRole');
     }
 	
 	public function privileges()
     {
-        return $this->hasMany('App\Privilege');
+        return $this->hasMany('App\Model\Privilege');
     }
 	
 	public function profiles() {
-		return $this->belongsToMany('App\Profile', 'profiles_roles');
+		return $this->belongsToMany('App\Model\Profile', 'profiles_roles');
 	}
 	
 	public function resources() {
-		return $this->belongsToMany('App\Resource', 'privileges');
+		return $this->belongsToMany('App\Model\Resource', 'privileges');
 	}
 	
 	public function canDelete() {

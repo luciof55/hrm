@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+use App\Model\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -65,7 +65,7 @@ class RoleController extends BaseController
     public function __construct(\App\Repositories\Contracts\RoleRepository $repository)
     {
 		$this->repository = $repository;
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 	
 	public function getPageSize() {

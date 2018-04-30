@@ -30,4 +30,6 @@ return [
 	'Resource' => 'Recurso',
 	'Privileges' => 'Privilegios',
 	'Privilege' => 'Privilegio',
+	'Users' => 'Usuarios',
+	'User' => 'Usuario',
 ];

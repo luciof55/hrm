@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-header">
 					<nav class="navbar navbar-expand-sm  navbar-dark">
-						@include('admin.form', ['title' => 'messages.Profiles'])
+						@include('admin.form', ['title' => 'messages.Users'])
 					</nav>
 				</div>
 				<div class="card-body">
@@ -32,14 +32,16 @@
 									<thead>
 									  <tr>
 										<th>Name</th>
-										<th>ID</th>
+										<th>Correo</th>
+										<th>@lang('messages.Profile')</th>
 									  </tr>
 									</thead>
 									<tbody>
 										@foreach ($list as $command)
 											<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) table-danger @endif" onclick="crudInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
 												<td>{{ $command->name }}</td>
-												<td>{{$command->id}}</td>
+												<td>{{$command->email}}</td>
+												<td>{{$command->profile->name}}</td>
 											</tr>
 										@endforeach
 									</tbody>

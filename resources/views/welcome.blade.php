@@ -14,7 +14,13 @@
 			<div class="card-header">@lang('messages.Actions')</div>
 		</div>
 	</div>
-	<div class="col-md-10"></div>
+	<div class="col-md-10">
+		@if(isset($status))
+			<div class="alert alert-danger">
+				{{ $status }}
+			</div>
+		@endif
+	</div>
 </div>
 @endsection
 

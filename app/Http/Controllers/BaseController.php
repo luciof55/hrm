@@ -133,7 +133,7 @@ class BaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
     public function show(\Illuminate\Http\Request $request)
@@ -166,7 +166,7 @@ class BaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
     public function edit(\Illuminate\Http\Request $request)
@@ -205,7 +205,7 @@ class BaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Profile  $profile
+     * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
     public function update(\Illuminate\Http\Request $request)
@@ -228,7 +228,7 @@ class BaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Profile  $profile
+     * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
     public function enable(\Illuminate\Http\Request $request)
@@ -252,7 +252,7 @@ class BaseController extends Controller
 	/**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
     public function destroy(\Illuminate\Http\Request $request, $id)

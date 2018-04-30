@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Role;
+use App\Model\Role;
 use App\Repositories\Contracts\RoleRepository;
 
 class EloquentRoleRepository extends EloquentBaseRepository implements RoleRepository
@@ -13,7 +13,7 @@ class EloquentRoleRepository extends EloquentBaseRepository implements RoleRepos
     }
 	
 	public function getInstance() {
-		return new \App\Role();
+		return new Role();
 	}
 	
 	protected function softDeleteCascade($role) {

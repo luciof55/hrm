@@ -31,13 +31,20 @@
 					<span class="navbar-toggler-icon"></span>
 				  </button>
 				  <div class="collapse navbar-collapse" id="navb">
-					<a class="navbar-brand">UpSales - NEW!!!!</a>
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active"><a class="nav-link" href="{{route('security')}}">Security</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-						<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
-					 </ul>
+					@guest
+						<a class="navbar-brand">UpSales - NEW!!!!</a>
+					@else
+						<a class="navbar-brand">UpSales - NEW!!!!</a>
+						<ul class="navbar-nav mr-auto">
+							@if (Gate::allows('show', 'security'))
+							<li class="nav-item active"><a class="nav-link" href="{{route('security')}}">Security</a></li>
+							@endif
+							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+							<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+
+						 </ul>
+					 @endguest
 				  </div>
 				</ul>
 				<!-- Right Side Of Navbar -->

@@ -1,50 +1,52 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class Privilege extends Model
+class ProfileRole extends Model
 {
     use Notifiable;
+	
+	protected $table = 'profiles_roles';
 	
 	/**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['role_id', 'resource_id', 'id'];
+    protected $fillable = ['profile_id', 'role_id',];
 	
 	/**
      * The attributes uses to sort.
      *
      * @var array
      */
-    protected $orderAttributes = ['role_id', 'resource_id'];
+    protected $orderAttributes = ['profile_id', 'role_id'];
 	
 	/**
      * Unique attributes to validate.
      *
      * @var array
      */
-    protected $uniqueAttributes = ['role_id', 'resource_id'];
+    protected $uniqueAttributes = ['profile_id', 'role_id'];
 	
 	/**
      * The attributes uses to filter.
      *
      * @var array
      */
-    protected $filterAttributes = ['role_id', 'resource_id',];
+    protected $filterAttributes = ['profile_id', 'role_id'];
+	
+	public function profile()
+    {
+        return $this->belongsTo('App\Model\Profile');
+    }
 	
 	public function role()
     {
-        return $this->belongsTo('App\Role');
-    }
-	
-	public function resource()
-    {
-        return $this->belongsTo('App\Resource');
+        return $this->belongsTo('App\Model\Role');
     }
 	
 	public function getOrderAttributes() {

@@ -13,6 +13,7 @@
 			  </button>
 			  <div class="collapse navbar-collapse" id="navbmenusec">
 				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" href="{{route('users.index')}}">@lang('messages.Users')</a></li>
 					<li class="nav-item active"><a class="nav-link" href="{{route('profiles.index')}}">@lang('messages.Profiles')</a></li>
 					<li class="nav-item active"><a class="nav-link" href="{{route('roles.index')}}">@lang('messages.Roles')</a></li>
 					<li class="nav-item active"><a class="nav-link" href="{{route('profilesroles.index')}}">@lang('messages.ProfilesRoles')</a></li>

@@ -6,14 +6,29 @@ function crud() {
 		var variable_name = 'crud_' + array_id[0] + '_id';
 		old_id = this.getEntityId(array_id[0]);
 		if (old_id != '' && old_id != null) {
-			$('#'+array_id[0]+'_'+old_id).removeClass('table-active');
+			$('#' + array_id[0] + '_' + old_id).removeClass('table-active');
 			if (old_id == array_id[1]) {
 				_values_id[variable_name] = null;
+				$('#button_view').addClass('disabled');
+				$('#button_edit').addClass('disabled');
+				$('#button_enable').addClass('disabled');
+				$('#button_remove').addClass('disabled');
 				return;
 			};
 		};
 		_values_id[variable_name] = array_id[1];
-		$('#'+id).addClass('table-active');
+		$('#button_view').removeClass('disabled');
+		$('#button_edit').removeClass('disabled');
+		$('#button_enable').removeClass('disabled');
+		$('#button_remove').removeClass('disabled');
+		
+		if ($('#' + id).hasClass('table-danger')) {
+			$('#button_enable').text('Habilitar');
+		} else {
+			$('#button_enable').text('Deshabilitar');
+		}
+		
+		$('#' + id).addClass('table-active');
 	};
 
 	this.postForm = function (action, method) {

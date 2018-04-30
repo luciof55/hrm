@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Resource;
+use App\Model\Resource;
 use App\Repositories\Contracts\ResourceRepository;
 
 class EloquentResourceRepository extends EloquentBaseRepository implements ResourceRepository
@@ -13,6 +13,6 @@ class EloquentResourceRepository extends EloquentBaseRepository implements Resou
     }
 	
 	public function getInstance() {
-		return new \App\Resource();
+		return new Resource();
 	}
 }

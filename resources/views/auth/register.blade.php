@@ -5,12 +5,22 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">@lang('messages.User')</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form id="commandForm" method="POST" action="{{ route('register') }}">
                         @csrf
-
+						<input id="id" name="id" type="hidden" value="{{ $command->id }}">
+						<input type="hidden" id="_method" name="_method" value="{{ $method }}">
+						<input type="hidden" id="page" name="page" value="{{ $page }}">
+						@foreach ($filters->keys() as $filterKey)
+							<input type="hidden" name="{{$filterKey}}" value="{{ $filters->get($filterKey) }}">
+						@endforeach
+						@if (isset($command->profile))
+							<?php $profile_id = $command->profile->id; ?>
+						@else
+							<?php $profile_id = null; ?>
+						@endif
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -60,13 +70,26 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+						
+						<div class="form-group row">
+							
+                            <label for="profile_id" class="col-md-4 col-form-label text-md-right">@lang('messages.Profile')</label>
+                            <div class="col-md-6">
+								@if ($errors->has('profile_id'))
+									{{ Form::select('profile_id', $profiles, $profile_id, ['required', 'autofocus', 'placeholder' => 'Pick a profile...', 'class' => 'form-control is-invalid'])}}
+								@else
+									{{ Form::select('profile_id', $profiles, $profile_id, ['required', 'autofocus', 'placeholder' => 'Pick a profile...', 'class' => 'form-control'])}}
+								@endif
+								@if ($errors->has('profile_id'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('profile_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                            @include('admin.down_buttons', ['btn_save' => true])
                         </div>
                     </form>
                 </div>

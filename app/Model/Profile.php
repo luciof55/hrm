@@ -1,15 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Resource extends Model
+class Profile extends Model
 {
-   use Notifiable;
-   
-   /**
+    use Notifiable;
+	use SoftDeletes;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -17,6 +19,13 @@ class Resource extends Model
     protected $fillable = [
         'name', 'id',
     ];
+	
+	/**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 	
 	/**
      * The attributes uses to sort.
@@ -32,13 +41,21 @@ class Resource extends Model
      */
     protected $filterAttributes = ['name', 'id'];
 	
-	public function rolespermissions()
+	public function profilesroles()
     {
-        return $this->hasMany('App\RolePermission');
+        return $this->hasMany('App\Model\ProfileRole');
     }
 	
 	public function roles() {
-		return $this->belongsToMany('App\Role', 'roles_permissions');
+		return $this->belongsToMany('App\Model\Role', 'profiles_roles');
+	}
+	
+	public function users() {
+		return $this->hasMany('App\User');
+	}
+	
+	public function canDelete() {
+		return $this->roles->isEmpty() && $this->users->isEmpty();
 	}
 	
 	public function getOrderAttributes() {
@@ -48,7 +65,8 @@ class Resource extends Model
 	public function getFilterAttributes() {
 		return $this->filterAttributes;
 	}
+	
 	public function isSoftDelete() {
-		return false;
+		return true;
 	}
 }

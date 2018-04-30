@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Privilege;
+use App\Model\Privilege;
 use App\Repositories\Contracts\PrivilegeRepository;
 use Illuminate\Support\Facades\Log;
 
@@ -14,7 +14,7 @@ class EloquentPrivilegeRepository extends EloquentBaseRepository implements Priv
     }
 	
 	public function getInstance() {
-		return new \App\Privilege();
+		return new Privilege();
 	}
 	
 	public function paginateWithTrashed($query = null, $paginate = null, $orderAttributes = null, $filterAttributes = null, $page = null)
