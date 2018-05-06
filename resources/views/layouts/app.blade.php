@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'UpSales') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -39,7 +39,9 @@
 							@if (Gate::allows('show', 'security'))
 							<li class="nav-item active"><a class="nav-link" href="{{route('security')}}">Security</a></li>
 							@endif
-							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+							@if (Gate::allows('show', 'administration'))
+							<li class="nav-item active"><a class="nav-link" href="{{route('administration')}}">Administration</a></li>
+							@endif
 							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 							<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
 
@@ -76,7 +78,7 @@
 			</div>
         </nav>
 		<nav class="navbar justify-content-between bg-dark navbar-dark">
-			<a class="navbar-brand" href="#"><img src="{{ asset('public/img/logo.jpg')}}" alt="Logo" style="width:40px;"></a>
+			<a class="navbar-brand" href="{{ route('home')}}"><img src="{{ asset('public/img/logo.jpg')}}" alt="Logo" style="width:100px;"></a>
 		  <form class="form-inline my-2 my-lg-0" action="#" method="GET">
 				@csrf
 				<input class="form-control mr-sm-2" type="search" placeholder="@lang('messages.Search')">

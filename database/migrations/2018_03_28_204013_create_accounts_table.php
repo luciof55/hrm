@@ -20,7 +20,7 @@ class CreateAccountsTable extends Migration
 			$table->string('name', 150)->unique();
 			$table->string('industry', 150);
 			$table->string('url', 150)->unique();
-			$table->multiLineString('notes')->nullable($value = true);
+			$table->string('notes', 1024)->nullable($value = true);
 			$table->softDeletes();
             $table->timestamps();
         });

@@ -32,4 +32,14 @@ return [
 	'Privilege' => 'Privilegio',
 	'Users' => 'Usuarios',
 	'User' => 'Usuario',
+	
+	'Revoke' => 'Revocar acceso',
+	'Authorize' => 'Autorizar acceso',
+	
+	'Accounts' => 'Cuentas',
+	'Account' => 'Cuenta',
+	
+	'Industry' => 'Industria',
+	
+	'Notes' => 'Notas',
 ];

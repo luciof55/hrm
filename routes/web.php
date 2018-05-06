@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('main');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->middleware('checkprivilege:users_create')->name('register');
 
 Route::get('profiles', 'ProfileController@index')->middleware('checkprivilege:profiles')->name('profiles.index');
 Route::get('profiles/create', 'ProfileController@create')->middleware('checkprivilege:profiles_create')->name('profiles.create');
@@ -53,7 +55,21 @@ Route::get('users/{id}/enable', 'UserController@enable')->middleware('checkprivi
 Route::get('users/{id}/delete', 'UserController@destroy')->middleware('checkprivilege:users_remove')->name('users.delete');
 
 Route::get('/security', 'SecurityController@index')->middleware('checkprivilege:security_show')->name('security');
+Route::get('/security/authorizeInit', 'SecurityController@authorizeInit')->middleware('checkprivilege:security_authorize')->name('security_authorizeInit');
+Route::get('/security/authorizeCallback', 'SecurityController@authorizeCallback')->middleware('checkprivilege:security_authorize')->name('security_authorize');
+Route::get('/security/revokeToken', 'SecurityController@revokeToken')->middleware('checkprivilege:security_authorize')->name('security_revokeToken');
 
 Route::get('/contact', 'ContactController@contact')->name('contact');
 Route::post('/contact', 'ContactController@process_contact')->name('contact');
+
+Route::get('/administration', 'Administration\AdministrationController@index')->middleware('checkprivilege:administration_show')->name('administration');
+
+Route::get('accounts', 'Administration\AccountController@index')->middleware('checkprivilege:accounts')->name('accounts.index');
+Route::get('accounts/create', 'Administration\AccountController@create')->middleware('checkprivilege:accounts_create')->name('accounts.create');
+Route::post('accounts/store', 'Administration\AccountController@store')->middleware('checkprivilege:accounts_create')->name('accounts.store');
+Route::put('accounts/{id}', 'Administration\AccountController@update')->middleware('checkprivilege:accounts_edit')->name('accounts.update');
+Route::get('accounts/{id}/edit', 'Administration\AccountController@edit')->middleware('checkprivilege:accounts_edit')->name('accounts.edit');
+Route::get('accounts/{id}', 'Administration\AccountController@show')->middleware('checkprivilege:accounts_view')->name('accounts.show');
+Route::get('accounts/{id}/enable', 'Administration\AccountController@enable')->middleware('checkprivilege:accounts_enable')->name('accounts.enable');
+Route::get('accounts/{id}/delete', 'Administration\AccountController@destroy')->middleware('checkprivilege:accounts_remove')->name('accounts.delete');
 

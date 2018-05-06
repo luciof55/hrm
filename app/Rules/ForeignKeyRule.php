@@ -31,11 +31,16 @@ class ForeignKeyRule implements Rule
     public function passes($attribute, $value)
     {
 		Log::info('Execute ForeignKey Validataion: '. $value);
-		$command = $this->repository->find($value);
-		if (method_exists($this->repository->entity(), 'canDelete')) {
-			return $command->canDelete();
+		if (method_exists($this->repository, 'canDelete')) {
+			$command = $this->repository->find($value);
+			return $this->repository->canDelete($command);
 		} else {
-			return true;
+			$command = $this->repository->find($value);
+			if (method_exists($this->repository->entity(), 'canDelete')) {
+				return $command->canDelete();
+			} else {
+				return true;
+			}
 		}
     }
 
