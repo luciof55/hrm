@@ -33,6 +33,14 @@ return [
 	'Users' => 'Usuarios',
 	'User' => 'Usuario',
 	
+	'MenuItems' => 'Entrada de Menúes',
+	'MenuItem' => 'Entrada de Menúesº',
+	'MenuType' => 'Tipo de Menú',
+	
+	'Main' => 'Principal',
+	'Secondary' => 'Secundario',
+	'Custom' => 'Personlizado',
+	
 	'Revoke' => 'Revocar acceso',
 	'Authorize' => 'Autorizar acceso',
 	

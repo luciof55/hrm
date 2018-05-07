@@ -7,4 +7,4 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1006,'security_authorize','Gestionar acceso a Google',NULL,NULL);
 
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1007,'administration_show','Gestionar Administración',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1007,'administration','Gestionar Administración',NULL,NULL);

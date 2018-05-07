@@ -36,10 +36,10 @@
 					@else
 						<a class="navbar-brand">UpSales - NEW!!!!</a>
 						<ul class="navbar-nav mr-auto">
-							@if (Gate::allows('show', 'security'))
+							@if (Gate::allows('module', 'security'))
 							<li class="nav-item active"><a class="nav-link" href="{{route('security')}}">Security</a></li>
 							@endif
-							@if (Gate::allows('show', 'administration'))
+							@if (Gate::allows('module', 'administration'))
 							<li class="nav-item active"><a class="nav-link" href="{{route('administration')}}">Administration</a></li>
 							@endif
 							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
