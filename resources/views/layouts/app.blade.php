@@ -32,9 +32,9 @@
 				  </button>
 				  <div class="collapse navbar-collapse" id="navb">
 					@guest
-						<a class="navbar-brand">UpSales - NEW!!!!</a>
+						<a class="navbar-brand">UpSales</a>
 					@else
-						<a class="navbar-brand">UpSales - NEW!!!!</a>
+						<a class="navbar-brand">UpSales</a>
 						<ul class="navbar-nav mr-auto">
 							@if (Gate::allows('module', 'security'))
 							<li class="nav-item active"><a class="nav-link" href="{{route('security')}}">Security</a></li>

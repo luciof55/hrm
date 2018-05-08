@@ -15,7 +15,6 @@ Route::get('/', 'HomeController@index')->name('main');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->middleware('checkprivilege:users_create')->name('register');
 
 Route::get('profiles', 'ProfileController@index')->middleware('checkprivilege:profiles')->name('profiles.index');
 Route::get('profiles/create', 'ProfileController@create')->middleware('checkprivilege:profiles_create')->name('profiles.create');

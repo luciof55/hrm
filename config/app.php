@@ -2,6 +2,8 @@
 
 return [
 
+	'default_public_profile' => env('DEFAULT_PUBLIC_PROFILE', '2'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -13,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'UpSales'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
