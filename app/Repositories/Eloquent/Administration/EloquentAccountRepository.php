@@ -18,26 +18,30 @@ class EloquentAccountRepository extends EloquentBaseRepository implements Accoun
 		return new Account();
 	}
 	
-	protected function softDeleteCascade($Account) {
-		
+	protected function softDeleteCascade($account) {
+		if ($account->contacts->isNotEmpty()) {
+			foreach($account->contacts as $contact) {
+				$contact->delete();
+			}
+		}
 	}
 	
-	public function canDelete($command) {
-		return true;
+	public function canDelete($account) {
+		return $account->contacts->isEmpty() && $account->canDelete();
 	}
 	
-	public function canRestore($command) {
+	public function canRestore($account) {
 		Log::info('EloquentAccountRepository - canRestore');
 		$result = collect([]);
 		$result->put('message', null);
 		$result->put('status', true);
 		
-		if (method_exists($command, 'canRestore')) {
-			$result->put('status', $command->canRestore());
+		if (method_exists($account, 'canRestore')) {
+			$result->put('status', $account->canRestore());
 		}
 		
-		if ($result->get('status') && $command->user->trashed()) {
-			$result->put('message', "El usuario de la cuenta está deshabilitado. Cambie de usuario o habilite el usuario: ".$command->user->name."'");
+		if ($result->get('status') && $account->user->trashed()) {
+			$result->put('message', "El usuario de la cuenta está deshabilitado. Cambie de usuario o habilite el usuario: ".$account->user->name."'");
 			$result->put('status', false);
 		}
 		

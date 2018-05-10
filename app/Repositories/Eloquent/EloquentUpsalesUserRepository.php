@@ -25,9 +25,15 @@ class EloquentUpsalesUserRepository extends EloquentUserRepository implements Up
 				$account->delete();
 			}
 		}
+		
+		if ($account->contacts->isNotEmpty()) {
+			foreach($account->contacts as $contact) {
+				$contact->delete();
+			}
+		}
 	}
 	
 	public function canDelete($command) {
-		return $command->accounts->isEmpty() && $command->canDelete();
+		return $command->accounts->isEmpty() && $command->contacts->isEmpty() && $command->canDelete();
 	}
 }

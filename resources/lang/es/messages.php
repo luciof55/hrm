@@ -34,12 +34,15 @@ return [
 	'User' => 'Usuario',
 	
 	'MenuItems' => 'Entrada de Menúes',
-	'MenuItem' => 'Entrada de Menúesº',
+	'MenuItem' => 'Entrada de Menúes',
 	'MenuType' => 'Tipo de Menú',
 	
 	'Main' => 'Principal',
 	'Secondary' => 'Secundario',
 	'Custom' => 'Personlizado',
+	
+	'Open' => 'Abierto',
+	'Closed' => 'Cerrado',
 	
 	'Module' => 'Módulo',
 	'Modules' => 'Módulos',
@@ -49,8 +52,17 @@ return [
 	
 	'Accounts' => 'Cuentas',
 	'Account' => 'Cuenta',
-	
 	'Industry' => 'Industria',
-	
 	'Notes' => 'Notas',
+	
+	'Contacts' => 'Contactos',
+	'Contact' => 'Contacto',
+	'Phone' => 'Teléfono',
+	'Position' => 'Posición',
+	
+	'BusinessRecordStates' => 'Estados',
+	'BusinessRecordState' => 'Estado',
+	'RecordStateType' => 'Tipo Estado',
+	
+	
 ];

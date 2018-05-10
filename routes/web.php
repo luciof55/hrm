@@ -92,3 +92,21 @@ Route::get('accounts/{id}', 'Administration\AccountController@show')->middleware
 Route::get('accounts/{id}/enable', 'Administration\AccountController@enable')->middleware('checkprivilege:accounts_enable')->name('accounts.enable');
 Route::get('accounts/{id}/delete', 'Administration\AccountController@destroy')->middleware('checkprivilege:accounts_remove')->name('accounts.delete');
 
+Route::get('contacts', 'Administration\ContactController@index')->middleware('checkprivilege:contacts')->name('contacts.index');
+Route::get('contacts/create', 'Administration\ContactController@create')->middleware('checkprivilege:contacts_create')->name('contacts.create');
+Route::post('contacts/store', 'Administration\ContactController@store')->middleware('checkprivilege:contacts_create')->name('contacts.store');
+Route::put('contacts/{id}', 'Administration\ContactController@update')->middleware('checkprivilege:contacts_edit')->name('contacts.update');
+Route::get('contacts/{id}/edit', 'Administration\ContactController@edit')->middleware('checkprivilege:contacts_edit')->name('contacts.edit');
+Route::get('contacts/{id}', 'Administration\ContactController@show')->middleware('checkprivilege:contacts_view')->name('contacts.show');
+Route::get('contacts/{id}/enable', 'Administration\ContactController@enable')->middleware('checkprivilege:contacts_enable')->name('contacts.enable');
+Route::get('contacts/{id}/delete', 'Administration\ContactController@destroy')->middleware('checkprivilege:contacts_remove')->name('contacts.delete');
+
+Route::get('businessrecordstates', 'Administration\BusinessRecordStateController@index')->middleware('checkprivilege:businessrecordstates')->name('businessrecordstates.index');
+Route::get('businessrecordstates/create', 'Administration\BusinessRecordStateController@create')->middleware('checkprivilege:businessrecordstates_create')->name('businessrecordstates.create');
+Route::post('businessrecordstates/store', 'Administration\BusinessRecordStateController@store')->middleware('checkprivilege:businessrecordstates_create')->name('businessrecordstates.store');
+Route::put('businessrecordstates/{id}', 'Administration\BusinessRecordStateController@update')->middleware('checkprivilege:businessrecordstates_edit')->name('businessrecordstates.update');
+Route::get('businessrecordstates/{id}/edit', 'Administration\BusinessRecordStateController@edit')->middleware('checkprivilege:businessrecordstates_edit')->name('businessrecordstates.edit');
+Route::get('businessrecordstates/{id}', 'Administration\BusinessRecordStateController@show')->middleware('checkprivilege:businessrecordstates_view')->name('businessrecordstates.show');
+Route::get('businessrecordstates/{id}/enable', 'Administration\BusinessRecordStateController@enable')->middleware('checkprivilege:businessrecordstates_enable')->name('businessrecordstates.enable');
+Route::get('businessrecordstates/{id}/delete', 'Administration\BusinessRecordStateController@destroy')->middleware('checkprivilege:businessrecordstates_remove')->name('businessrecordstates.delete');
+

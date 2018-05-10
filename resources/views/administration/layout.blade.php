@@ -15,6 +15,12 @@
 					@if (Gate::allows('module', 'accounts'))
 					<li class="nav-item active"><a class="nav-link" href="{{route('accounts.index')}}">@lang('messages.Accounts')</a></li>
 					@endif
+					@if (Gate::allows('module', 'contacts'))
+					<li class="nav-item active"><a class="nav-link" href="{{route('contacts.index')}}">@lang('messages.Contacts')</a></li>
+					@endif
+					@if (Gate::allows('module', 'businessrecordstates'))
+					<li class="nav-item active"><a class="nav-link" href="{{route('businessrecordstates.index')}}">@lang('messages.BusinessRecordStates')</a></li>
+					@endif
 				 </ul>
 			  </div>
 			</ul>

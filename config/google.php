@@ -1,5 +1,13 @@
 <?php
 return [
+	'app_path' => env('APP_PATH', ''),
+	/*
+	|----------------------------------------------------------------------------
+    | authorizeCallback & authorizeInit URL
+    |----------------------------------------------------------------------------
+	*/
+	'authorize_callback' => 'security/authorizeCallback',
+	'authorize_init' => 'security/authorizeInit',
     /*
     |----------------------------------------------------------------------------
     | Google application name

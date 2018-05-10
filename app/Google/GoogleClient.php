@@ -23,20 +23,36 @@ class GoogleClient
      */
     public function __construct(array $config, $userEmail = '')
     {
-		Log::info('GoogleClient - __construct');
+		Log::debug('GoogleClient - __construct');
         $this->config = $config;
 		
 		$this->client = new Google_Client();
 		$this->client->setApplicationName(array_get($config, 'application_name', ''));
 		$this->client->setScopes(Google_Service_Drive::DRIVE_METADATA_READONLY);
 		$this->client->setAuthConfig(__DIR__.'\..\..\key\client_secret.json');
-		$this->client->setAccessType('offline');
+		$this->client->setAccessType(array_get($this->config, 'access_type', 'offline'));
 		$this->client->setIncludeGrantedScopes(true);
-		$this->client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/upsales/security/authorizeCallback');
+		$app_path = array_get($config, 'app_path', '');
+		if ($app_path != '') {
+			$app_path = '/'. $app_path .'/';
+		}
+		Log::debug('RedirectUri: '. 'http://' . $_SERVER['HTTP_HOST'] . $app_path . $this->getAuthorizeCallback());
+		$this->client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . $app_path . $this->getAuthorizeCallback());
 		
-		Log::info('GoogleClient - __construct END');
+		Log::debug('GoogleClient - __construct END');
     }
+	
+	public function getAuthorizeCallback() {
+		return array_get($this->config, 'authorize_callback', '');
+	}
+	
+	public function getAuthorizeInit() {
+		return array_get($this->config, 'authorize_init', '');
+	}
     
+	public function getConfig() {
+		return $this->config;
+	}
 	
 	public function generateAccessToken($userName) {
 		// Load previously authorized credentials from a file.

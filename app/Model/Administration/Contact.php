@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Account extends Model
+class Contact extends Model
 {
     use Notifiable;
 	use SoftDeletes;
@@ -17,7 +17,7 @@ class Account extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'user_id', 'industry', 'url', 'notes'
+        'name', 'id', 'account_id', 'user_id', 'email', 'phone', 'position'
     ];
 	
 	/**
@@ -32,21 +32,21 @@ class Account extends Model
      *
      * @var array
      */
-    protected $orderAttributes = ['name', 'user_id'];
+    protected $orderAttributes = ['name'];
 	
 	/**
      * The attributes uses to filter.
      *
      * @var array
      */
-    protected $filterAttributes = ['name', 'user_id'];
+    protected $filterAttributes = ['name', 'user_id', 'account_id'];
+	
+	public function account() {
+		 return $this->belongsTo('App\Model\Administration\Account')->withTrashed();
+	}
 	
 	public function user() {
 		 return $this->belongsTo('App\UpsalesUser')->withTrashed();
-	}
-	
-	public function contacts() {
-		 return $this->hasMany('App\Model\Administration\Contact')->withTrashed();
 	}
 	
 	public function canDelete() {

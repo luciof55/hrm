@@ -27,23 +27,27 @@ class GoogleAuthorize
      */
     public function handle($request, Closure $next)
     {
-		Log::info('GoogleAuthorize - Handle');
-		Log::info('GoogleAuthorize - Handle - Path: '.$request->path());
-		if ($request->path() != 'security/authorizeCallback' && $request->path() != 'security/authorizeInit') {
+		Log::debug('GoogleAuthorize - Handle');
+		Log::debug('GoogleAuthorize - Handle - Path: '.$request->path());
+		Log::debug('GoogleAuthorize - Handle - Path: '.$request->path());
+		Log::debug('GoogleAuthorize - Handle - getAuthorizeCallback: '.$this->googleClient->getAuthorizeCallback());
+		Log::debug('GoogleAuthorize - Handle - getAuthorizeInit: '.$this->googleClient->getAuthorizeInit());
+		
+		if ($request->path() != $this->googleClient->getAuthorizeCallback() && $request->path() != $this->googleClient->getAuthorizeInit()) {
 			$user = $request->user();
 			$request->attributes->add(['sourceUrl' => $request->path()]);
 			
 			if (!is_null($request->user())) {
 				if ($this->googleClient->generateAccessToken($request->user()->name) == null) {
 					$request->attributes->add(['googleAuthorize' => false]);
-					Log::info('GoogleAuthorize - Handle - Not Authorized');
+					Log::debug('GoogleAuthorize - Handle - Not Authorized');
 				} else {
 					$request->attributes->add(['googleAuthorize' => true]);
-					Log::info('GoogleAuthorize - Handle - Authorized');
+					Log::debug('GoogleAuthorize - Handle - Authorized');
 				}
 			} else {
 				$request->attributes->add(['googleAuthorize' => false]);
-				Log::info('GoogleAuthorize User is null');
+				Log::debug('GoogleAuthorize User is null');
 			}
 		}
         return $next($request);

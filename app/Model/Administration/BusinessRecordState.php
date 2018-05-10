@@ -5,19 +5,22 @@ namespace App\Model\Administration;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enumeration\RecordStateType;
 
-class Account extends Model
+class BusinessRecordState extends Model
 {
     use Notifiable;
 	use SoftDeletes;
 	
-	/**
+	protected $table = 'business_record_state';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'user_id', 'industry', 'url', 'notes'
+        'name', 'id', 'closed_state',
     ];
 	
 	/**
@@ -32,21 +35,18 @@ class Account extends Model
      *
      * @var array
      */
-    protected $orderAttributes = ['name', 'user_id'];
+    protected $orderAttributes = ['name'];
 	
 	/**
      * The attributes uses to filter.
      *
      * @var array
      */
-    protected $filterAttributes = ['name', 'user_id'];
+    protected $filterAttributes = ['name'];
 	
-	public function user() {
-		 return $this->belongsTo('App\UpsalesUser')->withTrashed();
-	}
-	
-	public function contacts() {
-		 return $this->hasMany('App\Model\Administration\Contact')->withTrashed();
+	public function getClosedState() {
+		$select_types = RecordStateType::getEnumTranslate();
+		return $select_types->get($this->closed_state);
 	}
 	
 	public function canDelete() {
@@ -60,6 +60,7 @@ class Account extends Model
 	public function getFilterAttributes() {
 		return $this->filterAttributes;
 	}
+	
 	public function isSoftDelete() {
 		return true;
 	}

@@ -26,11 +26,11 @@ class GoogleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-		Log::info('GoogleServiceProvider - register');
+		Log::debug('GoogleServiceProvider - register');
 		$this->mergeConfigFrom(__DIR__.'/../../config/google.php', 'google');
-		Log::info($this->app['config']['google']);
+		Log::debug($this->app['config']['google']);
         $this->app->singleton('App\Google\GoogleClient', function ($app) {
-			Log::info('GoogleServiceProvider - singleton');
+			Log::debug('GoogleServiceProvider - singleton');
             return new GoogleClient($app['config']['google']);
         });
     }
