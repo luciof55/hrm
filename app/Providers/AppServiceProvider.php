@@ -58,6 +58,10 @@ class AppServiceProvider extends ServiceProvider
 		);
 		
 		$this->app->bind(
+			'App\Repositories\Contracts\ModuleRepository', 'App\Repositories\Eloquent\EloquentModuleRepository'
+		);
+		
+		$this->app->bind(
 			'App\Repositories\Contracts\Administration\AccountRepository', 'App\Repositories\Eloquent\Administration\EloquentAccountRepository'
 		);
     }

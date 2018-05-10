@@ -11,7 +11,7 @@
 				<div class="row"><div class="container">@include('common_status')</div></div>
 				<div class="row">
 					<div class="container">
-						@if ($authorize)
+						@if (!is_null(Request::get('googleAuthorize')) && Request::get('googleAuthorize'))
 							<h3>{{$AppName}}</h3>
 							@if (isset($results))
 								<div class="table-responsive">

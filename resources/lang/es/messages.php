@@ -41,6 +41,9 @@ return [
 	'Secondary' => 'Secundario',
 	'Custom' => 'Personlizado',
 	
+	'Module' => 'Módulo',
+	'Modules' => 'Módulos',
+	
 	'Revoke' => 'Revocar acceso',
 	'Authorize' => 'Autorizar acceso',
 	

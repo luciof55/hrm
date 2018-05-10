@@ -12,8 +12,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 </head>
@@ -42,9 +40,11 @@
 							@if (Gate::allows('module', 'administration'))
 							<li class="nav-item active"><a class="nav-link" href="{{route('administration')}}">Administration</a></li>
 							@endif
-							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-							<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
-
+							@if (!is_null(Request::get('modulesMenuItem')))
+								@foreach(Request::get('modulesMenuItem') as $menuItem)
+									<li class="nav-item active"><a class="nav-link" href="{{$menuItem['url']}}">{{$menuItem['text']}}</a></li>
+								@endforeach
+							@endif
 						 </ul>
 					 @endguest
 				  </div>
@@ -54,7 +54,7 @@
 					<!-- Authentication Links -->
 					@guest
 						<li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-						<li><a class="nav-link" href="{{ route('contact') }}">{{ __('Contact') }}</a></li>
+						<li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
 					@else
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -88,12 +88,12 @@
         
 		<div class="card">
 			@yield('header')
-			<div class="card-body">@yield('content')</div> 
+			<div class="card-body">@yield('content')</div>
 			<div class="card-footer">@yield('footer')</div>
 		</div>
         
     </div>
-	 <!-- Scripts -->
+	<!-- Scripts -->
 	<script src="https://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
     <script src="{{ asset('public/js/app.js') }}" defer></script>
 </body>
