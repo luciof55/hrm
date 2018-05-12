@@ -6,6 +6,7 @@ use App\Model\Administration\Account;
 use App\Repositories\Contracts\Administration\AccountRepository;
 use App\Repositories\Eloquent\EloquentBaseRepository;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class EloquentAccountRepository extends EloquentBaseRepository implements AccountRepository
 {
@@ -19,15 +20,20 @@ class EloquentAccountRepository extends EloquentBaseRepository implements Accoun
 	}
 	
 	protected function softDeleteCascade($account) {
-		if ($account->contacts->isNotEmpty()) {
-			foreach($account->contacts as $contact) {
-				$contact->delete();
-			}
-		}
+		$account->delete();
 	}
 	
 	public function canDelete($account) {
-		return $account->contacts->isEmpty() && $account->canDelete();
+		$result = collect([]);
+		$result->put('message', null);
+		$result->put('status', true);
+		
+		if ($account->contacts->isNotEmpty() || !$account->canDelete()) {
+			$result->put('message', "Existen datos relacionados, no se puede eliminar");
+			$result->put('status', false);
+		}
+		
+		return $result;
 	}
 	
 	public function canRestore($account) {

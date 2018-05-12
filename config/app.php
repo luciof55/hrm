@@ -2,6 +2,8 @@
 
 return [
 
+	'user_class' => 'App\UpsalesUser',
+
 	'default_public_profile' => env('DEFAULT_PUBLIC_PROFILE', '2'),
 
     /*
@@ -162,7 +164,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        App\Providers\RouteUpsalesServiceProvider::class,
 		App\Providers\GoogleServiceProvider::class,
 
     ],

@@ -18,6 +18,7 @@ class UpsalesKernel extends Kernel
      */
     public function __construct(Application $app, Router $router) {
 		array_push($this->middlewareGroups['web'], \App\Http\Middleware\GoogleAuthorize::class);
+		array_add($this->routeMiddleware, 'owner.authorize', \App\Http\Middleware\OwnerAuthorize::class);
 		HttpKernel::__construct($app, $router);
     }
 }

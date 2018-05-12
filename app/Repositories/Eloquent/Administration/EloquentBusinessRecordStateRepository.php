@@ -18,15 +18,15 @@ class EloquentBusinessRecordStateRepository extends EloquentBaseRepository imple
 		return new BusinessRecordState();
 	}
 	
-	protected function softDeleteCascade($account) {
+	protected function softDeleteCascade($businessRecordState) {
 		
 	}
 	
-	public function canDelete($account) {
+	public function canDelete($businessRecordState) {
 		return true;
 	}
 	
-	public function canRestore($account) {
+	public function canRestore($businessRecordState) {
 		Log::info('EloquentBusinessRecordStateRepository - canRestore');
 		$result = collect([]);
 		$result->put('message', null);

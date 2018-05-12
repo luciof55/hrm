@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\UpsalesBaseController;
 use App\Repositories\Contracts\Administration\AccountRepository;
+use App\Http\MiddleWare\OwnerAuthorize;
 
 class AccountController extends UpsalesBaseController
 {

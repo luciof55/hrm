@@ -7,6 +7,7 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1003,'accounts_edit','Editar Cuentas',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1004,'accounts_enable','Habilitar/Deshabilitar Cuentas',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1005,'accounts_remove','Borrar Cuentas',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1021,'accounts_admin','Super Admin Cuentas',NULL,NULL);
 
 /*
 //Generales
@@ -23,6 +24,7 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1011,'contacts_edit','Editar Contactos',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1012,'contacts_enable','Habilitar/Deshabilitar Contactos',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1013,'contacts_remove','Borrar Contactos',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1020,'contacts_admin','Super Admin Contactos',NULL,NULL);
 
 /*
 //Estados

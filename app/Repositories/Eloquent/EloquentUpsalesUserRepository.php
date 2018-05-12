@@ -18,22 +18,16 @@ class EloquentUpsalesUserRepository extends EloquentUserRepository implements Up
 		return new UpsalesUser();
 	}
 	
-    protected function softDeleteCascade($command) {
-		Log::info('EloquentUpsalesUserRepository - softDeleteCascade');
-		if ($command->accounts->isNotEmpty()) {
-			foreach($command->accounts as $account) {
-				$account->delete();
-			}
+	public function canDelete($command) {
+		$result = collect([]);
+		$result->put('message', null);
+		$result->put('status', true);
+		
+		if ($command->accounts->isNotEmpty() || $command->contacts->isNotEmpty() || !$command->canDelete()) {
+			$result->put('message', "Existen datos relacionados, no se puede eliminar");
+			$result->put('status', false);
 		}
 		
-		if ($account->contacts->isNotEmpty()) {
-			foreach($account->contacts as $contact) {
-				$contact->delete();
-			}
-		}
-	}
-	
-	public function canDelete($command) {
-		return $command->accounts->isEmpty() && $command->contacts->isEmpty() && $command->canDelete();
+		return $result;
 	}
 }

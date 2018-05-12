@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 
-class RestoreRule implements Rule
+class SoftDelete implements Rule
 {
     protected $repository;
 	protected $command;
@@ -18,7 +18,7 @@ class RestoreRule implements Rule
      */
     public function __construct($repository, $data, $command)
     {
-		Log::info('__construct Restore Rule');
+		Log::info('__construct SoftDelete Rule');
         $this->repository = $repository;
 		$this->data = $data;
 		$this->command = $command;
@@ -34,8 +34,8 @@ class RestoreRule implements Rule
     public function passes($attribute, $value)
     {
 		Log::info('Execute Restore Validataion: '. $value);
-		if (method_exists($this->repository, 'canRestore')) {
-			$result = $this->repository->canRestore($this->command);
+		if (method_exists($this->repository, 'canSoftDelete')) {
+			$result = $this->repository->canSoftDelete($this->command);
 			$this->message = $result->get('message');
 			return $result->get('status');
 		} else {
@@ -53,6 +53,6 @@ class RestoreRule implements Rule
 		if (isset($this->message)) {
 			return $this->message;
 		}
-        return 'No se puede habilitar existen relaciones que no están habilitadas.';
+        return 'No se puede deshabilitar.';
     }
 }

@@ -23,7 +23,10 @@ class EloquentContactRepository extends EloquentBaseRepository implements Contac
 	}
 	
 	public function canDelete($contact) {
-		return true;
+		$result = collect([]);
+		$result->put('message', null);
+		$result->put('status', true);
+		return $result;
 	}
 	
 	public function canRestore($contact) {

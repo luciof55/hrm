@@ -63,4 +63,14 @@ class Account extends Model
 	public function isSoftDelete() {
 		return true;
 	}
+	
+	public function delete() {
+		if ($this->contacts->isNotEmpty()) {
+			foreach($this->contacts as $contact) {
+				$contact->delete();
+			}
+		}
+		
+		parent::delete();
+	}
 }
