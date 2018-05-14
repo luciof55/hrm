@@ -48,3 +48,12 @@ Route::get('businessrecordstates/{id}/edit', 'Administration\BusinessRecordState
 Route::get('businessrecordstates/{id}', 'Administration\BusinessRecordStateController@show')->middleware('checkprivilege:businessrecordstates_view')->name('businessrecordstates.show');
 Route::get('businessrecordstates/{id}/enable', 'Administration\BusinessRecordStateController@enable')->middleware('checkprivilege:businessrecordstates_enable')->name('businessrecordstates.enable');
 Route::get('businessrecordstates/{id}/delete', 'Administration\BusinessRecordStateController@destroy')->middleware('checkprivilege:businessrecordstates_remove')->name('businessrecordstates.delete');
+
+Route::get('businessrecords', 'Administration\BusinessRecordController@index')->middleware('checkprivilege:businessrecords')->name('businessrecords.index');
+Route::get('businessrecords/create', 'Administration\BusinessRecordController@create')->middleware('checkprivilege:businessrecords_create')->name('businessrecords.create');
+Route::post('businessrecords/store', 'Administration\BusinessRecordController@store')->middleware('checkprivilege:businessrecords_create')->name('businessrecords.store');
+Route::put('businessrecords/{id}', 'Administration\BusinessRecordController@update')->middleware('checkprivilege:businessrecords_edit')->middleware('owner.authorize:\App\Model\Administration\BusinessRecord,update')->name('businessrecords.update');
+Route::get('businessrecords/{id}/edit', 'Administration\BusinessRecordController@edit')->middleware('checkprivilege:businessrecords_edit')->middleware('owner.authorize:\App\Model\Administration\BusinessRecord,edit')->middleware('checkprivilege:businessrecords_remove')->name('businessrecords.edit');
+Route::get('businessrecords/{id}', 'Administration\BusinessRecordController@show')->middleware('checkprivilege:businessrecords_view')->name('businessrecords.show');
+Route::get('businessrecords/{id}/enable', 'Administration\BusinessRecordController@enable')->middleware('checkprivilege:businessrecords_enable')->middleware('owner.authorize:\App\Model\Administration\BusinessRecord,enable')->name('businessrecords.enable');
+Route::get('businessrecords/{id}/delete', 'Administration\BusinessRecordController@destroy')->middleware('checkprivilege:businessrecords_remove')->middleware('owner.authorize:\App\Model\Administration\BusinessRecord,delete')->name('businessrecords.delete');

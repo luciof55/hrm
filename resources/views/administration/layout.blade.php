@@ -21,6 +21,9 @@
 					@if (Gate::allows('module', 'businessrecordstates'))
 					<li class="nav-item active"><a class="nav-link" href="{{route('businessrecordstates.index')}}">@lang('messages.BusinessRecordStates')</a></li>
 					@endif
+					@if (Gate::allows('module', 'businessrecords'))
+					<li class="nav-item active"><a class="nav-link" href="{{route('businessrecords.index')}}">@lang('messages.BusinessRecords')</a></li>
+					@endif
 				 </ul>
 			  </div>
 			</ul>

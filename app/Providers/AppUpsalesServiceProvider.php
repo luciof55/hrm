@@ -30,5 +30,9 @@ class AppUpsalesServiceProvider extends AppServiceProvider
 		$this->app->bind(
 			'App\Repositories\Contracts\Administration\BusinessRecordStateRepository', 'App\Repositories\Eloquent\Administration\EloquentBusinessRecordStateRepository'
 		);
+		
+		$this->app->bind(
+			'App\Repositories\Contracts\Administration\BusinessRecordRepository', 'App\Repositories\Eloquent\Administration\EloquentBusinessRecordRepository'
+		);
     }
 }

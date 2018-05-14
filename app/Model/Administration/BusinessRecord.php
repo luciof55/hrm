@@ -6,10 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Account extends Model
+class BusinessRecord extends Model
 {
     use Notifiable;
 	use SoftDeletes;
+	
+	protected $table = 'business_records';
 	
 	/**
      * The attributes that are mass assignable.
@@ -17,7 +19,7 @@ class Account extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'user_id', 'industry', 'url', 'notes'
+        'name', 'id', 'account_id', 'state_id', 'leader_id', 'comercial_id', 'management_tool', 'repository', 'notes'
     ];
 	
 	/**
@@ -32,25 +34,29 @@ class Account extends Model
      *
      * @var array
      */
-    protected $orderAttributes = ['name', 'user_id'];
+    protected $orderAttributes = ['name'];
 	
 	/**
      * The attributes uses to filter.
      *
      * @var array
      */
-    protected $filterAttributes = ['name', 'user_id'];
+    protected $filterAttributes = ['name', 'account_id', 'comercial_id', 'state_id'];
 	
-	public function user() {
-		 return $this->belongsTo('App\UpsalesUser')->withTrashed();
+	public function account() {
+		 return $this->belongsTo('App\Model\Administration\Account')->withTrashed();
 	}
 	
-	public function contacts() {
-		 return $this->hasMany('App\Model\Administration\Contact')->withTrashed();
+	public function state() {
+		 return $this->belongsTo('App\Model\Administration\BusinessRecordState', 'state_id')->withTrashed();
 	}
 	
-	public function businessRecords() {
-		return $this->hasMany('App\Model\Administration\BusinessRecord')->withTrashed();
+	public function leader() {
+		 return $this->belongsTo('App\UpsalesUser', 'leader_id')->withTrashed();
+	}
+	
+	public function comercial() {
+		 return $this->belongsTo('App\UpsalesUser', 'comercial_id')->withTrashed();
 	}
 	
 	public function canDelete() {
@@ -66,21 +72,5 @@ class Account extends Model
 	}
 	public function isSoftDelete() {
 		return true;
-	}
-	
-	public function delete() {
-		if ($this->contacts->isNotEmpty()) {
-			foreach($this->contacts as $contact) {
-				$contact->delete();
-			}
-		}
-		
-		if ($this->businessRecords->isNotEmpty()) {
-			foreach($this->businessRecords as $businessRecord) {
-				$businessRecord->delete();
-			}
-		}
-		
-		parent::delete();
 	}
 }

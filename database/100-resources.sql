@@ -35,3 +35,14 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1017,'businessrecordstates_edit','Editar Estados',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1018,'businessrecordstates_enable','Habilitar/Deshabilitar Estados',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1019,'businessrecordstates_remove','Borrar Estados',NULL,NULL);
+
+/*
+//Potenciales
+*/
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1022,'businessrecords','Administrar Potenciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1023,'businessrecords_create','Crear Potenciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1024,'businessrecords_view','Ver Potenciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1025,'businessrecords_edit','Editar Potenciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1026,'businessrecords_enable','Habilitar/Deshabilitar Potenciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1027,'businessrecords_remove','Borrar Potenciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1028,'businessrecords_admin','Super Admin Potenciales',NULL,NULL);

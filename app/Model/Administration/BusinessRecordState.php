@@ -49,6 +49,10 @@ class BusinessRecordState extends Model
 		return $select_types->get($this->closed_state);
 	}
 	
+	public function businessRecords() {
+		return $this->hasMany('App\Model\Administration\BusinessRecord', 'state_id')->withTrashed();
+	}
+	
 	public function canDelete() {
 		return true;
 	}

@@ -64,5 +64,11 @@ return [
 	'BusinessRecordState' => 'Estado',
 	'RecordStateType' => 'Tipo Estado',
 	
+	'BusinessRecords' => 'Potenciales',
+	'BusinessRecord' => 'Potencial',
+	'Comercial' => 'Comercial',
+	'Leader' => 'Líder',
+	'ManagementTool' => 'Herramienta de Gestión',
+	'Repository' => 'Repositorio',
 	
 ];

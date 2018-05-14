@@ -24,7 +24,17 @@ class EloquentUpsalesUserRepository extends EloquentUserRepository implements Up
 		$result->put('status', true);
 		
 		if ($command->accounts->isNotEmpty() || $command->contacts->isNotEmpty() || !$command->canDelete()) {
-			$result->put('message', "Existen datos relacionados, no se puede eliminar");
+			$result->put('message', "Existen cuentas/contactos relacionados, no se puede eliminar");
+			$result->put('status', false);
+		}
+		
+		if ($command->comercialBusinessRecords->isNotEmpty()) {
+			$result->put('message', "Existen potenciales relacionados, no se puede eliminar");
+			$result->put('status', false);
+		}
+		
+		if ($command->leaderBusinessRecords->isNotEmpty()) {
+			$result->put('message', "Existen potenciales relacionados, no se puede eliminar");
 			$result->put('status', false);
 		}
 		
