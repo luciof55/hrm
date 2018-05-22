@@ -12,6 +12,10 @@ use App\Http\Controllers\UpsalesBaseController;
 use App\Repositories\Contracts\Administration\AccountRepository;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Contracts\Administration\BusinessRecordState;
+use App\Exports\BusinessRecordExport;
+use \Maatwebsite\Excel\Excel;
+use App\Events\BusinessRecordUpdateEvent;
+use App\Events\BusinessRecordCreateEvent;
 
 class BusinessRecordController extends UpsalesBaseController
 {
@@ -94,6 +98,35 @@ class BusinessRecordController extends UpsalesBaseController
 			$select_state->put($state->id, $state->name);
 		}
 		$collection->put('states', $select_state);
+		
+		$actionExcel = action($this->getIndexActionName()).'/|id|/excel/';
+		$collection->put('actionExcel', $actionExcel);
+	}
+	
+	protected function fireCreateEvent(\Illuminate\Http\Request $request, $command) {
+		event(new BusinessRecordCreateEvent($command));
+	}
+	
+	protected function fireUpdateEvent(\Illuminate\Http\Request $request, $command) {
+		event(new BusinessRecordUpdateEvent($command));
+	}
+	
+	protected function storeExcel($excel, $export, $name) {
+		// Store on default disk
+		$excel->store($export, 'ficha'.$name.'.xlsx', 'fichas', Excel::XLSX);
+	}
+	
+	public function excel(\Illuminate\Http\Request $request, \Maatwebsite\Excel\Excel $excel) {
+		$entity = $this->repository->entity();
+		Log::info('Execute '. $entity.' excel.');
+		$url = substr($request->url(), 0, strrpos($request->url(), '/'));
+		Log::info('Strip URL: '. $url);
+		$id = substr($url, strrpos($url, '/') + 1);
+		Log::info('ID: '. $id);
+		$command = $this->repository->find($id);
+		$export = new BusinessRecordExport($command);
+		$this->storeExcel($excel, $export, $command->name);
+		return $excel->download($export, 'ficha.xlsx');
 	}
 	
 	 /**
@@ -101,8 +134,8 @@ class BusinessRecordController extends UpsalesBaseController
      *
      * @return void
      */
-    public function __construct(\App\Repositories\Contracts\Administration\BusinessRecordRepository $repository, \App\Repositories\Contracts\UserRepository $userRepository, \App\Repositories\Contracts\Administration\AccountRepository $accountRepository, \App\Repositories\Contracts\Administration\BusinessRecordStateRepository $businessRecordStateRepository)
-    {
+    public function __construct(\App\Repositories\Contracts\Administration\BusinessRecordRepository $repository, \App\Repositories\Contracts\UserRepository $userRepository, \App\Repositories\Contracts\Administration\AccountRepository $accountRepository, \App\Repositories\Contracts\Administration\BusinessRecordStateRepository $businessRecordStateRepository) {
+		
 		$this->userRepository = $userRepository;
 		$this->repository = $repository;
 		$this->accountRepository = $accountRepository;
@@ -150,5 +183,4 @@ class BusinessRecordController extends UpsalesBaseController
 	public function getViewBase() {
 		return 'administration.';
 	}
-
 }

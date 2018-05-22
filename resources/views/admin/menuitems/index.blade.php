@@ -20,7 +20,7 @@
 									{{ Form::select($filterKey, $resources, $filters->get($filterKey), ['autofocus', 'placeholder' => 'Pick a resource...', 'class' => 'form-control mr-sm-2'])}}
 								@endif
 							@endforeach
-							<button class="btn btn-primary" type="submit">@lang('messages.Search')</button>
+							<button class="btn btn-info" type="submit">@lang('messages.Search')</button>
 						</form>
 					</nav>
 				</div>

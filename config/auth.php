@@ -45,6 +45,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+		
+		'adldap' => [
+            'driver' => 'session',
+            'provider' => 'ldapusers',
+        ],
     ],
 
     /*
@@ -67,6 +72,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
+            'model' => App\UpsalesUser::class,
+        ],
+		
+		'ldapusers' => [
+            'driver' => 'adldap',
             'model' => App\UpsalesUser::class,
         ],
 

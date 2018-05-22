@@ -23,7 +23,7 @@
 								{{ Form::select($filterKey, $roles, $filters->get($filterKey), ['autofocus', 'placeholder' => 'Pick a role...', 'class' => 'form-control mr-sm-2'])}}
 							@endif
 						@endforeach
-						<button class="btn btn-primary" type="submit">@lang('messages.Search')</button>
+						<button class="btn btn-info" type="submit">@lang('messages.Search')</button>
 					</form>
 				</nav>
 			</div>
@@ -41,7 +41,7 @@
 								</thead>
 								<tbody>
 									@foreach ($list as $command)
-										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) table-danger @endif" onclick="crudInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
+										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) text-muted @endif" onclick="crudInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
 											<td>{{ $command->name }}</td>
 											<td>{{ $command->role->name}}</td>
 										</tr>

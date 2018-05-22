@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./framework');
+require('./upsales');
 
 window.Vue = require('vue');
 
@@ -15,6 +16,8 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import {TinkerComponent} from 'botman-tinker';
+Vue.component('botman-tinker', TinkerComponent);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 

@@ -18,7 +18,7 @@
 						<input class="form-control mr-sm-2" type="text" placeholder="@lang('messages.Search')" id="name_filter" name="name_filter" value="{{ $filters->get('name_filter') }}" autofocus>
 						{{ Form::select('user_id_filter', $users, $filters->get('user_id_filter'), ['placeholder' => 'Pick a user...', 'class' => 'form-control mr-sm-2'])}}
 						{{ Form::select('account_id_filter', $accounts, $filters->get('account_id_filter'), ['placeholder' => 'Pick a account...', 'class' => 'form-control mr-sm-2'])}}
-						<button class="btn btn-primary" type="submit">@lang('messages.Search')</button>
+						<button class="btn btn-info" type="submit">@lang('messages.Search')</button>
 					</form>
 				</nav>
 			</div>
@@ -37,7 +37,7 @@
 								</thead>
 								<tbody>
 									@foreach ($list as $command)
-										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) table-danger @endif" onclick="crudInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
+										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) text-muted @endif" onclick="crudInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
 											<td>{{ $command->name }}</td>
 											<td>{{ $command->user->name }}</td>
 											<td>{{ $command->account->name }}</td>

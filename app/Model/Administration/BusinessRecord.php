@@ -59,6 +59,22 @@ class BusinessRecord extends Model
 		 return $this->belongsTo('App\UpsalesUser', 'comercial_id')->withTrashed();
 	}
 	
+	public function comercialName() {
+		if (isset($this->comercial)) {
+			return $this->comercial->name;
+		} else {
+			return '';
+		}
+	}
+	
+	public function leaderName() {
+		if (isset($this->leader)) {
+			return $this->leader->name;
+		} else {
+			return '';
+		}
+	}
+	
 	public function canDelete() {
 		return true;
 	}

@@ -152,6 +152,19 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 		
 		Collective\Html\HtmlServiceProvider::class,
+		
+		/*
+         * Package Service Providers...
+         */
+        Laravel\Tinker\TinkerServiceProvider::class,
+
+        /*
+         * BotMan Service Providers...
+         */
+        BotMan\Tinker\TinkerServiceProvider::class,
+        App\Providers\BotMan\DriverServiceProvider::class,
+        BotMan\BotMan\BotManServiceProvider::class,
+        BotMan\Studio\Providers\StudioServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -166,6 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteUpsalesServiceProvider::class,
 		App\Providers\GoogleServiceProvider::class,
+		Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -217,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 		'Form' => Collective\Html\FormFacade::class,
 		'Html' => Collective\Html\HtmlFacade::class,
+		'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

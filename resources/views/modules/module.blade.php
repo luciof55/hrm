@@ -44,7 +44,7 @@
 					<div class="container">
 						<div class="float-right">
 							<div class="btn-group">
-								<button id="button_new" type="button" class="btn btn-primary btn-md">Configurar</button>
+								<button id="button_new" type="button" class="btn btn-info btn-md">Configurar</button>
 							</div>
 						</div>
 					</div>

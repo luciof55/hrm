@@ -1,6 +1,7 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
 
 // Variables
 @import "variables";
@@ -14,5 +15,25 @@
 }
 .form-control {
   border: 1px solid #607D8B;
+}
+
+.page-item.active .page-link {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.col-form-label {
+  @extend .d-none;
+  @extend .d-sm-block;
+}
+
+.table-header {
+  @extend .bg-info;
+  @extend .text-white;
+  @extend .text-center;
+}
+
+.pointer {
+  cursor: pointer;
 }
 

@@ -23,7 +23,7 @@
 								{{ Form::select($filterKey, $roles, $filters->get($filterKey), ['autofocus', 'placeholder' => 'Pick a role...', 'class' => 'form-control mr-sm-2'])}}
 							@endif
 						@endforeach
-						<button class="btn btn-primary" type="submit">@lang('messages.Search')</button>
+						<button class="btn btn-info" type="submit">@lang('messages.Search')</button>
 					</form>
 				</nav>
 			</div>

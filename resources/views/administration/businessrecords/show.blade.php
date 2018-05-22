@@ -20,13 +20,6 @@
 					</div>
 					
 					<div class="form-group row">
-						<label for="user" class="col-md-4 col-form-label text-md-right">@lang('messages.User')</label>
-						<div class="col-md-6">
-							<input id="user" type="text" class="form-control" name="user" value="{{ $command->user->name }}" readonly>
-						</div>
-					</div>
-					
-					<div class="form-group row">
 						<label for="account" class="col-md-4 col-form-label text-md-right">@lang('messages.Account')</label>
 						<div class="col-md-6">
 							<input id="account" type="text" class="form-control" name="acount" value="{{ $command->account->name }}" readonly>
@@ -34,23 +27,44 @@
 					</div>
 					
 					<div class="form-group row">
-						<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }})</label>
+						<label for="state_id" class="col-md-4 col-form-label text-md-right">@lang('messages.BusinessRecordState')</label>
 						<div class="col-md-6">
-							<input id="email" type="text" class="form-control" name="email" value="{{ $command->email }}" readonly>
+							<input id="state_id" type="text" class="form-control" name="state_id" value="{{ $command->state->name }}" readonly>
 						</div>
 					</div>
 					
 					<div class="form-group row">
-						<label for="phone" class="col-md-4 col-form-label text-md-right">@lang('messages.Phone')</label>
+						<label for="comercial" class="col-md-4 col-form-label text-md-right">@lang('messages.Comercial')</label>
 						<div class="col-md-6">
-							<input id="phone" type="text" class="form-control" name="phone" value="{{ $command->phone }}" readonly>
+							<input id="comercial" type="text" class="form-control" name="comercial" value="@if(isset($command->comercial)) {{ $command->comercial->name }} @endif" readonly>
 						</div>
 					</div>
 					
 					<div class="form-group row">
-						<label for="position" class="col-md-4 col-form-label text-md-right">@lang('messages.Position')</label>
+						<label for="leader" class="col-md-4 col-form-label text-md-right">@lang('messages.Leader')</label>
 						<div class="col-md-6">
-							<input id="position" type="text" class="form-control" name="position" value="{{ $command->position }}" readonly>
+							<input id="leader" type="text" class="form-control" name="leader" value="@if(isset($command->leader)) {{ $command->leader->name }} @endif" readonly>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="management_tool" class="col-md-4 col-form-label text-md-right">@lang('messages.ManagementTool')</label>
+						<div class="col-md-6">
+							<input id="management_tool" type="url" class="form-control" name="management_tool" value="{{ $command->management_tool }}" readonly>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="repository" class="col-md-4 col-form-label text-md-right">@lang('messages.Repository')</label>
+						<div class="col-md-6">
+							<input id="repository" type="url" class="form-control" name="repository" value="{{ $command->repository }}" readonly>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="notes" class="col-md-4 col-form-label text-md-right">@lang('messages.Notes')</label>
+						<div class="col-md-6">
+							{{ Form::textarea ('notes', $command->notes, ['readonly', 'class' => 'form-control'])}}
 						</div>
 					</div>
 

@@ -11,6 +11,7 @@ return [
 	'View' => 'Visualizar',
 	'Enable' => 'Habilitar',
 	'Actions' => 'Acciones',
+	'Export' => 'Exportar',
 	
 	'Name' => 'Nombre',
 	'selectrowtext' => 'Seleccione una fila',
@@ -70,5 +71,6 @@ return [
 	'Leader' => 'Líder',
 	'ManagementTool' => 'Herramienta de Gestión',
 	'Repository' => 'Repositorio',
+	'ExportFile' => 'Exportar Archivo',
 	
 ];

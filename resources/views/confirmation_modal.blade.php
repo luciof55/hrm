@@ -8,7 +8,7 @@
                 {{ $bodyText }}
             </div>
             <div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">@lang('messages.Cancel')</button>
+				<button type="button" class="btn btn-info" data-dismiss="modal">@lang('messages.Cancel')</button>
 				<button id="button_confirm_modal" class="btn btn-danger btn-ok" onclick="crudInstance.executeAction();">@lang('messages.Confirm')</button>
             </div>
         </div>
