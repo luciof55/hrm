@@ -50582,6 +50582,10 @@ module.exports = Component.exports
 				$('#button_edit').addClass('disabled');
 				$('#button_enable').addClass('disabled');
 				$('#button_remove').addClass('disabled');
+				$('#button_view_sm').addClass('disabled');
+				$('#button_edit_sm').addClass('disabled');
+				$('#button_enable_sm').addClass('disabled');
+				$('#button_remove_sm').addClass('disabled');
 				return;
 			};
 		};
@@ -50590,6 +50594,10 @@ module.exports = Component.exports
 		$('#button_edit').removeClass('disabled');
 		$('#button_enable').removeClass('disabled');
 		$('#button_remove').removeClass('disabled');
+		$('#button_view_sm').removeClass('disabled');
+		$('#button_edit_sm').removeClass('disabled');
+		$('#button_enable_sm').removeClass('disabled');
+		$('#button_remove_sm').removeClass('disabled');
 
 		if ($('#' + id).hasClass('text-muted')) {
 			$('#button_enable').text('Habilitar');
@@ -50722,8 +50730,10 @@ window.crudInstance = crudInstance;
 		crudInstance.setCurrentRowId(id);
 		if ($('#' + id).hasClass('table-active')) {
 			$('#button_excel').removeClass('disabled');
+			$('#button_excel_sm').removeClass('disabled');
 		} else {
 			$('#button_excel').addClass('disabled');
+			$('#button_excel_sm').addClass('disabled');
 		};
 	};
 
@@ -50732,9 +50742,9 @@ window.crudInstance = crudInstance;
 		if (id == '' || id == null) {
 			return 'empty!';
 		} else {
-			alert(action);
+			//alert(action);
 			action = action.replace("|id|", id);
-			alert(action);
+			//alert(action);
 			crudInstance.postForm(action, 'GET');
 		};
 	};

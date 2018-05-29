@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('administration.layout')
 @section('content')
 <div class="row justify-content-center">
 	<div class="col-md-8">
@@ -37,7 +37,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="user_id" class="col-md-4 col-form-label text-md-right">@lang('messages.User')</label>
 						<div class="col-md-6">
@@ -51,7 +51,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="account_id" class="col-md-4 col-form-label text-md-right">@lang('messages.Account')</label>
 						<div class="col-md-6">
@@ -65,7 +65,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }})</label>
 
@@ -79,7 +79,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="phone" class="col-md-4 col-form-label text-md-right">@lang('messages.Phone')</label>
 
@@ -93,7 +93,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="position" class="col-md-4 col-form-label text-md-right">@lang('messages.Position')</label>
 						<div class="col-md-6">
@@ -105,7 +105,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row mb-0">
 						@include('admin.down_buttons', ['btn_save' => true])
 					</div>

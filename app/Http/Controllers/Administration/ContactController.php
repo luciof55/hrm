@@ -98,6 +98,10 @@ class ContactController extends UpsalesBaseController
 		return 'contacts';
 	}
 	
+	public function getRouteGroup() {
+		return 'administration.';
+	}
+	
 	public function postProcessCommand(Request $request, $command) {
 		$command->name = $request->old('name');
 		$command->email = $request->old('email');

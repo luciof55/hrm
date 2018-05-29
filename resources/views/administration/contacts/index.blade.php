@@ -50,9 +50,12 @@
 				</div>
 				<div class="row">
 					<div class="container">
-						<div class="float-left">{{ $list->links() }}</div>
-						<div class="float-right">
-							@include('admin.buttons', ['btn_new' => true, 'btn_view' => true, 'btn_edit' => true, 'btn_enable' => true, 'btn_remove' => true])
+						<div class="d-flex flex-fill flex-row">
+							<div class="p-1">{{ $list->links() }}</div>
+							<div class="d-none d-md-block p-1"><button id="button_export" type="button" onclick="location.href='{{$actionExport}}';" class="btn btn-info btn-md"><i class="pr-2 fa fa-th-list"></i>@lang('messages.Export')</button></div>
+							<div class="p-1 ml-auto">
+								@include('admin.buttons', ['btn_new' => true, 'btn_view' => true, 'btn_edit' => true, 'btn_enable' => true, 'btn_remove' => true])
+							</div>
 						</div>
 					</div>
 				</div>

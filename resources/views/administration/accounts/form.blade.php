@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('administration.layout')
 @section('content')
 <div class="row justify-content-center">
 	<div class="col-md-8">
@@ -32,7 +32,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="user_id" class="col-md-4 col-form-label text-md-right">@lang('messages.User')</label>
 						<div class="col-md-6">
@@ -46,7 +46,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="industry" class="col-md-4 col-form-label text-md-right">@lang('messages.Industry')</label>
 
@@ -60,7 +60,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="url" class="col-md-4 col-form-label text-md-right">URL</label>
 
@@ -74,7 +74,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="notes" class="col-md-4 col-form-label text-md-right">@lang('messages.Notes')</label>
 						<div class="col-md-6">
@@ -88,7 +88,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row mb-0">
 						@include('admin.down_buttons', ['btn_save' => true])
 					</div>

@@ -151,6 +151,10 @@ class BusinessRecordController extends UpsalesBaseController
 		return 'businessrecords';
 	}
 	
+	public function getRouteGroup() {
+		return 'administration.';
+	}
+	
 	public function postProcessCommand(Request $request, $command) {
 		$command->name = $request->old('name');
 		$command->management_tool = $request->old('management_tool');

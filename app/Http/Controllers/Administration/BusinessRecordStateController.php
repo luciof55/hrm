@@ -75,6 +75,10 @@ class BusinessRecordStateController extends UpsalesBaseController
 		return 'businessrecordstates';
 	}
 	
+	public function getRouteGroup() {
+		return 'administration.';
+	}
+	
 	public function postProcessCommand(Request $request, $command) {
 		$command->name = $request->old('name');
 	}

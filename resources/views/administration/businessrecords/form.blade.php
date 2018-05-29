@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('administration.layout')
 @section('content')
 <div class="row justify-content-center">
 	<div class="col-md-8">
@@ -47,7 +47,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="account_id" class="col-md-4 col-form-label text-md-right">@lang('messages.Account')</label>
 						<div class="col-md-6">
@@ -61,7 +61,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="state_id" class="col-md-4 col-form-label text-md-right">@lang('messages.BusinessRecordState')</label>
 						<div class="col-md-6">
@@ -75,7 +75,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="comercial_id" class="col-md-4 col-form-label text-md-right">@lang('messages.Comercial')</label>
 						<div class="col-md-6">
@@ -89,7 +89,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="leader_id" class="col-md-4 col-form-label text-md-right">@lang('messages.Leader')</label>
 						<div class="col-md-6">
@@ -103,7 +103,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="management_tool" class="col-md-4 col-form-label text-md-right">@lang('messages.ManagementTool')</label>
 
@@ -117,7 +117,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="repository" class="col-md-4 col-form-label text-md-right">@lang('messages.Repository')</label>
 
@@ -131,7 +131,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row">
 						<label for="notes" class="col-md-4 col-form-label text-md-right">@lang('messages.Notes')</label>
 						<div class="col-md-6">
@@ -145,7 +145,7 @@
 							@endif
 						</div>
 					</div>
-					
+
 					<div class="form-group row mb-0">
 						@include('admin.down_buttons', ['btn_save' => true])
 					</div>

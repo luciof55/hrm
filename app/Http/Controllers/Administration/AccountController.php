@@ -85,6 +85,10 @@ class AccountController extends UpsalesBaseController
 		return 'accounts';
 	}
 	
+	public function getRouteGroup() {
+		return 'administration.';
+	}
+	
 	public function postProcessCommand(Request $request, $command) {
 		$command->name = $request->old('name');
 		$command->url = $request->old('url');

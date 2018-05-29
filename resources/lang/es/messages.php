@@ -12,7 +12,7 @@ return [
 	'Enable' => 'Habilitar',
 	'Actions' => 'Acciones',
 	'Export' => 'Exportar',
-	
+
 	'Name' => 'Nombre',
 	'selectrowtext' => 'Seleccione una fila',
 	'RemoveTitle' => 'Eliminación',
@@ -20,7 +20,7 @@ return [
 	'EnableTitle' => 'Habilitar/Deshabilitar',
 	'EnableRow' => 'Habilitar fila selccionada?',
 	'DisableRow' => 'Deshabilitar fila selccionada?',
-	
+
 	'Profiles' => 'Perfiles',
 	'Profile' => 'Perfil',
 	'Roles' => 'Roles',
@@ -33,44 +33,44 @@ return [
 	'Privilege' => 'Privilegio',
 	'Users' => 'Usuarios',
 	'User' => 'Usuario',
-	
+
 	'MenuItems' => 'Entrada de Menúes',
 	'MenuItem' => 'Entrada de Menúes',
 	'MenuType' => 'Tipo de Menú',
-	
+
 	'Main' => 'Principal',
 	'Secondary' => 'Secundario',
 	'Custom' => 'Personlizado',
-	
+
 	'Open' => 'Abierto',
 	'Closed' => 'Cerrado',
-	
+
 	'Module' => 'Módulo',
 	'Modules' => 'Módulos',
-	
+
 	'Revoke' => 'Revocar acceso',
 	'Authorize' => 'Autorizar acceso',
-	
+
 	'Accounts' => 'Cuentas',
 	'Account' => 'Cuenta',
 	'Industry' => 'Industria',
 	'Notes' => 'Notas',
-	
+
 	'Contacts' => 'Contactos',
 	'Contact' => 'Contacto',
 	'Phone' => 'Teléfono',
 	'Position' => 'Posición',
-	
+
 	'BusinessRecordStates' => 'Estados',
 	'BusinessRecordState' => 'Estado',
 	'RecordStateType' => 'Tipo Estado',
-	
+
 	'BusinessRecords' => 'Potenciales',
 	'BusinessRecord' => 'Potencial',
 	'Comercial' => 'Comercial',
 	'Leader' => 'Líder',
 	'ManagementTool' => 'Herramienta de Gestión',
 	'Repository' => 'Repositorio',
-	'ExportFile' => 'Exportar Archivo',
-	
+	'ExportFile' => 'Descargar',
+
 ];

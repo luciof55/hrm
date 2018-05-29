@@ -10412,6 +10412,18 @@ a.text-dark:focus {
   border-color: #17a2b8;
 }
 
+.main-content {
+  position: relative;
+  top: 110px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    position: relative;
+    top: 50px;
+  }
+}
+
 .pointer {
   cursor: pointer;
 }
