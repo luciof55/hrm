@@ -46,3 +46,19 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1026,'businessrecords_enable','Habilitar/Deshabilitar Potenciales',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1027,'businessrecords_remove','Borrar Potenciales',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1028,'businessrecords_admin','Super Admin Potenciales',NULL,NULL);
+
+/*
+// HOME
+*/
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1029,'principal','Principal',NULL,NULL);
+
+/*
+//Workflows
+*/
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1030,'workflows','Administrar Workflows',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1031,'workflows_create','Crear Workflows',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1032,'workflows_view','Ver Workflows',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1033,'workflows_edit','Editar Workflows',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1034,'workflows_enable','Habilitar/Deshabilitar Workflows',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1035,'workflows_remove','Borrar Workflows',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1036,'workflows_admin','Super Admin Workflows',NULL,NULL);

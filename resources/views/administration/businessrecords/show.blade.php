@@ -48,6 +48,13 @@
 					</div>
 
 					<div class="form-group row">
+						<label for="workflow" class="col-md-4 col-form-label text-md-right">Workflow</label>
+						<div class="col-md-6">
+							<input id="workflow" type="text" class="form-control" name="workflow" value="@if(isset($command->workflow)) {{ $command->workflow->name }} @endif" readonly>
+						</div>
+					</div>
+
+					<div class="form-group row">
 						<label for="management_tool" class="col-md-4 col-form-label text-md-right">@lang('messages.ManagementTool')</label>
 						<div class="col-md-6">
 							<input id="management_tool" type="url" class="form-control" name="management_tool" value="{{ $command->management_tool }}" readonly>

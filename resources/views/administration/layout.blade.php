@@ -22,11 +22,11 @@
 			<li class="nav-item"><a class="nav-link" href="{{route('administration.businessrecordstates.index')}}">@lang('messages.BusinessRecordStates')</a></li>
 		@endif
 	@endif
-	@if (Gate::allows('module', 'businessrecords'))
-		@if(Request::path() == 'businessrecords')
-			<li class="nav-item nav-link active">@lang('messages.BusinessRecords')</li>
+	@if (Gate::allows('module', 'workflows'))
+		@if(Request::path() == 'workflows')
+			<li class="nav-item nav-link active">Workflows</li>
 		@else
-			<li class="nav-item"><a class="nav-link" href="{{route('administration.businessrecords.index')}}">@lang('messages.BusinessRecords')</a></li>
+			<li class="nav-item"><a class="nav-link" href="{{route('administration.workflows.index')}}">Workflows</a></li>
 		@endif
 	@endif
 </ul>

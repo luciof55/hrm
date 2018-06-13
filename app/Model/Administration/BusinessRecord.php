@@ -19,7 +19,7 @@ class BusinessRecord extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'account_id', 'state_id', 'leader_id', 'comercial_id', 'management_tool', 'repository', 'notes'
+        'name', 'id', 'account_id', 'state_id', 'leader_id', 'comercial_id', 'workflow_id', 'management_tool', 'repository', 'notes'
     ];
 	
 	/**
@@ -34,8 +34,8 @@ class BusinessRecord extends Model
      *
      * @var array
      */
-    protected $orderAttributes = ['name'];
-	
+    protected $orderAttributes = ['name', 'account-name', 'comercial-name', 'state-name'];
+
 	/**
      * The attributes uses to filter.
      *
@@ -73,6 +73,10 @@ class BusinessRecord extends Model
 		} else {
 			return '';
 		}
+	}
+	
+	public function workflow() {
+		return $this->belongsTo('App\Model\Administration\Workflow')->withTrashed();
 	}
 	
 	public function canDelete() {

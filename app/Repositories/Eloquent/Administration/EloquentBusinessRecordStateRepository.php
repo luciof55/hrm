@@ -28,6 +28,11 @@ class EloquentBusinessRecordStateRepository extends EloquentBaseRepository imple
 			$result->put('status', false);
 		}
 		
+		if ($businessRecordState->initialWorkflows->isNotEmpty() || $businessRecordState->finalWorkflows->isNotEmpty() || !$businessRecordState->canDelete()) {
+			$result->put('message', "Existen Workflows relacionados, no se puede eliminar");
+			$result->put('status', false);
+		}
+		
 		return $result;
 	}
 	

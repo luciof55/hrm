@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('main');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->middleware('checkprivilege:principal')->name('home');
 
 Route::get('/mod/{moduleName}', 'OpenModuleController@index')->middleware('checkprivilege:moduleName')->name('open.modules');
 Route::get('/submod/{subModuleName}', 'OpenSubModuleController@index')->middleware('checkprivilege:subModuleName')->name('open.submodules');

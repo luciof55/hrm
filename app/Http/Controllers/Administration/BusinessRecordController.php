@@ -23,6 +23,7 @@ class BusinessRecordController extends UpsalesBaseController
 	protected $userRepository;
 	protected $accountRepository;
 	protected $businessRecordStateRepository;
+	protected $workflowRepository;
 	
 	/**
      * Get a validator for an incoming BusinessRecord request.
@@ -99,6 +100,14 @@ class BusinessRecordController extends UpsalesBaseController
 		}
 		$collection->put('states', $select_state);
 		
+		$workflows = $this->workflowRepository->select(['id', 'name']);
+		
+		$select_workflow = collect([]);
+		foreach ($workflows as $workflow) {
+			$select_workflow->put($workflow->id, $workflow->name);
+		}
+		$collection->put('workflows', $select_workflow);
+		
 		$actionExcel = action($this->getIndexActionName()).'/|id|/excel/';
 		$collection->put('actionExcel', $actionExcel);
 	}
@@ -134,12 +143,13 @@ class BusinessRecordController extends UpsalesBaseController
      *
      * @return void
      */
-    public function __construct(\App\Repositories\Contracts\Administration\BusinessRecordRepository $repository, \App\Repositories\Contracts\UserRepository $userRepository, \App\Repositories\Contracts\Administration\AccountRepository $accountRepository, \App\Repositories\Contracts\Administration\BusinessRecordStateRepository $businessRecordStateRepository) {
+    public function __construct(\App\Repositories\Contracts\Administration\BusinessRecordRepository $repository, \App\Repositories\Contracts\UserRepository $userRepository, \App\Repositories\Contracts\Administration\AccountRepository $accountRepository, \App\Repositories\Contracts\Administration\BusinessRecordStateRepository $businessRecordStateRepository, \App\Repositories\Contracts\Administration\WorkflowRepository $workflowRepository) {
 		
 		$this->userRepository = $userRepository;
 		$this->repository = $repository;
 		$this->accountRepository = $accountRepository;
 		$this->businessRecordStateRepository = $businessRecordStateRepository;
+		$this->workflowRepository = $workflowRepository;
         $this->middleware('auth');
     }
 	
@@ -152,7 +162,7 @@ class BusinessRecordController extends UpsalesBaseController
 	}
 	
 	public function getRouteGroup() {
-		return 'administration.';
+		return 'main.';
 	}
 	
 	public function postProcessCommand(Request $request, $command) {

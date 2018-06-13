@@ -23,6 +23,21 @@ function potencial() {
 		};
 	};
 
+	this.columnOrder = function (columnName) {
+		$('#columnOrder').val(columnName);
+		if ($('#'+columnName).val() == 'asc') {
+			$('#'+columnName).val('desc');
+		} else {
+			$('#'+columnName).val('asc');
+		}
+		crudInstance.executeAction();
+	}
+
+	this.removeColumnOrder = function (columnName) {
+		$('#columnOrder').val('');
+		$('#'+columnName).val('');
+		crudInstance.executeAction();
+	}
 
 };
 

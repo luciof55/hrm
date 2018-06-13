@@ -51,6 +51,14 @@ class BusinessRecordState extends Model
 		return $this->hasMany('App\Model\Administration\BusinessRecord', 'state_id')->withTrashed();
 	}
 	
+	public function initialWorkflows() {
+		return $this->hasMany('App\Model\Administration\Workflow', 'initial_state_id')->withTrashed();
+	}
+	
+	public function finalWorkflows() {
+		return $this->hasMany('App\Model\Administration\Workflow', 'final_state_id')->withTrashed();
+	}
+	
 	public function canDelete() {
 		return true;
 	}

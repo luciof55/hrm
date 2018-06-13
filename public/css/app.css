@@ -10108,7 +10108,8 @@ button.bg-dark:focus {
   white-space: nowrap;
 }
 
-.text-left {
+.text-left,
+.table-header {
   text-align: left !important;
 }
 
@@ -10116,8 +10117,7 @@ button.bg-dark:focus {
   text-align: right !important;
 }
 
-.text-center,
-.table-header {
+.text-center {
   text-align: center !important;
 }
 
@@ -10426,5 +10426,32 @@ a.text-dark:focus {
 
 .pointer {
   cursor: pointer;
+}
+
+.dropdown-toggle-down::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.455em;
+  font-family: FontAwesome;
+  content: "\F077";
+}
+
+.dropdown-toggle-up::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.455em;
+  font-family: FontAwesome;
+  content: "\F078";
+}
+
+.dropdown-toggle-none::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.455em;
+  font-family: FontAwesome;
+  content: "\F146";
 }
 

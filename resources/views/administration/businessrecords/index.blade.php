@@ -24,6 +24,8 @@
 						<input type="hidden" id="method" name="method" value="{{ $method }}">
 						<input type="hidden" id="page" name="page" value="{{ $page }}">
 						<input type="hidden" id="id" name="id" value="">
+						<input type="hidden" id="columnOrder" name="columnOrder" value="@if(isset($columnOrder)){{$columnOrder}}@endif">
+						@include('order_fields')
 						<div class="d-flex bg-light">
 							<div class="p-1"><label for="name_filter" class="col-form-label text-md-right">@lang('messages.Name')</label></div>
 							<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Name')" id="name_filter" name="name_filter" value="{{ $filters->get('name_filter') }}" autofocus></div>
@@ -52,13 +54,21 @@
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover">
 								<thead>
-								  <tr>
-									<td class="table-header">@lang('messages.Name')<i class="pointer pl-2 fa fa-sort-down"></i></td>
-									<td class="table-header">@lang('messages.Account')</td>
-									<td class="table-header">@lang('messages.Comercial')</td>
-									<td class="table-header">@lang('messages.BusinessRecordState')</td>
-								  </tr>
-								</thead>
+			            <tr>
+			            <td class="table-header">
+			              @include('column_order', ['column_order' => 'name_order', 'column_text' => 'messages.Name'])
+			            </td>
+			            <td class="table-header">
+			              @include('column_order', ['column_order' => 'account-name_order', 'column_text' => 'messages.Account'])
+			            </td>
+			            <td class="table-header">
+			              @include('column_order', ['column_order' => 'comercial-name_order', 'column_text' => 'messages.Comercial'])
+			            </td>
+			            <td class="table-header">
+			              @include('column_order', ['column_order' => 'state-name_order', 'column_text' => 'messages.BusinessRecordState'])
+			            </td>
+			            </tr>
+			          </thead>
 								<tbody>
 									@foreach ($list as $command)
 										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) bg-light text-muted @endif" onclick="potencialInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
@@ -77,12 +87,14 @@
 					<div class="container">
 						<div class="d-flex flex-fill flex-row">
 							<div class="p-1">{{ $list->links() }}</div>
-							<div class="d-none d-md-block p-1"><button id="button_export" type="button" onclick="location.href='{{$actionExport}}';" class="btn btn-info btn-md"><i class="pr-2 fa fa-th-list"></i>@lang('messages.Export')</button></div>
+							@if($actionExportEnable)
+								<div class="d-none d-md-block p-1"><button id="button_export" type="button" onclick="location.href='{{$actionExport}}';" class="btn btn-info btn-md"><i class="pr-2 fa fa-th-list"></i>@lang('messages.Export')</button></div>
+							@endif
 							<div class="p-1 ml-auto">
 								<div class="btn-group">
-									<button id="button_excel" type="button" onclick="potencialInstance.generateExcel('{{$actionExcel}}', '{{$entity}}');" class="d-none d-md-block btn btn-info btn-md disabled"><i class="pr-2 fa fa-download mr-1"></i>@lang('messages.ExportFile')</button>
-									<button id="button_excel_sm" type="button" onclick="potencialInstance.generateExcel('{{$actionExcel}}', '{{$entity}}');" class="d-block d-md-none btn btn-info btn-sm disabled"><i class="fa fa-download"></i></button>
-									@include('admin.only_buttons', ['btn_new' => true, 'btn_view' => true, 'btn_edit' => true, 'btn_enable' => true, 'btn_remove' => true])
+										<button id="button_excel" type="button" onclick="potencialInstance.generateExcel('{{$actionExcel}}', '{{$entity}}');" class="d-none d-md-block btn btn-info btn-md disabled"><i class="pr-2 fa fa-download mr-1"></i>@lang('messages.ExportFile')</button>
+										<button id="button_excel_sm" type="button" onclick="potencialInstance.generateExcel('{{$actionExcel}}', '{{$entity}}');" class="d-block d-md-none btn btn-info btn-sm disabled"><i class="fa fa-download"></i></button>
+										@include('admin.only_buttons', ['btn_new' => true, 'btn_view' => true, 'btn_edit' => true, 'btn_enable' => true, 'btn_remove' => true])
 								</div>
 							</div>
 						</div>

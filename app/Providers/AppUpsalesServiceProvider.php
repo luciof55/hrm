@@ -34,5 +34,13 @@ class AppUpsalesServiceProvider extends AppServiceProvider
 		$this->app->singleton(
 			'App\Repositories\Contracts\Administration\BusinessRecordRepository', 'App\Repositories\Eloquent\Administration\EloquentBusinessRecordRepository'
 		);
+		
+		$this->app->singleton(
+			'App\Repositories\Contracts\Administration\WorkflowRepository', 'App\Repositories\Eloquent\Administration\EloquentWorkflowRepository'
+		);
+		
+		$this->app->singleton(
+			'App\Repositories\Contracts\Administration\TransitionRepository', 'App\Repositories\Eloquent\Administration\EloquentTransitionRepository'
+		);
     }
 }

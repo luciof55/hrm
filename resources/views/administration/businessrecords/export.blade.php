@@ -31,7 +31,7 @@
             <td>{{ $command->leaderName() }}</td>
         </tr>
 		<tr>
-            <td>@lang('messages.Management_tool')</td>
+            <td>@lang('messages.ManagementTool')</td>
             <td>{{ $command->management_tool }}</td>
         </tr>
 		<tr>

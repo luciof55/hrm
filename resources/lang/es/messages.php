@@ -72,5 +72,10 @@ return [
 	'ManagementTool' => 'Herramienta de Gestión',
 	'Repository' => 'Repositorio',
 	'ExportFile' => 'Descargar',
+	
+	'Transitions' => 'Transiciones',
+	'Transition' => 'Transición',
+	'StateFrom' => 'Estado desde',
+	'StateTo' => 'Estado hasta'
 
 ];

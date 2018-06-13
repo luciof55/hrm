@@ -24,6 +24,8 @@ class CreateBusinessRecordTable extends Migration
 			$table->foreign('leader_id')->references('id')->on('users');
 			$table->unsignedInteger('comercial_id');
 			$table->foreign('comercial_id')->references('id')->on('users');
+			$table->unsignedInteger('workflow_id');
+			$table->foreign('workflow_id')->references('id')->on('workflows');
 			$table->string('management_tool', 250)->nullable($value = true);
 			$table->string('repository', 250)->nullable($value = true);
 			$table->string('notes', 1024)->nullable($value = true);

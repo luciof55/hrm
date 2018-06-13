@@ -1633,36 +1633,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/ExampleComponent.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
-
-/***/ }),
-
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39236,160 +39206,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/component-normalizer.js":
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0ca92eac\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/ExampleComponent.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue/dist/vue.common.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50442,7 +50258,34 @@ window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
 Vue.component('botman-tinker', __WEBPACK_IMPORTED_MODULE_0_botman_tinker__["TinkerComponent"]);
 
-Vue.component('example-component', __webpack_require__("./resources/assets/js/components/ExampleComponent.vue"));
+//Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+Vue.component('example-component', {
+  data: function data() {
+    return {
+      count: 0
+    };
+  },
+  template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+});
+
+Vue.component('delete-button-component', {
+  data: function data() {
+    return {
+      rows: []
+    };
+  },
+  methods: {
+    addRow: function addRow() {
+      this.rows.push({});
+    },
+    removeRow: function removeRow(row) {
+      //console.log(row);
+      this.rows.$remove(row);
+    }
+  },
+  template: '<button type="button" v-on:click="removeRow(row)" class="fa fa-remove delete-button"></button>'
+});
 
 var app = new Vue({
   el: '#app'
@@ -50513,54 +50356,6 @@ if (token) {
 //     encrypted: true
 // });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/jquery/dist/jquery.js")))
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/ExampleComponent.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
-/* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/ExampleComponent.vue")
-/* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0ca92eac\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/ExampleComponent.vue")
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ca92eac", Component.options)
-  } else {
-    hotAPI.reload("data-v-0ca92eac", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
 
 /***/ }),
 
@@ -50664,6 +50459,16 @@ module.exports = Component.exports
 		$("#" + formName).submit();
 	};
 
+	this.validateAndSubmitForm = function (formName) {
+		if ($('#' + formName)[0].checkValidity() === false) {
+			$('#' + formName).addClass('was-validated');
+			return false;
+		} else {
+			$("#" + formName).submit();
+			return true;
+		}
+	};
+
 	$(document).on('show.bs.modal', '#confirmation-modal', function (e) {
 		entity = $(e.relatedTarget).data('entity');
 		var id = crudInstance.getEntityId(entity);
@@ -50700,6 +50505,26 @@ module.exports = Component.exports
 		$('#_method').val(method);
 		$('#' + form).attr('action', action);
 		$('#' + form).submit();
+	};
+
+	this.ajaxSubmit = function (formName, url, method, options, callbackSuccess) {
+		// alert('formName: ' + formName);
+		// alert('url: ' + url);
+		// alert('method: ' + method);
+		$.ajaxSetup({ header: $('meta[name="_token"]').attr('content') });
+
+		$.ajax({
+			type: method,
+			url: url,
+			data: $('#' + formName).serialize(),
+			dataType: 'json',
+			success: function success(data) {
+				callbackSuccess(data, options);
+			},
+			error: function error(data) {
+				alert('error: ' + data);
+			}
+		});
 	};
 };
 
@@ -50748,6 +50573,22 @@ window.crudInstance = crudInstance;
 			crudInstance.postForm(action, 'GET');
 		};
 	};
+
+	this.columnOrder = function (columnName) {
+		$('#columnOrder').val(columnName);
+		if ($('#' + columnName).val() == 'asc') {
+			$('#' + columnName).val('desc');
+		} else {
+			$('#' + columnName).val('asc');
+		}
+		crudInstance.executeAction();
+	};
+
+	this.removeColumnOrder = function (columnName) {
+		$('#columnOrder').val('');
+		$('#' + columnName).val('');
+		crudInstance.executeAction();
+	};
 };
 
 module.exports = potencial;
@@ -50763,6 +50604,134 @@ var potencial = __webpack_require__("./resources/assets/js/potencial.js");
 var potencialInstance = new potencial();
 
 window.potencialInstance = potencialInstance;
+
+var workflow = __webpack_require__("./resources/assets/js/workflow.js");
+
+var workflowInstance = new workflow();
+
+window.workflowInstance = workflowInstance;
+
+/***/ }),
+
+/***/ "./resources/assets/js/workflow.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {function workflow() {
+
+	this.processAction = function (formName, urlAction, urlRemove, method, tableId, clearBody, addRemoveButton) {
+		options = { tableId: tableId, clearBody: clearBody, urlAction: urlAction, urlRemove: urlRemove };
+		crudInstance.ajaxSubmit(formName, urlAction, method, options, function (data, options) {
+			if (data.status == 'ok') {
+				tableId = '#' + options.tableId;
+				if (options.clearBody) {
+					$(tableId + ' > tbody').html('');
+					//$(tableId).append('<tbody />');
+				}
+				console.log(data.list);
+				var arrayList = JSON.parse(data.list);
+				console.log(arrayList.length);
+				for (var i = 0; i < arrayList.length; i++) {
+					var obj = arrayList[i];
+					rowcontent = '<tr id="transition_' + obj[data.key] + '">';
+					console.log(obj);
+					for (var key in obj) {
+						if (key != data.key) {
+							var value = obj[key];
+							rowcontent = rowcontent + '<td>' + value + '</td>';
+						}
+					}
+					if (addRemoveButton) {
+						rowcontent = rowcontent + '<td></td>';
+					}
+					rowcontent = rowcontent + '</tr>';
+					$(tableId + ' > tr').length > 0 ? $(tableId).children('tbody:last').children('tr:last').append(rowcontent) : $(tableId).children('tbody:last').append(rowcontent);
+					if (addRemoveButton) {
+						if (options.urlRemove == '') {
+							urlRemove = data.urlRemove;
+						} else {
+							urlRemove = options.urlRemove;
+						}
+						workflowInstance.addRemoveButton('transition_' + obj[data.key], obj['name'], urlRemove, options.urlRemove);
+					}
+					$("#spanMessage").css("opacity", 0);
+					$("#spanMessage").css("display", 'none');
+				}
+				workflowInstance.updatePaginationLinks(data.paginationLinks, data.table_page);
+			} else {
+				$("#spanMessage > span").text(data.message);
+				$("#spanMessage").stop().css("opacity", 1).fadeIn(30);
+				//alert("Error desde App: " + data.message)
+			}
+		});
+	};
+
+	this.updatePaginationLinks = function (paginationLinks, currentPage) {
+		$('#tablePage').val(currentPage);
+		var arrayList = JSON.parse(paginationLinks);
+		//console.log(arrayList['html_content']);
+		$('#divTransitionPagination').empty().append(arrayList['html_content']);
+	};
+
+	this.addRemoveButton = function (rowId, name, urlAction, urlRemove) {
+		var td = $("#" + rowId).children('td:last');
+		td.append('<button type="button" class="fa fa-remove delete-button"></button>');
+		td.children('button').on("click", function () {
+			//alert('name: ' + name);
+			workflowInstance.removeElement('commandChildForm', urlAction, urlRemove, 'POST', name, 'transitions-table', true);
+		});
+	};
+
+	this.paginateTransitions = function (page) {
+		urlAction = $('#commandChildForm').attr('action');
+		$('#tablePage').val(page);
+		workflowInstance.loadTranstions('commandChildForm', urlAction, '', 'POST', 'transitions-table', true, true);
+	};
+
+	this.paginateTransitionsShow = function (page) {
+		$('#tablePage').val(page);
+		crudInstance.submitForm('commandChildForm');
+	};
+
+	this.loadTranstions = function (formName, urlAction, urlRemove, method, tableId, clearBody, addRemoveButton) {
+		this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, addRemoveButton);
+	};
+
+	this.removeElement = function (formName, urlAction, urlRemove, method, transitionName, tableId, clearBody) {
+		event.preventDefault();
+		event.stopPropagation();
+		$('#deleteTransitionName').val(transitionName);
+		this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
+		$('#deleteTransitionName').val('');
+	};
+
+	this.addElement = function (formName, urlAction, urlRemove, method, tableId, clearBody) {
+		if ($('#' + formName)[0].checkValidity() === false) {} else {
+			event.preventDefault();
+			event.stopPropagation();
+			this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
+		}
+	};
+
+	this.setActiveTab = function (tab) {
+		$('#activeTab').val(tab);
+		$('#commandForm  .form-control').each(function (index) {
+			var textbox = document.getElementById($(this).attr('id'));
+			textbox.focus();
+			textbox.scrollIntoView();
+			return false;
+		});
+	};
+
+	this.validateAndSubmitForm = function (formName) {
+		if (!crudInstance.validateAndSubmitForm(formName)) {
+			//workflowInstance.setActiveTab('main');
+			$('#main-tab').click();
+		}
+	};
+};
+
+module.exports = workflow;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 

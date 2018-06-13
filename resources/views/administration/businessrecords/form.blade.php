@@ -34,6 +34,11 @@
 					@else
 						<?php $leader_id = null; ?>
 					@endif
+					@if (isset($command->workflow))
+						<?php $workflow_id = $command->workflow->id; ?>
+					@else
+						<?php $workflow_id = null; ?>
+					@endif
 					<div class="form-group row">
 						<label for="name" class="col-md-4 col-form-label text-md-right">@lang('messages.Name')</label>
 
@@ -100,6 +105,20 @@
 								</span>
 							@else
 								{{ Form::select('leader_id', $leaders, $leader_id, ['placeholder' => 'Pick a leader...', 'class' => 'form-control'])}}
+							@endif
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="workflow_id" class="col-md-4 col-form-label text-md-right">Workflow</label>
+						<div class="col-md-6">
+							@if ($errors->has('workflow_id'))
+								{{ Form::select('workflow_id', $workflows, $workflow_id, ['placeholder' => 'Pick a Workflow...', 'class' => 'form-control is-invalid'])}}
+								<span class="invalid-feedback">
+									<strong>{{ $errors->first('workflow_id') }}</strong>
+								</span>
+							@else
+								{{ Form::select('workflow_id', $workflows, $workflow_id, ['placeholder' => 'Pick a Workflow...', 'class' => 'form-control'])}}
 							@endif
 						</div>
 					</div>
