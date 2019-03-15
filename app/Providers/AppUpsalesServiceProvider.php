@@ -42,5 +42,9 @@ class AppUpsalesServiceProvider extends AppServiceProvider
 		$this->app->singleton(
 			'App\Repositories\Contracts\Administration\TransitionRepository', 'App\Repositories\Eloquent\Administration\EloquentTransitionRepository'
 		);
+		
+		$this->app->singleton(
+			'App\Repositories\Contracts\Gondola\CategoryRepository', 'App\Repositories\Eloquent\Gondola\EloquentCategoryRepository'
+		);
     }
 }

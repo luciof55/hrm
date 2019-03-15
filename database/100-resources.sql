@@ -62,3 +62,13 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1034,'workflows_enable','Habilitar/Deshabilitar Workflows',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1035,'workflows_remove','Borrar Workflows',NULL,NULL);
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1036,'workflows_admin','Super Admin Workflows',NULL,NULL);
+
+/*
+//Categories
+*/
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1037,'categories','Administrar Categorías',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1038,'categoriess_create','Crear Categorías',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1039,'categories_view','Ver Categorías',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1040,'categories_edit','Editar Categorías',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1041,'categories_enable','Habilitar/Deshabilitar Categorías',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1042,'categories_remove','Borrar Categorías',NULL,NULL);

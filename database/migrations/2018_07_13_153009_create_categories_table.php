@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddLdapToUsersTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AddLdapToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-			$table->boolean('ldap_login')->default(0)->after('remember_token');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
+			$table->string('code', 150)->unique();
+			$table->string('label', 150);
+			$table->string('parent', 150);
+			$table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ class AddLdapToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('ldap_login');
-        });
+        Schema::dropIfExists('categories');
     }
 }

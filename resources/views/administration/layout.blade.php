@@ -29,6 +29,13 @@
 			<li class="nav-item"><a class="nav-link" href="{{route('administration.workflows.index')}}">Workflows</a></li>
 		@endif
 	@endif
+	@if (Gate::allows('module', 'categories'))
+		@if(Request::path() == 'categories')
+			<li class="nav-item nav-link active">Categories</li>
+		@else
+			<li class="nav-item"><a class="nav-link" href="{{route('main.categories.index')}}">Categories</a></li>
+		@endif
+	@endif
 </ul>
 @endsection
 @section('content')

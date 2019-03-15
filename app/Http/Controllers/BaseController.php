@@ -12,6 +12,7 @@ use App\Rules\ForeignKeyRule;
 use App\Rules\RestoreRule;
 use App\Exports\TableExport;
 use \Maatwebsite\Excel\Excel;
+use \Exception;
 
 class BaseController extends Controller
 {	

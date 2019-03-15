@@ -76,6 +76,11 @@ return [
 	'Transitions' => 'Transiciones',
 	'Transition' => 'Transición',
 	'StateFrom' => 'Estado desde',
-	'StateTo' => 'Estado hasta'
+	'StateTo' => 'Estado hasta',
+	
+	'Categories' => 'Categorías',
+	'Category' => 'Categoría',
+
+	'ImportExcel' => 'Importar',
 
 ];

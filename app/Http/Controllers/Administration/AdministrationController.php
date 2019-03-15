@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Administration;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Google\GoogleClient;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\UpsalesController;
 

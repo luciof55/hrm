@@ -66,3 +66,13 @@ INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`
 INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1034,1000,1034,NULL,NULL);
 INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1035,1000,1035,NULL,NULL);
 INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1036,1000,1036,NULL,NULL);
+
+/*
+//Categories
+*/
+INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1037,1000,1030,NULL,NULL);
+INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1038,1000,1031,NULL,NULL);
+INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1039,1000,1032,NULL,NULL);
+INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1040,1000,1033,NULL,NULL);
+INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1041,1000,1034,NULL,NULL);
+INSERT INTO `privileges` (`id`,`role_id`,`resource_id`,`created_at`,`updated_at`) VALUES (1042,1000,1035,NULL,NULL);

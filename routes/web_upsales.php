@@ -42,4 +42,6 @@ Route::put('home/{id}', 'HomeController@update')->middleware('checkprivilege:bus
 
 Route::get('businessrecords/{id}/excel', 'Administration\BusinessRecordController@excel')->middleware('checkprivilege:businessrecords_edit')->middleware('owner.authorize:\App\Model\Administration\BusinessRecord,excel')->name('businessrecords.excel');
 ReqUtils::routeController('businessrecords', 'Administration\BusinessRecordController', '\App\Model\Administration\BusinessRecord', ['checkprivilege', 'owner.authorize']);
+
+ReqUtils::routeController('categories', 'Gondola\CategoryController', '', ['checkprivilege']);
 });

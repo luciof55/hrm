@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'UpSales'),
 
     /*
     |--------------------------------------------------------------------------
@@ -178,7 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteUpsalesServiceProvider::class,
-		App\Providers\GoogleServiceProvider::class,
+		//App\Providers\GoogleServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		App\Providers\RequestUtilsServiceProvider::class,
 

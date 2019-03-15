@@ -13,3 +13,5 @@ yarn-error.log
 .env
 *_credentials.json
 /key/*.json
+/.discovery
+/storage/*.*
