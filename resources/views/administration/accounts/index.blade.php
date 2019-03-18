@@ -27,10 +27,6 @@
 						<div class="d-flex flex-fill flex-row d-inline-flex bg-light">
 							<div class="p-1"><label for="name_filter" class="col-form-label text-md-right">@lang('messages.Name')</label></div>
 							<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Name')" id="name_filter" name="name_filter" value="{{ $filters->get('name_filter') }}" autofocus></div>
-							<div class="p-1"><label for="user_id_filter" class="col-form-label text-md-right">@lang('messages.Comercial')</label></div>
-							<div class="p-1">
-								{{ Form::select('user_id_filter', $users, $filters->get('user_id_filter'), ['placeholder' => 'Pick a user...', 'class' => 'form-control'])}}
-							</div>
 							<div class="p-1">
 									<button class="d-none d-sm-block btn btn-info" type="submit"><i class="pr-2 fa fa-search"></i>@lang('messages.Search')</button>
 									<button class="d-block d-sm-none btn btn-info" type="submit"><i class="fa fa-search"></i></button>
@@ -52,14 +48,12 @@
 								<thead>
 								  <tr>
 									<td class="bg-info text-white">Name</td>
-									<td class="bg-info text-white">User</td>
 								  </tr>
 								</thead>
 								<tbody>
 									@foreach ($list as $command)
 										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) bg-light text-muted @endif" onclick="crudInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
 											<td>{{ $command->name }}</td>
-											<td>{{ $command->user->name }}</td>
 										</tr>
 									@endforeach
 								</tbody>

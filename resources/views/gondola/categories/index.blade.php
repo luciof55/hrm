@@ -57,7 +57,7 @@
 								<tbody>
 									@foreach ($list as $command)
 										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) bg-light text-muted @endif" onclick="potencialInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
-											<td>{{ $command->label }}</td>
+											<td>{{ $command->name }}</td>
 										</tr>
 									@endforeach
 								</tbody>
@@ -74,7 +74,7 @@
 							@endif
 							<div class="p-1 ml-auto">
 								<div class="btn-group">
-									@include('admin.only_buttons', ['btn_new' => false, 'btn_view' => true, 'btn_edit' => false, 'btn_enable' => false, 'btn_remove' => false])
+									@include('admin.only_buttons', ['btn_new' => true, 'btn_view' => true, 'btn_edit' => true, 'btn_enable' => true, 'btn_remove' => true])
 								</div>
 							</div>
 						</div>

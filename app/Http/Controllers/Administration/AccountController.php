@@ -14,8 +14,6 @@ use App\Http\MiddleWare\OwnerAuthorize;
 
 class AccountController extends UpsalesBaseController
 {
-
-	protected $userRepository;
 	
 	/**
      * Get a validator for an incoming Account request.
@@ -28,7 +26,7 @@ class AccountController extends UpsalesBaseController
 		Log::info('Execute Account create validator.');
         return Validator::make($data, [
             'name' => 'bail|required|string|max:150|unique:accounts',
-			'url' => 'bail|required|string|max:150|unique:accounts',
+			'url' => 'bail|nullable|string|max:150|unique:accounts',
 			'notes' => 'bail|nullable|string|max:1024',
         ]);
     }
@@ -44,7 +42,7 @@ class AccountController extends UpsalesBaseController
 		Log::info('Execute Account update validator.');
         return Validator::make($data, [
             'name' => 'bail|required|string|max:150|unique:accounts,name,'.$data['id'],
-			'url' => 'bail|required|string|max:150|unique:accounts,url,'.$data['id'],
+			'url' => 'bail|nullable|string|max:150|unique:accounts,url,'.$data['id'],
 			'notes' => 'bail|nullable|string|max:1024',
         ]);
     }
@@ -56,13 +54,7 @@ class AccountController extends UpsalesBaseController
      * @param  \Illuminate\Support\Collection  $collection
      */
 	protected function referenceData(\Illuminate\Http\Request $request, \Illuminate\Support\Collection $collection) {
-		$users = $this->userRepository->select(['id', 'name']);
 		
-		$select_user = collect([]);
-		foreach ($users as $user) {
-			$select_user->put($user->id, $user->name);
-		}
-		$collection->put('users', $select_user);
 	}
 	
 	 /**
@@ -72,7 +64,6 @@ class AccountController extends UpsalesBaseController
      */
     public function __construct(\App\Repositories\Contracts\Administration\AccountRepository $repository, \App\Repositories\Contracts\UserRepository $userRepository)
     {
-		$this->userRepository = $userRepository;
 		$this->repository = $repository;
         $this->middleware('auth');
     }
@@ -97,6 +88,10 @@ class AccountController extends UpsalesBaseController
 	public function postEditProcessCommand(Request $request, $command) {
 		if (!empty($request->old('name'))) {
 			$command->name = $request->old('name');
+		}
+		
+		if (!empty($request->old('industry'))) {
+			$command->industry = $request->old('industry');
 		}
 		
 		if (!empty($request->old('url'))) {

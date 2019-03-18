@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'UpSales') }}</title>
+    <title>{{ config('app.name', 'HRM') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -48,7 +48,6 @@
 
     </div>
 	<!-- Scripts -->
-	<script src="https://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

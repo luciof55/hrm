@@ -5,6 +5,7 @@ namespace App\Model\Administration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Arr;
 
 class Workflow extends Model
 {
@@ -15,7 +16,7 @@ class Workflow extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'initial_state_id', 'final_state_id',
+        'name', 'id', 'telefono',
     ];
 	
 	/**
@@ -44,22 +45,32 @@ class Workflow extends Model
 	protected function initAuxTransitions() {
 		$this->auxTransitions = collect([]);
 		foreach ($this->transitions as $transition) {
-			$this->auxTransitions->put(strtolower($transition->name), $transition);
+			$this->auxTransitions->put($transition->getTransitionKey(), $transition);
 		}
 	}
 	
-	public function getTransitionByState($fromStateId, $toStateId) {
+	public function getEntrevistaByKey($key) {
+		if (!isset($this->auxTransitions)) {
+			$this->initAuxTransitions();
+		}
+		
+		if (Arr::has($this->auxTransitions, $key)) {
+			return Arr::get($this->auxTransitions, $key);
+		}
+		
+		return null;
+	}
+	
+	public function getEntrevistaByAnioAndEmpresa($anio, $empresa) {
 		if (!isset($this->auxTransitions)) {
 			$this->initAuxTransitions();
 		}
 		
 		foreach ($this->auxTransitions as $transition) {
-			if ($transition->from_state_id == $fromStateId && $transition->to_state_id == $toStateId) {
+			if ($transition->anio == $anio && $transition->account_id == $empresa) {
 				return $transition;
 			}
 		}
-		
-		return null;
 	}
 	
 	public function getAllTransitions() {
@@ -75,40 +86,31 @@ class Workflow extends Model
 		if (!isset($this->auxTransitions)) {
 			$this->auxTransitions = collect([]);
 		}
-		if (is_null($this->getTransitionByState($transition->from_state_id, $transition->to_state_id))) {
-			$this->auxTransitions->put(strtolower($transition->name), $transition);
-			return strtolower($transition->name);
-		} else {
-			return null;
-		}
+		
+		$this->auxTransitions->put($transition->getTransitionKey(), $transition);
+		
+		return $transition->getTransitionKey();
 	}
 	
 	public function removeTransition($transitionName) {
 		if (isset($this->auxTransitions)) {
-			$transition = $this->auxTransitions->pull(strtolower($transitionName));
-			if (isset($transition)) {
-				$transition->workflow()->dissociate($this);
-				return $transition;
+			if (Arr::has($this->auxTransitions, $transitionName)) {
+				$transition = $this->auxTransitions->pull($transitionName);
+				if (isset($transition)) {
+					$transition->workflow()->dissociate($this);
+					return $transition;
+				} else {
+					Log::info('Nulo transition');
+					return null;
+				}
 			} else {
-				Log::info('Nulo transition');
-				return null;
+				Log::info('Key not found: '.$transitionName);
+			return null;
 			}
 		} else {
 			Log::info('Nulo auxTransitions');
 			return null;
 		}
-	}
-	
-	public function initialState() {
-		 return $this->belongsTo('App\Model\Administration\BusinessRecordState', 'initial_state_id')->withTrashed();
-	}
-	
-	public function finalState() {
-		 return $this->belongsTo('App\Model\Administration\BusinessRecordState', 'final_state_id')->withTrashed();
-	}
-	
-	public function businessRecords() {
-		return $this->hasMany('App\Model\Administration\BusinessRecord')->withTrashed();
 	}
 	
 	public function transitions() {

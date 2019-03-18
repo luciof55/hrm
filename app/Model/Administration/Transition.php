@@ -12,7 +12,7 @@ class Transition extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'workflow_id', 'from_state_id', 'to_state_id', 'from_state', 'to_state',
+        'anio', 'id', 'workflow_id', 'account_id', 'category_id', 'zonas', 'comentarios',
     ];
 	
 	/**
@@ -20,31 +20,29 @@ class Transition extends Model
      *
      * @var array
      */
-    protected $orderAttributes = ['name',];
+    protected $orderAttributes = ['anio',];
 
 	/**
      * The attributes uses to filter.
      *
      * @var array
      */
-    protected $filterAttributes = ['name',];
-	
-	public function getCleanName() {
-		$string = str_replace(' ', '-', $this->name); // Replaces all spaces with hyphens.
-		$string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
-		return strtolower($string); //return to lower
+    protected $filterAttributes = ['anio',];
+
+	public function getTransitionKey() {
+		return $this->anio . '_' . $this->account_id;
 	}
 	
 	public function workflow() {
 		 return $this->belongsTo('App\Model\Administration\Workflow')->withTrashed();
 	}
 	
-	public function fromState() {
-		 return $this->belongsTo('App\Model\Administration\BusinessRecordState', 'from_state_id')->withTrashed();
+	public function account() {
+		 return $this->belongsTo('App\Model\Administration\Account')->withTrashed();
 	}
 	
-	public function toState() {
-		 return $this->belongsTo('App\Model\Administration\BusinessRecordState', 'to_state_id')->withTrashed();
+	public function category() {
+		 return $this->belongsTo('App\Model\Gondola\Category')->withTrashed();
 	}
 	
 	public function canDelete() {

@@ -17,7 +17,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'label', 'id', 'code', 'parent', 
+        'name', 'id',  
     ];
 	
 	/**
@@ -32,14 +32,14 @@ class Category extends Model
      *
      * @var array
      */
-    protected $orderAttributes = ['label',];
+    protected $orderAttributes = ['name',];
 
 	/**
      * The attributes uses to filter.
      *
      * @var array
      */
-    protected $filterAttributes = ['label', ];
+    protected $filterAttributes = ['name', ];
 	
 	public function canDelete() {
 		return true;

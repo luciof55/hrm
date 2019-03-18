@@ -23,8 +23,7 @@ class CategoryController extends UpsalesBaseController
     {
 		Log::info('Execute Category create validator.');
         return Validator::make($data, [
-            'code' => 'bail|required|string|max:150|unique:categories',
-			'name' => 'bail|string|max:150',
+            'name' => 'bail|required|string|max:150|unique:categories',
         ]);
     }
 	
@@ -38,8 +37,7 @@ class CategoryController extends UpsalesBaseController
     {
 		Log::info('Execute Category update validator.');
         return Validator::make($data, [
-            'code' => 'bail|required|string|max:150|unique:categories,code,'.$data['id'],
-			'name' => 'bail|string|max:150',
+            'name' => 'bail|required|string|max:150|unique:categories,name,'.$data['id'],
         ]);
     }
 	

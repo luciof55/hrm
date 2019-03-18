@@ -14,11 +14,6 @@
 					@foreach ($filters->keys() as $filterKey)
 						<input type="hidden" name="{{$filterKey}}" value="{{ $filters->get($filterKey) }}">
 					@endforeach
-					@if (isset($command->user))
-						<?php $user_id = $command->user->id; ?>
-					@else
-						<?php $user_id = null; ?>
-					@endif
 					<div class="form-group row">
 						<label for="name" class="col-md-4 col-form-label text-md-right">@lang('messages.Name')</label>
 
@@ -33,25 +28,12 @@
 						</div>
 					</div>
 
-					<div class="form-group row">
-						<label for="user_id" class="col-md-4 col-form-label text-md-right">@lang('messages.User')</label>
-						<div class="col-md-6">
-							@if ($errors->has('user_id'))
-								{{ Form::select('user_id', $users, $user_id, ['required', 'autofocus', 'placeholder' => 'Pick a user...', 'class' => 'form-control is-invalid'])}}
-								<span class="invalid-feedback">
-									<strong>{{ $errors->first('user_id') }}</strong>
-								</span>
-							@else
-								{{ Form::select('user_id', $users, $user_id, ['required', 'placeholder' => 'Pick a user...', 'class' => 'form-control'])}}
-							@endif
-						</div>
-					</div>
 
 					<div class="form-group row">
 						<label for="industry" class="col-md-4 col-form-label text-md-right">@lang('messages.Industry')</label>
 
 						<div class="col-md-6">
-							<input id="industry" type="text" class="form-control{{ $errors->has('industry') ? ' is-invalid' : '' }}" name="industry" value="{{ $command->industry }}" required>
+							<input id="industry" type="text" class="form-control{{ $errors->has('industry') ? ' is-invalid' : '' }}" name="industry" value="{{ $command->industry }}">
 
 							@if ($errors->has('industry'))
 								<span class="invalid-feedback">
@@ -65,7 +47,7 @@
 						<label for="url" class="col-md-4 col-form-label text-md-right">URL</label>
 
 						<div class="col-md-6">
-							<input id="url" type="url" class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}" name="url" value="{{ $command->url }}" required>
+							<input id="url" type="url" class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}" name="url" value="{{ $command->url }}" >
 
 							@if ($errors->has('url'))
 								<span class="invalid-feedback">

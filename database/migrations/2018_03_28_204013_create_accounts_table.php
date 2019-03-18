@@ -15,11 +15,9 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
-			$table->unsignedInteger('user_id');
-			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('name', 150)->unique();
-			$table->string('industry', 150);
-			$table->string('url', 150)->unique();
+			$table->string('industry', 150)->nullable($value = true);
+			$table->string('url', 150)->nullable($value = true)->unique();
 			$table->string('notes', 1024)->nullable($value = true);
 			$table->softDeletes();
             $table->timestamps();

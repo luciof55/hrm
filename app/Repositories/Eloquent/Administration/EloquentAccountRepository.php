@@ -51,11 +51,6 @@ class EloquentAccountRepository extends EloquentBaseRepository implements Accoun
 			$result->put('status', $account->canRestore());
 		}
 		
-		if ($result->get('status') && $account->user->trashed()) {
-			$result->put('message', "El usuario de la cuenta está deshabilitado. Cambie de usuario o habilite el usuario: ".$account->user->name."'");
-			$result->put('status', false);
-		}
-		
 		return $result;
 	}
 }

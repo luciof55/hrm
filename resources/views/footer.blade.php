@@ -1,3 +1,3 @@
 <div class="row justify-content-center">
-	UpSales - 2018
+	{{ config('app.name', 'HRM') }} - 2019
 </div>

@@ -6,8 +6,7 @@ function workflow() {
 				if (data.status == 'ok') {
 					tableId = '#' + options.tableId;
 					if (options.clearBody) {
-							$(tableId + ' > tbody').html('');
-							//$(tableId).append('<tbody />');
+						$(tableId + ' > tbody').html('');
 					}
 					console.log(data.list);
 					var arrayList = JSON.parse(data.list);
@@ -25,6 +24,10 @@ function workflow() {
 						if (addRemoveButton) {
 							rowcontent = rowcontent + '<td></td>';
 						}
+						
+						//load button column
+						rowcontent = rowcontent + '<td></td>';
+						
 						rowcontent = rowcontent + '</tr>';
 						($(tableId + ' > tr').length > 0) ? $(tableId).children('tbody:last').children('tr:last').append(rowcontent): $(tableId).children('tbody:last').append(rowcontent);
 						if (addRemoveButton) {
@@ -33,8 +36,13 @@ function workflow() {
 							} else {
 								urlRemove = options.urlRemove;
 							}
-							workflowInstance.addRemoveButton('transition_' + obj[data.key], obj['name'], urlRemove, options.urlRemove);
+							workflowInstance.addRemoveButton('transition_' + obj[data.key], obj[data.key], urlRemove, options.urlRemove);
 						}
+						
+						//alert(data.urlLoad);
+						
+						workflowInstance.addLoadButton('transition_' + obj[data.key], obj[data.key], data.urlLoad);
+						
 						$( "#spanMessage").css("opacity", 0);
 						$( "#spanMessage").css("display", 'none');
 					}
@@ -55,11 +63,20 @@ function workflow() {
 	}
 
 	this.addRemoveButton = function (rowId, name, urlAction, urlRemove) {
-		var td = $("#" + rowId).children('td:last');
+		var td = $("#" + rowId).children('td:last').prev();
 		td.append('<button type="button" class="fa fa-remove delete-button"></button>');
 		td.children('button').on("click", function() {
 				//alert('name: ' + name);
 				workflowInstance.removeElement('commandChildForm', urlAction, urlRemove, 'POST', name, 'transitions-table', true);
+			});
+	}
+	
+	this.addLoadButton = function (rowId, name, urlLoad) {
+		var td = $("#" + rowId).children('td:last');
+		td.append('<button type="button" class="fa fa-search button"></button>');
+		td.children('button:last').on("click", function() {
+				//alert('name: ' + name);
+				workflowInstance.loadElement('commandChildForm', urlLoad, 'POST', name, true);
 			});
 	}
 
@@ -81,9 +98,10 @@ function workflow() {
 	this.removeElement = function (formName, urlAction, urlRemove, method, transitionName, tableId, clearBody) {
 		event.preventDefault();
 		event.stopPropagation();
-		$('#deleteTransitionName').val(transitionName);
+		$('#transitionName').val(transitionName);
 		this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
-		$('#deleteTransitionName').val('');
+		this.clearFields();
+		$('#transitionName').val('');
 	}
 
 	this.addElement = function (formName, urlAction, urlRemove, method, tableId, clearBody) {
@@ -92,12 +110,62 @@ function workflow() {
 				event.preventDefault();
 				event.stopPropagation();
 				this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
+				this.clearFields();
 			}
+	}
+	
+	this.loadElement = function (formName, urlAction, method, transitionName, showId) {
+		event.preventDefault();
+		event.stopPropagation();
+		$('#transitionName').val(transitionName);
+		
+		options = {urlAction: urlAction};
+		crudInstance.ajaxSubmit(formName, urlAction, method, options, function (data, options) {
+			if (data.status == 'ok') {
+				//console.log(data.transition);
+				$('#transition-anio').val(data.transition.anio);
+				$('#transition-anio').attr('readonly', 'readonly');
+				
+				if (showId) {
+					$('#transition-account_id').val(data.transition.account_id);
+					$('#transition-category_id').val(data.transition.category_id);
+				} else {
+					$('#transition-account_id').val(data.transition.account.name);
+					$('#transition-category_id').val(data.transition.category.name);
+				}
+				
+				$('#transition-account_id').attr('readonly', 'readonly');
+				
+				$('#transition-zonas').val(data.transition.zonas);
+				$('#transition-comentarios').val(data.transition.comentarios);
+				$('#addButton').text('Modificar');
+				$('#addButton').attr('role', 'update');
+				$('#transition-comentarios').focus();
+			} else {
+				$( "#spanMessage > span" ).text( data.message );
+				$( "#spanMessage" ).stop().css( "opacity", 1 ).fadeIn( 30 );
+			}
+		});
+		$('#transitionName').val('');
+	}
+	
+	this.clearFields = function() {
+		$('#transition-anio').val('');
+		$('#transition-anio').removeAttr('readonly');
+		$('#transition-account_id').val('');
+		$('#transition-account_id').removeAttr('readonly');
+		$('#transition-category_id').val('');
+		$('#transition-zonas').val('');
+		$('#transition-comentarios').val('');
+		$('#addButton').text('Agregar');
+		$('#addButton').attr('add');
+		$('#transition-anio').focus();
+		
 	}
 
 	this.setActiveTab = function(tab) {
 		$('#activeTab').val(tab);
-		$('#commandForm  .form-control').each(function (index) {
+		$('#commandForm .form-control').each(function (index) {
 				var textbox = document.getElementById($(this).attr('id'));
 				textbox.focus();
 				textbox.scrollIntoView();

@@ -17,7 +17,7 @@ class Account extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'user_id', 'industry', 'url', 'notes'
+        'name', 'id', 'industry', 'url', 'notes'
     ];
 	
 	/**
@@ -39,11 +39,7 @@ class Account extends Model
      *
      * @var array
      */
-    protected $filterAttributes = ['name', 'user_id'];
-	
-	public function user() {
-		 return $this->belongsTo('App\UpsalesUser')->withTrashed();
-	}
+    protected $filterAttributes = ['name',];
 	
 	public function contacts() {
 		 return $this->hasMany('App\Model\Administration\Contact')->withTrashed();

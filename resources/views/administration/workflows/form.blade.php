@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
 	<div class="col-md-8">
 		<div class="card">
-			<div class="card-header">Workflow</div>
+			<div class="card-header">Comercial</div>
 			<div class="card-body">
 				@if (isset($statusError))
 					<div class="alert alert-danger">{{ $statusError }}</div>
@@ -12,6 +12,7 @@
 						<div class="alert alert-danger">{{ $errors->first('auxTransitions') }}</div>
 					@endif
 				@endif
+				
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item">
 						<a class="nav-link @if($activeTab == 'main') active @endif" onclick="workflowInstance.setActiveTab('main')"

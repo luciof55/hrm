@@ -41,6 +41,10 @@ return [
 	'Main' => 'Principal',
 	'Secondary' => 'Secundario',
 	'Custom' => 'Personlizado',
+	
+	'Anio' => 'Año',
+	'Telefono' => 'Teléfono',
+	'Zonas' => 'Zonas',
 
 	'Open' => 'Abierto',
 	'Closed' => 'Cerrado',
@@ -51,8 +55,8 @@ return [
 	'Revoke' => 'Revocar acceso',
 	'Authorize' => 'Autorizar acceso',
 
-	'Accounts' => 'Cuentas',
-	'Account' => 'Cuenta',
+	'Accounts' => 'Empresas',
+	'Account' => 'Empresa',
 	'Industry' => 'Industria',
 	'Notes' => 'Notas',
 
@@ -73,13 +77,11 @@ return [
 	'Repository' => 'Repositorio',
 	'ExportFile' => 'Descargar',
 	
-	'Transitions' => 'Transiciones',
-	'Transition' => 'Transición',
-	'StateFrom' => 'Estado desde',
-	'StateTo' => 'Estado hasta',
+	'Transitions' => 'Entrevistas',
+	'Transition' => 'Entrevista',
 	
-	'Categories' => 'Categorías',
-	'Category' => 'Categoría',
+	'Categories' => 'Puestos',
+	'Category' => 'Puesto',
 
 	'ImportExcel' => 'Importar',
 

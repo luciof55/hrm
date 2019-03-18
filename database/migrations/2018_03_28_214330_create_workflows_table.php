@@ -16,10 +16,7 @@ class CreateWorkflowsTable extends Migration
         Schema::create('workflows', function (Blueprint $table) {
             $table->increments('id');
 			$table->string('name', 150)->unique();
-			$table->unsignedInteger('initial_state_id');
-			$table->foreign('initial_state_id')->references('id')->on('business_record_state');
-			$table->unsignedInteger('final_state_id');
-			$table->foreign('final_state_id')->references('id')->on('business_record_state');
+			$table->string('telefono', 50);
 			$table->softDeletes();
             $table->timestamps();
         });

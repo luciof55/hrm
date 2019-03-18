@@ -20,13 +20,6 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="user" class="col-md-4 col-form-label text-md-right">@lang('messages.User')</label>
-						<div class="col-md-6">
-							<input id="user" type="text" class="form-control" name="user" value="{{ $command->user->name }}" readonly>
-						</div>
-					</div>
-
-					<div class="form-group row">
 						<label for="industry" class="col-md-4 col-form-label text-md-right">@lang('messages.Industry')</label>
 						<div class="col-md-6">
 							<input id="industry" type="text" class="form-control" name="industry" value="{{ $command->industry }}" readonly>

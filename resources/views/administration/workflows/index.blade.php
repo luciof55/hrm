@@ -12,7 +12,7 @@
 			<div class="d-flex flex-column">
 				<div class="p-2 text-white bg-info border-bottom rounded-top">
 						<div class="d-flex">
-							<div><span>Workflows</span></diV>
+							<div><span>Comerciales</span></diV>
 							<div class="ml-auto">
 								<div class="d-block d-md-none">@include('administration.actions', ['collapse' => 'collapse', 'navactions_id' => 'navactions_sm'])</div>
 							</div>
@@ -52,16 +52,14 @@
 										<td class="table-header">
 											@include('column_order', ['column_order' => 'name_order', 'column_text' => 'messages.Name'])
 										</td>
-										<td class="table-header">Estado inicial</td>
-										<td class="table-header">Estado final</td>
+										<td class="table-header">Teléfono</td>
 								  </tr>
 								</thead>
 								<tbody>
 									@foreach ($list as $command)
 										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) bg-light text-muted @endif" onclick="potencialInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
 											<td>{{ $command->name }}</td>
-											<td>{{ $command->initialState->name }}</td>
-											<td>{{ $command->finalState->name }}</td>
+											<td>{{ $command->telefono }}</td>
 										</tr>
 									@endforeach
 								</tbody>
