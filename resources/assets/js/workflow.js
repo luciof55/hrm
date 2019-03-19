@@ -96,8 +96,8 @@ function workflow() {
 	}
 
 	this.removeElement = function (formName, urlAction, urlRemove, method, transitionName, tableId, clearBody) {
-		event.preventDefault();
-		event.stopPropagation();
+		// event.preventDefault();
+		// event.stopPropagation();
 		$('#transitionName').val(transitionName);
 		this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
 		this.clearFields();
@@ -107,16 +107,16 @@ function workflow() {
 	this.addElement = function (formName, urlAction, urlRemove, method, tableId, clearBody) {
 			if ($('#'+formName)[0].checkValidity() === false) {
 			} else {
-				event.preventDefault();
-				event.stopPropagation();
+				// event.preventDefault();
+				// event.stopPropagation();
 				this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
 				this.clearFields();
 			}
 	}
 	
 	this.loadElement = function (formName, urlAction, method, transitionName, showId) {
-		event.preventDefault();
-		event.stopPropagation();
+		// event.preventDefault();
+		// event.stopPropagation();
 		$('#transitionName').val(transitionName);
 		
 		options = {urlAction: urlAction};
