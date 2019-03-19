@@ -23,11 +23,6 @@ class EloquentWorkflowRepository extends EloquentBaseRepository implements Workf
 		$result->put('message', null);
 		$result->put('status', true);
 		
-		if ($workflow->businessRecords->isNotEmpty() || !$workflow->canDelete()) {
-			$result->put('message', "Existen potenciales relacionados, no se puede eliminar");
-			$result->put('status', false);
-		}
-		
 		return $result;
 	}
 	
