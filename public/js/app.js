@@ -52223,9 +52223,11 @@ window.workflowInstance = workflowInstance;
 					$("#spanMessage").css("display", 'none');
 				}
 				workflowInstance.updatePaginationLinks(data.paginationLinks, data.table_page);
+				return true;
 			} else {
 				$("#spanMessage > span").text(data.message);
 				$("#spanMessage").stop().css("opacity", 1).fadeIn(30);
+				return false;
 				//alert("Error desde App: " + data.message)
 			}
 		});
@@ -52284,8 +52286,9 @@ window.workflowInstance = workflowInstance;
 		if ($('#' + formName)[0].checkValidity() === false) {} else {
 			// event.preventDefault();
 			// event.stopPropagation();
-			this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
-			this.clearFields();
+			if (this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true)) {
+				this.clearFields();
+			}
 		}
 	};
 

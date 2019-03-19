@@ -330,12 +330,13 @@ class WorkflowController extends UpsalesBaseController
 		
 		$transition->fill(['anio' => $request->input('transition-anio'), 'zonas' => $request->input('transition-zonas'), 'comentarios' => $request->input('transition-comentarios')]);
 		
-		if (is_null($transition->account())) {
+		if (is_null($transition->account_id)) {
 			$account = Account::find($request->input('transition-account_id'));
 			$transition->account()->associate($account);
+			$transition->fill(['account_id' => $request->input('transition-account_id')]);
 		}
 		
-		if (is_null($transition->workflow())) {
+		if (is_null($transition->workflow_id)) {
 			$transition->workflow()->associate($workflow);
 		}
 	
