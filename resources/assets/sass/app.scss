@@ -10,7 +10,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
-  background-color: #fff;
+  background-color: $white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 .form-control {
@@ -18,8 +18,8 @@
 }
 
 .page-item.active .page-link {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: $info;
+  border-color: $info;
 }
 
 .col-form-label {
