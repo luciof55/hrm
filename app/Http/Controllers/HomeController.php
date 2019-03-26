@@ -5,55 +5,49 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Administration\BusinessRecordController;
+use App\Http\Controllers\UpsalesController;
 
-class HomeController extends BusinessRecordController
+class HomeController extends UpsalesController
 {
-
+	protected $repository;
+	protected $transitionRepository;
+	protected $accountRepository;
+	protected $categoryRepository;
 	
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-	 public function __construct(\App\Repositories\Contracts\Administration\BusinessRecordRepository $repository, \App\Repositories\Contracts\UserRepository $userRepository, \App\Repositories\Contracts\Administration\AccountRepository $accountRepository, \App\Repositories\Contracts\Administration\BusinessRecordStateRepository $businessRecordStateRepository, \App\Repositories\Contracts\Administration\WorkflowRepository $workflowRepository) {
+    public function __construct(\App\Repositories\Contracts\Administration\WorkflowRepository $repository,
+	\App\Repositories\Contracts\Administration\TransitionRepository $transitionRepository,
+	\App\Repositories\Contracts\Gondola\CategoryRepository $categoryRepository, \App\Repositories\Contracts\Administration\AccountRepository $accountRepository) {
 		
-		$this->userRepository = $userRepository;
 		$this->repository = $repository;
+		$this->transitionRepository = $transitionRepository;
+		$this->categoryRepository = $categoryRepository;
 		$this->accountRepository = $accountRepository;
-		$this->businessRecordStateRepository = $businessRecordStateRepository;
-		$this->workflowRepository = $workflowRepository;
-        
         $this->middleware('auth');
     }
 	
-	public function getIndexView() {
-		return 'welcome';
-	}
-	
-	/**
-     * Add reference data.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Support\Collection  $collection
-     */
-	protected function referenceData(\Illuminate\Http\Request $request, \Illuminate\Support\Collection $collection) {
-		parent::referenceData($request, $collection);
+	public function index() {
+		$collection = collect([]);
 		
-		if ($request->has('columnOrder')) {
-			$collection->put('columnOrder', $request->input('columnOrder'));
-		}
-	}
-	
-	public function getEditView() {
-		return 'potencials.details';
-	}
-	
-	public function getControllerName() {
-		return 'HomeController';
-	}
-	
-	public function getRouteGroup() {
-		return '';
+		$countComerciales = $this->repository->countWithTrashed();
+		$collection->put('countComerciales', $countComerciales);
+		
+		$orders = collect([]);
+		$orders->put('created_at', 'created_at'); 
+		$collection->put('list', $this->repository->paginateWithTrashed(null, 6, $orders, null, null));
+		
+		$entity = 'workflows';
+		$collection->put('entity', $entity);
+		
+		$actionCreate = 'administration.workflows.create';
+		$collection->put('actionCreate', $actionCreate);
+		$actionEdit = action('Administration\WorkflowController@index').'/|id|/edit/';
+		$collection->put('actionEdit', $actionEdit);
+		
+		return view('comerciales.main', $collection->all());
 	}
 }

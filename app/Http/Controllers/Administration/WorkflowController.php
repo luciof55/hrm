@@ -239,7 +239,7 @@ class WorkflowController extends UpsalesBaseController
 		}
 	}
 	
-	 /**
+	/**
      * Create a new controller instance.
      *
      * @return void

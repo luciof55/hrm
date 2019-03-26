@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('header')
 <ul class="navbar-nav mr-auto">
-	@if (Gate::allows('module', 'businessrecords'))
-		@if(Request::path() == 'businessrecords')
-			<li class="nav-item nav-link active">@lang('messages.BusinessRecords')</li>
+	@if (Gate::allows('module', 'workflows'))
+		@if(Request::path() == 'workflows')
+			<li class="nav-item nav-link active">Comerciales</li>
 		@else
-			<li class="nav-item"><a class="nav-link" href="{{route('main.businessrecords.index')}}">@lang('messages.BusinessRecords')</a></li>
+			<li class="nav-item"><a class="nav-link" href="{{route('administration.workflows.index')}}">Comerciales</a></li>
 		@endif
 	@endif
 </ul>
@@ -20,7 +20,7 @@
 	<div class="col-md-10">
 		<div class="card">
 			@if (Gate::allows('module', 'principal'))
-				@include('potencials.main')
+				@include('comerciales.main')
 			@else
 				<div class="card-body"><div class="row"><div class="container">@include('common_status')</div></div></div>
 			@endif

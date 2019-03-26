@@ -75,7 +75,7 @@
       <div class="d-flex flex-fill flex-row">
         <div class="p-1">{{ $list->links() }}</div>
         <div class="p-1 ml-auto">
-          <div class="btn-group" role="group" aria-label="Basic example">
+          <div class="btn-group" role="group" aria-label="">
             <button id="button_excel" type="button" onclick="potencialInstance.generateExcel('{{$actionExcel}}', '{{$entity}}');" class="d-none d-md-block btn btn-info btn-md disabled"><i class="pr-2 fa fa-download mr-1"></i>@lang('messages.ExportFile')</button>
             <button id="button_excel_sm" type="button" onclick="potencialInstance.generateExcel('{{$actionExcel}}', '{{$entity}}');" class="d-block d-md-none btn btn-info btn-sm disabled"><i class="fa fa-download"></i></button>
             @if (Gate::allows('edit', $entity))

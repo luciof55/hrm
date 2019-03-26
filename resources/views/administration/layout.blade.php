@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('header')
 <ul class="navbar-nav mr-auto">
+	@if (Gate::allows('module', 'workflows'))
+		@if(Request::path() == 'workflows')
+			<li class="nav-item nav-link active">Comerciales</li>
+		@else
+			<li class="nav-item"><a class="nav-link" href="{{route('administration.workflows.index')}}">Comerciales</a></li>
+		@endif
+	@endif
 	@if (Gate::allows('module', 'accounts'))
 		@if(Request::path() == 'accounts')
 			<li class="nav-item nav-link active">@lang('messages.Accounts')</li>
@@ -13,14 +20,6 @@
 			<li class="nav-item nav-link active">Puestos</li>
 		@else
 			<li class="nav-item"><a class="nav-link" href="{{route('main.categories.index')}}">Puestos</a></li>
-		@endif
-	@endif
-	
-	@if (Gate::allows('module', 'workflows'))
-		@if(Request::path() == 'workflows')
-			<li class="nav-item nav-link active">Comerciales</li>
-		@else
-			<li class="nav-item"><a class="nav-link" href="{{route('administration.workflows.index')}}">Comerciales</a></li>
 		@endif
 	@endif
 </ul>

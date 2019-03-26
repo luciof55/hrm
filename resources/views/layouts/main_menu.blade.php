@@ -14,9 +14,9 @@
   @endif
     @if (Gate::allows('module', 'administration'))
       @if(Request::path() == 'administration')
-        <li class="nav-item nav-link active">Administration</li>
+        <li class="nav-item nav-link active">Administración</li>
       @else
-        <li class="nav-item"><a class="nav-link" href="{{route('administration')}}">Administration</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{route('administration')}}">Administración</a></li>
       @endif
       @if($submenu && ReqUtils::isCurrentMenu('administration'))
         <div class="navbar-nav pl-2">@yield('header')</div>
@@ -24,9 +24,9 @@
     @endif
     @if (Gate::allows('module', 'security'))
       @if(Request::path() == 'security')
-        <li class="nav-item nav-link active">Security</li>
+        <li class="nav-item nav-link active">Seguridad</li>
       @else
-        <li class="nav-item"><a class="nav-link" href="{{route('security')}}">Security</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{route('security')}}">Seguridad</a></li>
       @endif
       @if($submenu && ReqUtils::isCurrentMenu('security'))
         <div class="navbar-nav pl-2">@yield('header')</div>
