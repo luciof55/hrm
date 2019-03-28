@@ -8,7 +8,7 @@ function workflow() {
 					if (options.clearBody) {
 						$(tableId + ' > tbody').html('');
 					}
-					console.log(data.list);
+					//console.log(data.list);
 					var arrayList = JSON.parse(data.list);
 					console.log(arrayList.length);
 					for (var i = 0; i < arrayList.length; i++) {
@@ -42,15 +42,15 @@ function workflow() {
 						//alert(data.urlLoad);
 						
 						workflowInstance.addLoadButton('transition_' + obj[data.key], obj[data.key], data.urlLoad);
-						
-						$( "#spanMessage").css("opacity", 0);
-						$( "#spanMessage").css("display", 'none');
 					}
+					workflowInstance.clearFields();
+					$( "#spanMessage").css("opacity", 0);
+					$( "#spanMessage").css("display", 'none');
 					workflowInstance.updatePaginationLinks(data.paginationLinks, data.table_page);
 				} else {
-				  $( "#spanMessage > span" ).text( data.message );
-				  $( "#spanMessage" ).stop().css( "opacity", 1 ).fadeIn( 30 );
-					//alert("Error desde App: " + data.message)
+					$( "#spanMessage > span" ).text( data.message );
+					$( "#spanMessage" ).stop().css( "opacity", 1 ).fadeIn( 30 );
+					//alert("Error desde App: " + data.message);
 				}
 		});
 	}
@@ -75,9 +75,9 @@ function workflow() {
 		var td = $("#" + rowId).children('td:last');
 		td.append('<button type="button" class="fa fa-search button"></button>');
 		td.children('button:last').on("click", function() {
-				//alert('name: ' + name);
-				workflowInstance.loadElement('commandChildForm', urlLoad, 'POST', name, true);
-			});
+			//alert('name: ' + name);
+			workflowInstance.loadElement('commandChildForm', urlLoad, 'POST', name, true);
+		});
 	}
 
 	this.paginateTransitions = function(page) {
@@ -96,27 +96,21 @@ function workflow() {
 	}
 
 	this.removeElement = function (formName, urlAction, urlRemove, method, transitionName, tableId, clearBody) {
-		// event.preventDefault();
-		// event.stopPropagation();
 		$('#transitionName').val(transitionName);
 		this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
-		this.clearFields();
 		$('#transitionName').val('');
 	}
 
 	this.addElement = function (formName, urlAction, urlRemove, method, tableId, clearBody) {
-			if ($('#'+formName)[0].checkValidity() === false) {
-			} else {
-				event.preventDefault();
-				event.stopPropagation();
-				this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
-				this.clearFields();
-			}
+		if ($('#'+formName)[0].checkValidity() === false) {
+		} else {
+			event.preventDefault();
+			event.stopPropagation();
+			this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
+		}
 	}
 	
 	this.loadElement = function (formName, urlAction, method, transitionName, showId) {
-		// event.preventDefault();
-		// event.stopPropagation();
 		$('#transitionName').val(transitionName);
 		
 		options = {urlAction: urlAction};
@@ -179,7 +173,5 @@ function workflow() {
 			$('#main-tab').click();
 		}
 	}
-
 };
-
 module.exports = workflow;

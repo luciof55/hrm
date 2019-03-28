@@ -32,12 +32,12 @@
 				</div>
 				<div class="col-md-11">
 					@if ($errors->has('transition-comentarios'))
-						{{ Form::textarea ('transition-comentarios', $command->comentarios, ['id' => 'transition-comentarios', 'class' => 'form-control is-invalid'])}}
+						{{ Form::textarea ('transition-comentarios', $command->comentarios, ['id' => 'transition-comentarios', 'class' => 'form-control is-invalid', 'required' => 'required'])}}
 						<span class="invalid-feedback">
 							<strong>{{ $errors->first('transition-comentarios') }}</strong>
 						</span>
 					@else
-						{{ Form::textarea ('transition-comentarios', $command->comentarios, ['id' => 'transition-comentarios', 'class' => 'form-control'])}}
+						{{ Form::textarea ('transition-comentarios', $command->comentarios, ['id' => 'transition-comentarios', 'class' => 'form-control', 'required' => 'required'])}}
 					@endif
 				</div>
 			</div>

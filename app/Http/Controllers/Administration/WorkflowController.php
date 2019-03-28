@@ -320,7 +320,15 @@ class WorkflowController extends UpsalesBaseController
 	public function addTransition(\Illuminate\Http\Request $request) {
 		$entity = $this->repository->entity();
 		Log::info('Execute '. $entity.' addTranstion.');
-
+	
+		
+		if (blank($request->input('transition-anio')) || blank($request->input('transition-zonas')) || blank($request->input('transition-account_id')) || blank($request->input('transition-category_id')) || blank($request->input('transition-comentarios'))) {
+			return response()->json([
+				'status' => 'error',
+				'message' => 'Faltan cargar datos requeridos.'
+			]);
+		}
+		
 		$workflow = $this->getCommand($request);
 		
 		$transition = $workflow->getEntrevistaByAnioAndEmpresa($request->input('transition-anio'), $request->input('transition-account_id'));
@@ -351,12 +359,6 @@ class WorkflowController extends UpsalesBaseController
 		$request->session()->put($this->getCommandKey(), $workflow);
 		$page = $this->getItemPage(5, $workflow->getAllTransitions()->sort(), $transition->getTransitionKey());
 		return $this->getTransitionsTable($workflow, $page);
-		// } else {
-			// return response()->json([
-				// 'status' => 'error',
-				// 'message' => 'La entrevista ya se encuentra creada'
-			// ]);
-		// }
 		
 	}
 	
