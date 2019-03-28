@@ -32,7 +32,7 @@ class Account extends Model
      *
      * @var array
      */
-    protected $orderAttributes = ['name', 'user_id'];
+    protected $orderAttributes = ['name'];
 	
 	/**
      * The attributes uses to filter.

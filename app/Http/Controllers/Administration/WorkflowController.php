@@ -139,6 +139,11 @@ class WorkflowController extends UpsalesBaseController
 		$request->session()->put($this->getCommandKey(), $workflow);
 	}
 	
+	protected function getQuery(\Illuminate\Http\Request $request, $collectionOrder, $collectionFilter, $page) {
+		$query = $this->repository->getInstance()->join('transitions', 'workflows.id', '=', 'transitions.workflow_id')->select('workflows.*')->distinct();
+		return $query;
+	}
+	
 	protected function paginate($items, $perPage = 5, $page = null, $options = []) {
 		$page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
 		$items = $items instanceof Collection ? $items : Collection::make($items);

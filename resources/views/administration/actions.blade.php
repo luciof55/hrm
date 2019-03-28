@@ -3,6 +3,6 @@
 		<span class="navbar-text navbar-toggler-icon"></span></button>
 	<div class="{{ $collapse }} navbar-collapse border rounded" id="{{$navactions_id}}">
 		<div class="d-flex flex-column" style="width: 100%">
-			<div class="d-none d-md-block p-2 bg-info text-white">@lang('messages.Actions')</div>
+			<div class="d-none d-md-block p-2 bg-info text-white rounded-top">@lang('messages.Actions')</div>
 		</div>
 	</div>

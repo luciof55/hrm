@@ -24,6 +24,8 @@
 						<input type="hidden" id="_method" name="_method" value="{{ $method }}">
 						<input type="hidden" id="page" name="page" value="{{ $page }}">
 						<input type="hidden" id="id" name="id" value="">
+						<input type="hidden" id="columnOrder" name="columnOrder" value="@if(isset($columnOrder)){{$columnOrder}}@endif">
+						@include('order_fields')
 						<div class="d-flex flex-fill flex-row d-inline-flex bg-light">
 							<div class="p-1"><label for="name_filter" class="col-form-label text-md-right">@lang('messages.Name')</label></div>
 							<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Name')" id="name_filter" name="name_filter" value="{{ $filters->get('name_filter') }}" autofocus></div>
@@ -47,7 +49,9 @@
 							<table class="table table-bordered table-hover">
 								<thead>
 								  <tr>
-									<td class="bg-info text-white">Name</td>
+									<td class="table-header">
+										@include('column_order', ['column_order' => 'name_order', 'column_text' => 'messages.Name'])
+									</td>
 								  </tr>
 								</thead>
 								<tbody>

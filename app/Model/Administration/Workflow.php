@@ -38,7 +38,7 @@ class Workflow extends Model
      *
      * @var array
      */
-    protected $filterAttributes = ['name',];
+    protected $filterAttributes = ['name', 'transitions.anio', 'transitions.account_id', 'transitions.zonas'];
 	
 	protected $auxTransitions;
 	

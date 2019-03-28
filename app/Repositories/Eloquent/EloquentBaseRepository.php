@@ -96,9 +96,11 @@ class EloquentBaseRepository extends AbstractRepository
         return $this->find($id)->forceDelete();
     }
 	
-	public function countWithTrashed($filterAttributes = null) {
+	public function countWithTrashed($query = null, $filterAttributes = null) {
 	
-		$query = $this->entity;
+		if (is_null($query)) {
+			$query = $this->entity;
+		}
 		
 		if ($this->isSoftDelete()) {
 			$query = $query->withTrashed();
@@ -108,17 +110,21 @@ class EloquentBaseRepository extends AbstractRepository
 			Log::info('Hay Filtros-Valor');
 			foreach ($filterAttributes->keys() as $attributeKey) {
 				Log::info('Key: '.$attributeKey);
-				$value = $filterAttributes->get($attributeKey);
-				Log::info('value:'.$value.'FIN');
-				if(is_numeric($value)) {
-					Log::info('Adding NUMBER-------------------------- ');
-					$query = $query->where($attributeKey, $value);
+				if (!str_contains($attributeKey, '.')) {
+					$value = $filterAttributes->get($attributeKey);
+					Log::info('value:'.$value.' FIN');
+					if(is_numeric($value)) {
+						Log::info('Adding NUMBER--------------------------');
+						$query = $query->where($attributeKey, $value);
+					} else {
+						$query = $query->where($attributeKey, 'like', '%'.$value.'%');
+					}
 				} else {
-					$query = $query->where($attributeKey, 'like', '%'.$value.'%');
+					$this->addNestedFilters($query, $attributeKey, $filterAttributes);
 				}
 			}
 			// print_r($query->getBindings());
-			// Log::info('IF SQL: '.$query->toSql());
+			Log::info('IF SQL: '.$query->toSql());
 			// Log::info('IF SQL: '.$query->toBase()->count());
 			return $query->count();
 		}
@@ -166,7 +172,17 @@ class EloquentBaseRepository extends AbstractRepository
 		$command->delete();
 	}
 	
-	protected function addNestedFilters($query, $filterAttributes) {
+	protected function addNestedFilters($query, $attributeKey, $filterAttributes) {
+		Log::info('addNestedFilters');
+		Log::info('KEY: '.$attributeKey);
+		$value = $filterAttributes->get($attributeKey);
+		Log::info('VALUE: '.$value);
+		if(is_numeric($value)) {
+			Log::info('Adding NUMBER-------------------------- ');
+			$query->where($attributeKey, $value);
+		} else {
+			$query->where($attributeKey, 'like', '%'.$value.'%');
+		}
 	}
 	
      /**
@@ -189,9 +205,11 @@ class EloquentBaseRepository extends AbstractRepository
 					} else {
 						$query->where($this->getInstance()->getTable().'.'.$attributeKey, 'like', '%'.$value.'%');
 					}
+				} else {
+					$this->addNestedFilters($query, $attributeKey, $filterAttributes);
 				}
 			}
-			$this->addNestedFilters($query, $filterAttributes);
+			
 		};
 		
 		if (!empty($orderAttributes)&& $orderAttributes->isNotEmpty()) {
@@ -210,7 +228,7 @@ class EloquentBaseRepository extends AbstractRepository
 			}
 		};
 		
-		//Log::info('***************SQL: '.$query->toSql());
+		Log::info('***************SQL: '.$query->toSql());
 		
 		return $paginate ? $query->paginate($paginate, null, null, $page) : $query->get();
 	}

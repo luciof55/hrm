@@ -13,7 +13,7 @@ function crud() {
 				$('#button_edit').addClass('disabled');
 				$('#button_enable').addClass('disabled');
 				$('#button_remove').addClass('disabled');
-        $('#button_view_sm').addClass('disabled');
+				$('#button_view_sm').addClass('disabled');
 				$('#button_edit_sm').addClass('disabled');
 				$('#button_enable_sm').addClass('disabled');
 				$('#button_remove_sm').addClass('disabled');
@@ -25,15 +25,17 @@ function crud() {
 		$('#button_edit').removeClass('disabled');
 		$('#button_enable').removeClass('disabled');
 		$('#button_remove').removeClass('disabled');
-    $('#button_view_sm').removeClass('disabled');
+		$('#button_view_sm').removeClass('disabled');
 		$('#button_edit_sm').removeClass('disabled');
 		$('#button_enable_sm').removeClass('disabled');
 		$('#button_remove_sm').removeClass('disabled');
 
 		if ($('#' + id).hasClass('text-muted')) {
-			$('#button_enable').text('Habilitar');
+			$('#button_enable').html('<i class="pr-2 fa fa-check mr-1"></i>' + 'Habilitar');
+			$('#button_enable_sm').html('<i class="fa fa-check"></i>');
 		} else {
-			$('#button_enable').text('Deshabilitar');
+			$('#button_enable').html('<i class="pr-2 fa fa-ban mr-1"></i>' + 'Deshabilitar');
+			$('#button_enable_sm').html('<i class="fa fa-ban"></i>');
 		}
 
 		$('#' + id).addClass('table-active');

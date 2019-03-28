@@ -74,7 +74,9 @@ class BaseController extends Controller
 		$collectionView->put('filters', $collectionFilterAttributes);
 		$collectionView->put('orders', $collectionOrderAttributes);
 		
-		$totalItems = $this->repository->countWithTrashed($collectionFilter);
+		$query = $this->getQuery($request, $collectionOrder, $collectionFilter, $page);
+		
+		$totalItems = $this->repository->countWithTrashed($query, $collectionFilter);
 		
 		if (!empty($page)) {
 			$pages = $this->getPages($this->getPageSize(), $totalItems);
@@ -440,13 +442,16 @@ class BaseController extends Controller
 		if (!empty($filterAttributes)) {
 			Log::info('Hay Filtros');
 			foreach ($filterAttributes as $attribute) {
-				if (!empty($request->input($attribute.'_filter'))) {
+				$attributeAux = str_replace(".", "-", $attribute);
+				Log::info('*****KEY');
+				Log::info($attributeAux);
+				if (!empty($request->input($attributeAux.'_filter'))) {
 					Log::info('Hay Valor');
 					if (isset ($collectionFilter)) {
-						$collectionFilter->put($attribute, $request->input($attribute.'_filter'));
+						$collectionFilter->put($attribute, $request->input($attributeAux.'_filter'));
 					}
 				} 
-				$collectionFilterAttributes->put($attribute.'_filter', $request->input($attribute.'_filter'));
+				$collectionFilterAttributes->put($attributeAux.'_filter', $request->input($attributeAux.'_filter'));
 			}
 		}
 	}
@@ -550,7 +555,20 @@ class BaseController extends Controller
 	}
 	
 	protected function paginateWithTrashed(\Illuminate\Http\Request $request, $collectionOrder, $collectionFilter, $page) {
-		return $this->repository->paginateWithTrashed(null, $this->getPageSize(), $collectionOrder, $collectionFilter, $page);
+		$query = $this->getQuery($request, $collectionOrder, $collectionFilter, $page);
+		return $this->repository->paginateWithTrashed($query, $this->getPageSize(), $collectionOrder, $collectionFilter, $page);
+	}
+	
+	/**
+     * Default query implementation.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Support\Collection  $collectionOrder
+	* @param  \Illuminate\Support\Collection  $collectionFilter
+	* @param $page
+     */
+	protected function getQuery(\Illuminate\Http\Request $request, $collectionOrder, $collectionFilter, $page) {
+		return null;
 	}
 	
 	/**
