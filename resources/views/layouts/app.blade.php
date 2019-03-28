@@ -33,8 +33,11 @@
                   <div class="navbar-nav d-block d-md-none">@include('layouts.main_menu', ['submenu' => true])</div>
                   <div class="navbar-nav d-none d-md-block pl-2">@yield('header')</div>
                 </div>
-                <div class="navbar-nav d-block d-md-none float-right">@include('layouts.auth_links')</div>
-                <div class="navbar-nav d-none d-md-block ml-auto">@include('layouts.main_search')</div>
+				@guest
+					<div class="navbar-nav d-block d-md-none float-right">@include('layouts.auth_links')</div>
+				@else
+					<div class="navbar-nav d-none d-md-block ml-auto">@include('layouts.main_search')</div>
+				@endguest
               </div>
           	</ul>
   				</nav>
