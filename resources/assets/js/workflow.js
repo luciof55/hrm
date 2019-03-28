@@ -107,8 +107,8 @@ function workflow() {
 	this.addElement = function (formName, urlAction, urlRemove, method, tableId, clearBody) {
 			if ($('#'+formName)[0].checkValidity() === false) {
 			} else {
-				// event.preventDefault();
-				// event.stopPropagation();
+				event.preventDefault();
+				event.stopPropagation();
 				this.processAction(formName, urlAction, urlRemove, method, tableId, clearBody, true);
 				this.clearFields();
 			}

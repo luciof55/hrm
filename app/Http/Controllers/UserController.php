@@ -81,7 +81,7 @@ class UserController extends BaseController
 			//Log::info('ID: '. $id);
 			if (Auth::guard()->check()) {
 				if ($id == Auth::id()) {
-					$message = 'Cannot disable yourself!';
+					$message = __('messages.DisableYourSelf');
 					return $this->index($request, $message);
 				}
 			}
@@ -90,7 +90,7 @@ class UserController extends BaseController
 				$validator->validate();
 			}
 			$this->repository->updateSoftDelete($id);
-			$message = 'Successfully updated!';
+			$message = __('messages.Actualizado');
 		} else {
 			$message = 'Enable/Disable feature is not valid.';
 		}

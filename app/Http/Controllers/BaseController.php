@@ -165,7 +165,7 @@ class BaseController extends Controller
 			}
 			$command = $this->storeCommand($request);
 			$this->fireCreateEvent($request, $command);
-			return $this->index($request, 'Successfully saved!');
+			return $this->index($request, __('messages.Guardado'));
 		// } catch (\Exception $e) {
 			// Log::error($e);
 			// $request->session()->put('statusError', 'Se ha producido un error');
@@ -292,7 +292,7 @@ class BaseController extends Controller
 			$id = $request->input('id');
 			$command = $this->updateCommand($request, $id);
 			$this->fireUpdateEvent($request, $command);
-			return $this->index($request, 'Successfully updated!');
+			return $this->index($request, __('messages.Actualizado'));
 		// } catch (\Exception $e) {
 			// Log::error($e);
 			// $request->session()->put('statusError', 'Se ha producido un error');
@@ -346,7 +346,7 @@ class BaseController extends Controller
 		$command = $this->repository->find($id);
 		$this->repository->forceDelete($id);
 		$this->fireDeleteEvent($request, $command);
-		return $this->index($request, 'Successfully deleted!');
+		return $this->index($request, __('messages.Borrado'));
     }
 	
 	public function export(\Illuminate\Http\Request $request, \Maatwebsite\Excel\Excel $excel) {

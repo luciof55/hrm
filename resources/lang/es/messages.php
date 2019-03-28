@@ -12,7 +12,13 @@ return [
 	'Enable' => 'Habilitar',
 	'Actions' => 'Acciones',
 	'Export' => 'Exportar',
-
+	
+	'Guardado' => 'Guardado con éxito!',
+	'Actualizado' => 'Actualizado con éxito!',
+	'Borrado' => 'Borrado con éxito!',
+	
+	'DisableYourSelf' => 'No se puede deshabilitar a sí mismo.',
+	
 	'Name' => 'Nombre',
 	'selectrowtext' => 'Seleccione una fila',
 	'RemoveTitle' => 'Eliminación',

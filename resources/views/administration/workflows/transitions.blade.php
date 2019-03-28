@@ -13,7 +13,6 @@
 			<div class="form-group row">
 				<div class="col-1"><label for="transition-anio" class="col-form-label">@lang('messages.Anio')</label></div>
 				<div class="col-2"><input type="text" class="form-control" name="transition-anio" id="transition-anio" required></div>
-				<div class="invalid-feedback">No, you missed this one.</div>
 				<div class="col-2"><label for="transition-account_id" class="col-form-label">@lang('messages.Account')</label></div>
 				<div class="col-3">
 					{{ Form::select('transition-account_id', $accounts, null, ['required', 'placeholder' => 'Empresa...', 'class' => 'form-control', 'id' => 'transition-account_id'])}}

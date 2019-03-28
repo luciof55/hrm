@@ -62,10 +62,13 @@
 						@endif
 						<div class="card border-info mb-3" style="max-width: 18rem;">
 							<div class="card-header"><a href="{{route('administration.workflows.edit', ['id' => $command->id])}}">{{ $command->name }}</a> - <span class="badge badge-light">{{count($command->transitions)}} Entrevistas</span></div>
-							<div class="card-body text-info">
+							<div class="card-body" style="padding: 0px">
 								@if ($command->transitions)
-									<h5 class="card-title">{{$command->transitions[0]->account->name}} / {{$command->transitions[0]->anio}} </h5>
-									<p class="card-text">@php echo substr($command->transitions[0]->comentarios, 0, 50); @endphp...</p>
+									<ul class="list-group list-group-flush">
+									@foreach ($command->transitions as $transition)
+										<li class="list-group-item">{{$transition->anio}} - {{$transition->account->name}} - {{$transition->zonas}}</li>
+									@endforeach
+									</ul>
 								@endif
 							</div>
 							<div class="card-footer"><small class="text-muted">Creado: {{$command->transitions[0]->created_at}}</small></div>

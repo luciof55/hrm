@@ -398,6 +398,7 @@ class WorkflowController extends UpsalesBaseController
 	
 	public function postProcessCommand(Request $request, $command) {
 		$command->name = $request->old('name');
+		$command->telefono = $request->old('telefono');
 	}
 	
 	public function postEditProcessCommand(Request $request, $command) {
