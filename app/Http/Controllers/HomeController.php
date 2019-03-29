@@ -33,9 +33,6 @@ class HomeController extends UpsalesController
 	public function index(\Illuminate\Http\Request $request) {
 		$collection = collect([]);
 		
-		$countComerciales = $this->repository->countWithTrashed();
-		$collection->put('countComerciales', $countComerciales);
-		
 		$entity = 'workflows';
 		$collection->put('entity', $entity);
 		
@@ -74,22 +71,27 @@ class HomeController extends UpsalesController
 		}
 		$collection->put('accounts', $select_account);
 		
+		$entrevistadoOptions = collect([]);
+		$entrevistadoOptions->put(1, 'Si');
+		$entrevistadoOptions->put(0, 'No');
+		$collection->put('entrevistadoOptions', $entrevistadoOptions);
+		
 		return view('comerciales.main', $collection->all());
 	}
 	
 	protected function processRequestFilters($request, $filterAttributes, $collectionFilterAttributes, $collectionFilter) {
 		if (!empty($filterAttributes)) {
-			Log::debug('*****Hay Filtros');
+			Log::info('*****Hay Filtros');
 			foreach ($filterAttributes as $attribute) {
 				$attributeAux = str_replace(".", "-", $attribute);
-				Log::debug('*****KEY');
-				Log::debug($attributeAux);
-				if (!empty($request->input($attributeAux.'_filter'))) {
+				Log::info('*****KEY');
+				Log::info($attributeAux);
+				if (!blank($request->input($attributeAux.'_filter'))) {
 					Log::info('****Hay Valor');
 					if (isset ($collectionFilter)) {
 						$collectionFilter->put($attribute, $request->input($attributeAux.'_filter'));
 					}
-				} 
+				}
 				$collectionFilterAttributes->put($attributeAux.'_filter', $request->input($attributeAux.'_filter'));
 			}
 		}

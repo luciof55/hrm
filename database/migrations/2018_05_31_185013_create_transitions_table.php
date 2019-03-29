@@ -22,8 +22,8 @@ class CreateTransitionsTable extends Migration
 			$table->foreign('account_id')->references('id')->on('accounts');
 			$table->unsignedInteger('category_id');
 			$table->foreign('category_id')->references('id')->on('categories');
-			$table->binary('zonas')->nullable($value = true);
-			$table->binary('comentarios');
+			$table->mediumText('zonas')->nullable($value = true);
+			$table->mediumText('comentarios');
             $table->timestamps();
         });
     }

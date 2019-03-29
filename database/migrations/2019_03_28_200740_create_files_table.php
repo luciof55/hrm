@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWorkflowsTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateWorkflowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('workflows', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('name', 150)->unique();
-			$table->string('telefono', 50);
-			$table->boolean('entrevistado')->default(1);
-			$table->softDeletes();
+			$table->integer('workflow_id')->unsigned()->index();
+			$table->foreign('workflow_id')->references('id')->on('workflows')->onDelete('cascade');
+            $table->string('filename');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateWorkflowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workflows');
+        Schema::dropIfExists('files');
     }
 }

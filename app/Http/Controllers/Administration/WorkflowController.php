@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Administration;
 
 use App\Model\Administration\Workflow;
 use App\Model\Administration\Account;
+use App\Model\Administration\File as Archivo;
 use App\Model\Gondola\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -45,6 +47,7 @@ class WorkflowController extends UpsalesBaseController
 					return $fail('Debe agregar al menos una entrevista');
 				}
 			}],
+			'filename' => 'file|max:2048'
         ]);
     }
 	
@@ -68,6 +71,7 @@ class WorkflowController extends UpsalesBaseController
 					return $fail('Debe agregar al menos una entrevista');
 				}
 			}],
+			'filename' => 'file|max:2048'
         ]);
     }
 	
@@ -92,6 +96,10 @@ class WorkflowController extends UpsalesBaseController
 		}
 		$collection->put('categories', $select_categories);
 		
+		$entrevistadoOptions = collect([]);
+		$entrevistadoOptions->put(1, 'Si');
+		$entrevistadoOptions->put(0, 'No');
+		$collection->put('entrevistadoOptions', $entrevistadoOptions);
 		
 		if ($request->session()->has($this->getCommandKey())) {
 			$workflow = $request->session()->get($this->getCommandKey(), null);
@@ -177,13 +185,31 @@ class WorkflowController extends UpsalesBaseController
 		foreach ($workflow->getAllTransitions() as $transition) {
 			$workflow->transitions()->save($transition);
 		}
+		if ($request->hasFile('filename') && $request->file('filename')->isValid()) {
+			$file = $this->saveFile($request);
+			if (isset($file)) {
+				$file->workflow()->associate($workflow);
+				$workflow->files()->save($file);
+			}
+		} else {
+			Log::info('No hay Filename o no es válido');
+		}
 		
 		return $workflow;
 	}
 	
 	protected function updateCommand(\Illuminate\Http\Request $request, $id) {
+		Log::info('**********************');
+		Log::info($request->all());
+		
 		$workflow = $this->getCommand($request);
 		$workflow->fill($request->all());
+		
+		if ( ! $request->has('entrevistado')) {
+			$workflow->entrevistado = false;
+		} else {
+			$workflow->entrevistado = true;
+		}
 		
 		$currentTransitions = collect([]);
 		foreach ($workflow->transitions as $transition) {
@@ -191,6 +217,12 @@ class WorkflowController extends UpsalesBaseController
 		}
 		
 		$toDelete = $currentTransitions->diffKeys($workflow->getAllTransitions());
+		
+		if ($request->hasFile('filename') && $request->file('filename')->isValid()) {
+			$file = $this->saveFile($request);
+		} else {
+			Log::info('No hay Filename o no es válido');
+		}
 		
 		$workflow->save();
 		
@@ -202,11 +234,27 @@ class WorkflowController extends UpsalesBaseController
 			$workflow->transitions()->save($transition);
 		}
 		
+		if (isset($file)) {
+			foreach ($workflow->files as $fileToDelete) {
+				Log::info('Deleting: ' . $fileToDelete->id);
+				try {
+					Storage::delete($fileToDelete->filename);
+				} catch (Exception $e) {
+					Log::error($e);
+				}
+				$fileToDelete->delete();
+			}
+			$file->workflow()->associate($workflow);
+			$workflow->files()->save($file);
+		}
+		
+		$workflow->save();
+		
 		return $workflow;
 	}
 	
 	protected function getPaginationLinks($transitions, $page) {
-		Log::info('getPaginationLinks - Page: '. $page);
+		Log::debug('getPaginationLinks - Page: '. $page);
 		$view = $transitions->links('vendor.pagination.bootstrap-4', ['paginationFunction' => 'workflowInstance.paginateTransitions']);
 		//Log::info('getPaginationLinks - utf8_encode: '. utf8_encode($view));
 		$json_array = array('html_content'=>utf8_encode($view));
@@ -243,6 +291,21 @@ class WorkflowController extends UpsalesBaseController
 			]);
 		}
 	}
+	
+	protected function saveFile(\Illuminate\Http\Request $request) {
+		Log::info('saveFile STAR');
+		try {
+			$dir = config('app.files_directory');
+			$path = $request->filename->store($dir);
+			$file = new Archivo;
+			$file->filename = $path;
+			return $file;			
+		} catch (Exception $e) {
+			Log::error($e);
+			return null;
+		}
+		
+    }
 	
 	/**
      * Create a new controller instance.
@@ -384,6 +447,16 @@ class WorkflowController extends UpsalesBaseController
 				'transition' => $transition
 			]);
 		}
+	}
+	
+	public function download(\Illuminate\Http\Request $request) {
+		$id = $request->input('id');
+		$workflow = $this->repository->find($id);
+		if (isset($workflow) && !blank($workflow->files)) {
+			$filename = $workflow->files[0]->filename;
+			return Storage::download($filename);
+		}
+		
 	}
 	
 	public function getPageSize() {

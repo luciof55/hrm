@@ -445,7 +445,7 @@ class BaseController extends Controller
 				$attributeAux = str_replace(".", "-", $attribute);
 				Log::info('*****KEY');
 				Log::info($attributeAux);
-				if (!empty($request->input($attributeAux.'_filter'))) {
+				if (!blank($request->input($attributeAux.'_filter'))) {
 					Log::info('Hay Valor');
 					if (isset ($collectionFilter)) {
 						$collectionFilter->put($attribute, $request->input($attributeAux.'_filter'));

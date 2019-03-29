@@ -30,9 +30,9 @@
 							<div class="p-1"><label for="name_filter" class="col-form-label text-md-right">@lang('messages.Name')</label></div>
 							<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Name')" id="name_filter" name="name_filter" value="{{ $filters->get('name_filter') }}" autofocus></div>
 							<div class="p-1">
-									<button class="d-none d-sm-block btn btn-info" type="submit"><i class="pr-2 fa fa-search"></i>@lang('messages.Search')</button>
-									<button class="d-block d-sm-none btn btn-info" type="submit"><i class="fa fa-search"></i></button>
-								</div>
+								<button class="d-none d-sm-block btn btn-info" type="submit"><i class="pr-2 fa fa-search"></i>@lang('messages.Search')</button>
+								<button class="d-block d-sm-none btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+							</div>
 							<div class="p-1">
 								<button class="d-none d-sm-block btn btn-info" type="reset"><i class="pr-2 fa fa-undo"></i>Reset</button>
 								<button class="d-block d-sm-none btn btn-info" type="reset"><i class="fa fa-undo"></i></button>

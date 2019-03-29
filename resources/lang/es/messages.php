@@ -83,6 +83,8 @@ return [
 	'Repository' => 'Repositorio',
 	'ExportFile' => 'Descargar',
 	
+	'Entrevistado' => 'Entrevistado',
+	
 	'Transitions' => 'Entrevistas',
 	'Transition' => 'Entrevista',
 	

@@ -16,7 +16,7 @@ class Workflow extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id', 'telefono',
+        'name', 'id', 'telefono', 'entrevistado'
     ];
 	
 	/**
@@ -38,7 +38,7 @@ class Workflow extends Model
      *
      * @var array
      */
-    protected $filterAttributes = ['name', 'transitions.anio', 'transitions.account_id', 'transitions.zonas'];
+    protected $filterAttributes = ['name', 'entrevistado', 'transitions.anio', 'transitions.account_id', 'transitions.zonas'];
 	
 	protected $auxTransitions;
 	
@@ -115,6 +115,10 @@ class Workflow extends Model
 	
 	public function transitions() {
 		return $this->hasMany('App\Model\Administration\Transition');
+	}
+	
+	public function files() {
+		return $this->hasMany('App\Model\Administration\File');
 	}
 	
 	public function canDelete() {

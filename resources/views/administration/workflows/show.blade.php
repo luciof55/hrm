@@ -39,6 +39,20 @@
 											<input id="telefono" type="text" class="form-control-plaintext" name="telefono" value="{{$command->telefono}}" >
 										</div>
 									</div>
+									<div class="form-group row">
+										<label for="entrevistado" class="col-md-4 col-form-label text-md-right">@lang('messages.Entrevistado')</label>
+										<div class="col-md-6">
+											<input id="entrevistado" type="text" class="form-control-plaintext" name="entrevistado" value="@if ($command->entrevistado) Si @else No @endif" readonly>
+										</div>
+									</div>
+									@if (!blank($command->files))
+										<div class="form-group row">
+											<label for="download" class="col-md-4 col-form-label text-md-right">Descargar archivo</label>
+											<div class="col-md-6">
+												<a href="{{route('administration.workflows_download')}}?id={{$command->id}}"><i class="fa fa-download"></i></a>
+											</div>
+										</div>
+									@endif
 								</form>
 							</div>
 						</div>
@@ -94,7 +108,7 @@
 												<td class="table-header">@lang('messages.Name')</td>
 												<td class="table-header">@lang('messages.Account')</td>
 												<td class="table-header">@lang('messages.Category')</td>
-												 <td class="table-header"></td>
+												<td class="table-header"></td>
 											</tr>
 										  </thead>
 										  <tbody>

@@ -26,27 +26,42 @@
 						<input type="hidden" id="id" name="id" value="">
 						<input type="hidden" id="columnOrder" name="columnOrder" value="@if(isset($columnOrder)){{$columnOrder}}@endif">
 						@include('order_fields')
-						<div class="d-flex bg-light">
-							<div class="p-1"><label for="name_filter" class="col-form-label text-md-right">@lang('messages.Name')</label></div>
-							<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Name')" id="name_filter" name="name_filter" value="{{ $filters->get('name_filter') }}" autofocus></div>
-							
-							<div class="p-1"><label for="transitions-account_id_filter" class="col-form-label text-md-right">@lang('messages.Account')</label></div>
+						<div class="d-flex flex-row bg-light">
 							<div class="p-1">
-								{{ Form::select('transitions-account_id_filter', $accounts, $filters->get('transitions-account_id_filter'), ['placeholder' => 'Empresa...', 'class' => 'form-control', 'id' => 'transitions-account_id_filter'])}}
-							</div>
-							
-							<div class="p-1"><label for="transition-zonas_filter" class="col-form-label text-md-right">@lang('messages.Zonas')</label></div>
-							<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Zonas')" id="transitions-zonas_filter" name="transitions-zonas_filter" value="{{ $filters->get('transitions-zonas_filter') }}"></div>
-							
-							<div class="p-1"><label for="transition-anio_filter" class="col-form-label text-md-right">@lang('messages.Anio')</label></div>
-							<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Anio')" id="transitions-anio_filter" name="transitions-anio_filter" value="{{ $filters->get('transitions-anio_filter') }}"></div>
-							<div class="p-1">
-								<button class="d-none d-sm-block btn btn-info" type="submit"><i class="fa fa-search"></i></button>
-								<button class="d-block d-sm-none btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+								<div class="d-flex flex-row">
+									<div class="p-1"><label for="name_filter" class="col-form-label text-md-right">@lang('messages.Name')</label></div>
+									<div class="p-1">
+										<input class="form-control" type="text" placeholder="@lang('messages.Name')" id="name_filter" name="name_filter" value="{{ $filters->get('name_filter') }}" autofocus>
+									</div>
+									<div class="p-1"><label class="col-form-label text-md-right" for="entrevistado_filter">@lang('messages.Entrevistado')</label></div>
+									<div class="p-1">
+										{{ Form::select('entrevistado_filter', $entrevistadoOptions, $filters->get('entrevistado_filter'), ['placeholder' => 'Entrevistado...', 'class' => 'form-control', 'id' => 'entrevistado_filter'])}}
+									</div>
+								</div>
 							</div>
 							<div class="p-1">
-								<button class="d-none d-sm-block btn btn-info" type="reset"><i class="fa fa-undo"></i></button>
-								<button class="d-block d-sm-none btn btn-info" type="reset"><i class="fa fa-undo"></i></button>
+								<div class="d-flex flex-row">
+									<div class="p-1"><label for="transitions-account_id_filter" class="col-form-label text-md-right">@lang('messages.Account')</label></div>
+									<div class="p-1">
+										{{ Form::select('transitions-account_id_filter', $accounts, $filters->get('transitions-account_id_filter'), ['placeholder' => 'Empresa...', 'class' => 'form-control', 'id' => 'transitions-account_id_filter'])}}
+									</div>
+								
+									<div class="p-1"><label for="transition-zonas_filter" class="col-form-label text-md-right">@lang('messages.Zonas')</label></div>
+									<div class="p-1"><input class="form-control" type="text" placeholder="@lang('messages.Zonas')" id="transitions-zonas_filter" name="transitions-zonas_filter" value="{{ $filters->get('transitions-zonas_filter') }}"></div>
+								
+									<div class="p-1"><label for="transition-anio_filter" class="col-form-label text-md-right">@lang('messages.Anio')</label></div>
+									<div class="p-1">
+										<input class="form-control" type="text" placeholder="@lang('messages.Anio')" id="transitions-anio_filter" name="transitions-anio_filter" value="{{ $filters->get('transitions-anio_filter') }}">
+									</div>
+									<div class="p-1">
+										<button class="d-none d-sm-block btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+										<button class="d-block d-sm-none btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+									</div>
+									<div class="p-1">
+										<button class="d-none d-sm-block btn btn-info" type="reset"><i class="fa fa-undo"></i></button>
+										<button class="d-block d-sm-none btn btn-info" type="reset"><i class="fa fa-undo"></i></button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</form>

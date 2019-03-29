@@ -2,6 +2,8 @@
 
 return [
 
+	'files_directory' => env('FILES_DIRECTORY', 'files'),
+
 	'user_class' => 'App\UpsalesUser',
 
 	'default_public_profile' => env('DEFAULT_PUBLIC_PROFILE', '2'),
