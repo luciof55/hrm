@@ -12,7 +12,7 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'filename', 'id', 'workflow_id'
+        'filename', 'id', 'workflow_id', 'original_filename'
     ];
 	
 	public function workflow() {

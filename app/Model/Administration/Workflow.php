@@ -42,6 +42,8 @@ class Workflow extends Model
 	
 	protected $auxTransitions;
 	
+	protected $auxRemoveFiles;
+	
 	protected function initAuxTransitions() {
 		$this->auxTransitions = collect([]);
 		foreach ($this->transitions as $transition) {
@@ -110,6 +112,25 @@ class Workflow extends Model
 		} else {
 			Log::info('Nulo auxTransitions');
 			return null;
+		}
+	}
+	
+	public function getFilesToRemove() {
+		if (!isset($this->auxRemoveFiles)) {
+			$this->auxRemoveFiles = collect([]);
+		}
+		return $this->auxRemoveFiles;
+	}
+	
+	public function removeFile() {
+		if (!isset($this->auxRemoveFiles)) {
+			$this->auxRemoveFiles = collect([]);
+		}
+		
+		if (!blank($this->files)) {
+			$file = $this->files->pull(0);
+			$file->workflow()->dissociate();
+			$this->auxRemoveFiles->put($file->id, $file);
 		}
 	}
 	

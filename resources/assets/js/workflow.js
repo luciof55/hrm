@@ -173,5 +173,36 @@ function workflow() {
 			$('#main-tab').click();
 		}
 	}
+	
+	this.removeFile = function (formName, method, urlAction) {
+		options = {urlAction: urlAction};
+		crudInstance.ajaxSubmit(formName, urlAction, method, options, function (data, options) {
+			if (data.status == 'ok') {
+				//alert('Eliminado');
+				$( "#button_download_file").remove();
+				$( "#button_remove_file").remove();
+				$( "#nofiles" ).stop().css( "opacity", 1 ).fadeIn( 30 );
+			} else {
+				$( "#mainSpanMessage > span" ).text( data.message );
+				$( "#mainSpanMessage" ).stop().css( "opacity", 1 ).fadeIn( 30 );
+			}
+		});
+	}
+	
+	this.downloadFile = function (formName, method, urlAction, fileName) {
+		options = {urlAction: urlAction, fileName: fileName};
+		
+		crudInstance.ajaxFileSubmit(formName, urlAction, method, options, function (data, options) {
+			//alert('Ejecutado');
+			console.log(data);
+			var a = document.createElement('a');
+            var url = window.URL.createObjectURL(data);
+            a.href = url;
+			console.log(options);
+            a.download = options.fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
+		});
+	}
 };
 module.exports = workflow;

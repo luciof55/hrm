@@ -161,7 +161,37 @@ function crud() {
            callbackSuccess(data, options);
        },
        error: function(data){
-         alert('error: ' + data);
+		   console.log('**********HUBO ERROR');
+			console.log(data);
+			console.log('**********HUBO ERROR');
+			//alert('error: ' + data);
+       }
+     })
+   }
+   
+   this.ajaxFileSubmit = function (formName, url, method, options, callbackSuccess) {
+    // alert('formName: ' + formName);
+    // alert('url: ' + url);
+    // alert('method: ' + method);
+    $.ajaxSetup({header:$('meta[name="_token"]').attr('content')});
+
+    $.ajax({
+       type:method,
+       url:url,
+       data:$('#'+formName).serialize(),
+       processData: false,
+	   contentType: "multipart/form-data",
+	   xhrFields: {
+            responseType: 'blob'
+       },
+       success: function(data){
+           callbackSuccess(data, options);
+       },
+       error: function(data){
+		   console.log('**********HUBO ERROR');
+			console.log(data);
+			console.log('**********HUBO ERROR');
+         //alert('error: ' + data);
        }
      })
    }

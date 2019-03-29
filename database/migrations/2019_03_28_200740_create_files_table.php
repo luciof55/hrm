@@ -18,6 +18,7 @@ class CreateFilesTable extends Migration
 			$table->integer('workflow_id')->unsigned()->index();
 			$table->foreign('workflow_id')->references('id')->on('workflows')->onDelete('cascade');
             $table->string('filename');
+			$table->string('original_filename');
             $table->timestamps();
         });
     }

@@ -28,7 +28,8 @@ Route::post('workflows/transition/add', 'Administration\WorkflowController@addTr
 Route::post('workflows/transition/remove', 'Administration\WorkflowController@removeTransition')->middleware('checkprivilege:workflows_edit')->name('workflows_removeTranstion');
 Route::post('workflows/transition/load', 'Administration\WorkflowController@loadTransition')->middleware('checkprivilege:workflows_edit')->name('workflows_loadTranstion');
 Route::post('workflows/transition/get', 'Administration\WorkflowController@getTransitions')->middleware('checkprivilege:workflows_edit')->name('workflows_getTranstions');
-Route::get('workflows/download', 'Administration\WorkflowController@download')->middleware('checkprivilege:workflows_edit')->name('workflows_download');
+Route::match(['get', 'post'], 'workflows/download', 'Administration\WorkflowController@download')->middleware('checkprivilege:workflows_edit')->name('workflows_download');
+Route::post('workflows/removeFile', 'Administration\WorkflowController@removeFile')->middleware('checkprivilege:workflows_edit')->name('workflows_removeFile');
 ReqUtils::routeController('workflows', 'Administration\WorkflowController', '', ['checkprivilege']);
 });
 

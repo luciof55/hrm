@@ -144,6 +144,9 @@ class WorkflowController extends UpsalesBaseController
 			$collection->put('activeTab', 'main');
 		}
 		
+		$action_removefile = route('administration.workflows_removeFile');
+		$collection->put('action_removefile', $action_removefile);
+		
 		$request->session()->put($this->getCommandKey(), $workflow);
 	}
 	
@@ -248,6 +251,16 @@ class WorkflowController extends UpsalesBaseController
 			$workflow->files()->save($file);
 		}
 		
+		foreach ($workflow->getFilesToRemove() as $fileToDelete) {
+			Log::info('Deleting: ' . $fileToDelete->id);
+			try {
+				Storage::delete($fileToDelete->filename);
+			} catch (Exception $e) {
+				Log::error($e);
+			}
+			$fileToDelete->delete();
+		}
+		
 		$workflow->save();
 		
 		return $workflow;
@@ -299,6 +312,7 @@ class WorkflowController extends UpsalesBaseController
 			$path = $request->filename->store($dir);
 			$file = new Archivo;
 			$file->filename = $path;
+			$file->original_filename = $request->filename->getClientOriginalName();
 			return $file;			
 		} catch (Exception $e) {
 			Log::error($e);
@@ -454,9 +468,25 @@ class WorkflowController extends UpsalesBaseController
 		$workflow = $this->repository->find($id);
 		if (isset($workflow) && !blank($workflow->files)) {
 			$filename = $workflow->files[0]->filename;
-			return Storage::download($filename);
+			$clientFilename = $workflow->files[0]->original_filename;
+			return Storage::download($filename, $clientFilename);
 		}
 		
+	}
+	
+	public function removeFile(\Illuminate\Http\Request $request) {
+		$workflow = $this->getCommand($request);
+		if (!blank($workflow->files)) {
+			$workflow->removeFile();
+			
+			return response()->json([
+				'status' => 'ok'
+			]);
+		} else {
+			return response()->json([
+				'status' => 'ok'
+			]);
+		}
 	}
 	
 	public function getPageSize() {
