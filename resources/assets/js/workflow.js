@@ -195,13 +195,19 @@ function workflow() {
 		crudInstance.ajaxFileSubmit(formName, urlAction, method, options, function (data, options) {
 			//alert('Ejecutado');
 			console.log(data);
-			var a = document.createElement('a');
-            var url = window.URL.createObjectURL(data);
-            a.href = url;
-			console.log(options);
-            a.download = options.fileName;
-            a.click();
-            window.URL.revokeObjectURL(url);
+			if (navigator.msSaveOrOpenBlob) {
+				navigator.msSaveOrOpenBlob(data, options.fileName);
+			} else {
+				var a = document.createElement('a');
+				var url = window.URL.createObjectURL(data);
+				a.href = url;
+				console.log(options);
+				a.download = options.fileName;
+				document.body.appendChild(a);
+				a.click();
+				window.URL.revokeObjectURL(url);
+				a.remove();
+			}
 		});
 	}
 };

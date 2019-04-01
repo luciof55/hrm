@@ -47,12 +47,17 @@
 									</div>
 									@if (!blank($command->files))
 										<div class="form-group row">
-											<label for="download" class="col-md-4 col-form-label text-md-right">Descargar archivo</label>
+											<label for="download" class="col-md-4 col-form-label text-md-right">Archivo</label>
 											<div class="col-md-6">
-												<a href="{{route('administration.workflows_download')}}?id={{$command->id}}"><i class="fa fa-download"></i></a>
+												<button id="button_download_file" type="button" onclick="workflowInstance.downloadFile('fileForm', 'GET',  '{{route('administration.workflows_download')}}', '{{$command->files[0]->original_filename}}');" class="btn btn-info btn-md"><i class="pr-2 fa fa-download"></i>Descargar</button>
 											</div>
 										</div>
 									@endif
+								</form>
+								<form id="fileForm" method="POST" action="">
+									@csrf
+									<input id="id" name="id" type="hidden" value="{{ $command->id }}">
+									<input type="hidden" id="_method" name="_method" value="POST">
 								</form>
 							</div>
 						</div>
