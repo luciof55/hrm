@@ -79,46 +79,52 @@
 			<div class="card-body">
 				<div class="row"><div class="container">@include('common_status')</div></div>
 				
-				<div class="d-flex justify-content-center">
-				<div class="d-flex flex-column">	
-					@foreach ($list as $command)
-						@if ($loop->iteration % 3 == 1)
-							<div class="card-deck d-flex flex-row">
-						@endif
-						<div class="card border-info mb-3" style="max-width: 18rem;">
-							<div class="card-header">
-								<div class="d-flex">
-									<div class="mr-auto">
-										<a href="{{route('administration.workflows.edit', ['id' => $command->id])}}">{{ $command->name }}</a> - <span class="badge badge-light">{{count($command->transitions)}} Entrevistas</span>
-									</div>
-									<div class="">
-										@if (!blank($command->files))
-											<a href="{{route('administration.workflows_download')}}?id={{$command->id}}"><i class="fa fa-download"></i></a>
-										@endif
+				<div class="d-flex @if (count($list) > 2) justify-content-center @endif">
+				<div class="d-flex flex-column">
+					@if (count($list) > 0)
+						@foreach ($list as $command)
+							@if ($loop->iteration % 3 == 1)
+								<div class="card-deck d-flex">
+							@endif
+							<div class="card border-info mb-3" style="max-width: 18rem;">
+								<div class="card-header">
+									<div class="d-flex">
+										<div class="mr-auto">
+											<a href="{{route('administration.workflows.edit', ['id' => $command->id])}}">{{ $command->name }}</a> - <span class="badge badge-light">{{count($command->transitions)}} Entrevistas</span>
+										</div>
+										<div class="">
+											@if (!blank($command->files))
+												<a href="{{route('administration.workflows_download')}}?id={{$command->id}}"><i class="fa fa-download"></i></a>
+											@endif
+										</div>
 									</div>
 								</div>
+								<div class="card-body" style="padding: 0px">
+									@if ($command->transitions)
+										<ul class="list-group list-group-flush">
+										@foreach ($command->transitions as $transition)
+											<li class="list-group-item">{{$transition->anio}} - {{$transition->account->name}} - {{$transition->zonas}}</li>
+										@endforeach
+										</ul>
+									@endif
+								</div>
+								<div class="card-footer"><small class="text-muted">Creado: {{$command->created_at}}</small></div>
 							</div>
-							<div class="card-body" style="padding: 0px">
-								@if ($command->transitions)
-									<ul class="list-group list-group-flush">
-									@foreach ($command->transitions as $transition)
-										<li class="list-group-item">{{$transition->anio}} - {{$transition->account->name}} - {{$transition->zonas}}</li>
-									@endforeach
-									</ul>
-								@endif
-							</div>
-							<div class="card-footer"><small class="text-muted">Creado: {{$command->created_at}}</small></div>
-						</div>
-						@if ($loop->iteration % 3 == 0 || $loop->last)
-							</div>
-						@endif
-					@endforeach
+							@if ($loop->iteration % 3 == 0 || $loop->last)
+								</div>
+							@endif
+						@endforeach
+					@else
+						<div class="mr-auto p-2"><h5>Sin resultados</h5></div>
+					@endif
 				</div>
 				</div>
 			</div>
 				
 			<div class="card-footer bg-light" style="padding: 0px">
-				<div class="p-2">{{ $list->links() }}</div>
+				@if (count($list) > 0)
+					<div class="p-2">{{ $list->links() }}</div>
+				@endif
 			</div>
 		</div>
 	</div>

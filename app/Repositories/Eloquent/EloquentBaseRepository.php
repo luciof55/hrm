@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use Kurt\Repoist\Repositories\Eloquent\AbstractRepository;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class EloquentBaseRepository extends AbstractRepository
 {
@@ -65,6 +66,7 @@ class EloquentBaseRepository extends AbstractRepository
 			} else {
 				$query = $this->entity;
 			}
+			$query->select($this->getInstance()->getTable().'.*');
 			return $this->getWithTrashed($query, $paginate, $orderAttributes, $filterAttributes, $page);
 		}
 	}
@@ -124,11 +126,12 @@ class EloquentBaseRepository extends AbstractRepository
 				}
 			}
 			// print_r($query->getBindings());
-			Log::info('IF SQL: '.$query->toSql());
+			Log::info('COUNT IF SQL: '.$query->toSql());
 			// Log::info('IF SQL: '.$query->toBase()->count());
-			return $query->count();
+			return $query->count($this->getInstance()->getTable().'.id');
 		}
-		return $query->count();
+		Log::info('COUNT: '.$query->toSql());
+		return $query->count($this->getInstance()->getTable().'.id');
 	}
 	
 	/**
@@ -190,8 +193,6 @@ class EloquentBaseRepository extends AbstractRepository
      */
     protected function getWithTrashed($query, $paginate = null, $orderAttributes = null, $filterAttributes = null, $page = null)
     {
-		$query->select($this->getInstance()->getTable().'.*');
-		
 		if (isset($filterAttributes) && $filterAttributes->isNotEmpty()) {
 			Log::info('Hay Filtros-Valor');
 			foreach ($filterAttributes->keys() as $attributeKey) {
@@ -228,9 +229,22 @@ class EloquentBaseRepository extends AbstractRepository
 			}
 		};
 		
-		Log::info('***************SQL: '.$query->toSql());
+		Log::info('------------SQL: '.$query->toSql());
+		if ($paginate) {
+			$total = $query->count($this->getInstance()->getTable().'.id');
+			$auxList = $query->paginate($paginate, null, null, $page);
+			$list = array();
+			foreach ($auxList as $element) {
+				array_push($list, $element);
+			}
+
+			Log::info('***************TOTAL GET: '.$total);
+			return new LengthAwarePaginator($list, $total, $paginate, $page);
+		} else {
+			return $query->get();
+		}
 		
-		return $paginate ? $query->paginate($paginate, null, null, $page) : $query->get();
+		//return $paginate ? $query->paginate($paginate, ['distinct ('.$this->getInstance()->getTable().'.id)'], null, $page) : $query->get();
 	}
 	
 	public function getRelation($relationName) {

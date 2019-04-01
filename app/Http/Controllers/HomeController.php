@@ -42,7 +42,7 @@ class HomeController extends UpsalesController
 		$collection->put('actionEdit', $actionEdit);
 		
 		$page = $request->input('page');
-		$collection->put('page', $page);
+		
 		
 		$collectionFilterAttributes = collect([]);
 		$collectionFilter = collect([]);
@@ -55,12 +55,31 @@ class HomeController extends UpsalesController
 		$query = $this->repository->getInstance()->join('transitions', 'workflows.id', '=', 'transitions.workflow_id')->select('workflows.*')->distinct();
 		
 		if (isset($collectionFilter) && $collectionFilter->isNotEmpty()) {
+			$totalItems = $this->repository->countWithTrashed($query, $collectionFilter);
+		} else {
+			$totalItems = $this->repository->countWithTrashed(null, $collectionFilter);
+		}
+		
+		if (!blank($page)) {
+			Log::info('getPages '. ceil($totalItems / 6));
+			$pages = ceil($totalItems / 6);
+			if ($page > $pages) {
+				$page = $pages;
+			}
+		};
+		
+		if (isset($collectionFilter) && $collectionFilter->isNotEmpty()) {
 			$resultMessage = "Comerciales encontrados";
-			$collection->put('list', $this->repository->paginateWithTrashed($query, 6, $orders, $collectionFilter, $page));
+			$list = $this->repository->paginateWithTrashed($query, 6, $orders, $collectionFilter, $page);
 		} else {
 			$resultMessage = 'Últimos Comerciales';
-			$collection->put('list', $this->repository->paginateWithTrashed(null, 6, $orders, $collectionFilter, $page));
+			$list = $this->repository->paginateWithTrashed(null, 6, $orders, $collectionFilter, $page);
 		}
+		
+		$collection->put('list', $list);
+		Log::info('TT : ' . $list->total());
+		
+		$collection->put('page', $page);
 		
 		$collection->put('resultMessage', $resultMessage);
 		
