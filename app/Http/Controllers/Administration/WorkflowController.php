@@ -184,6 +184,11 @@ class WorkflowController extends UpsalesBaseController
 	protected function storeCommand(\Illuminate\Http\Request $request) {
 		$workflow = $this->getCommand($request);
 		$workflow->fill($request->all());
+		if ( ! $request->has('entrevistado')) {
+			$workflow->entrevistado = false;
+		} else {
+			$workflow->entrevistado = true;
+		}
 		$workflow->save();
 		foreach ($workflow->getAllTransitions() as $transition) {
 			$workflow->transitions()->save($transition);

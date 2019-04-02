@@ -50,7 +50,7 @@ class HomeController extends UpsalesController
 		$collection->put('filters', $collectionFilterAttributes);
 		
 		$orders = collect([]);
-		$orders->put('created_at', 'created_at'); 
+		$orders->put('updated_at', 'updated_at'); 
 		
 		$query = $this->repository->getInstance()->join('transitions', 'workflows.id', '=', 'transitions.workflow_id')->select('workflows.*')->distinct();
 		

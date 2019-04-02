@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('header')
+<div class='thetop'></div>
 <ul class="navbar-nav mr-auto">
 	@if (Gate::allows('module', 'workflows'))
 		@if(Request::path() == 'workflows')
