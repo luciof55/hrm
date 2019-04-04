@@ -86,4 +86,6 @@ Route::get('users/{id}/edit', 'UserController@edit')->middleware('checkprivilege
 Route::get('users/{id}', 'UserController@show')->middleware('checkprivilege:users_view')->name('users.show');
 Route::get('users/{id}/enable', 'UserController@enable')->middleware('checkprivilege:users_enable')->name('users.enable');
 Route::get('users/{id}/delete', 'UserController@destroy')->middleware('checkprivilege:users_remove')->name('users.delete');
+Route::get('useraccount', 'UserController@useraccount')->name('useraccount');
+Route::post('saveuseraccount', 'UserController@saveuseraccount')->name('saveuseraccount');
 });

@@ -28,17 +28,119 @@ class UserController extends BaseController
     {
 		Log::info('Execute User update validator.');
         return Validator::make($data, [
-            'name' => 'bail|required|string|max:150|unique:users,name,'.$data['id'],
+            //'name' => 'bail|required|string|max:150|unique:users,name,'.$data['id'],
+			'password' => 'sometimes|required|string|min:6|confirmed',
+			'email' => 'bail|required|email',
+			'profile_id' => 'bail|required|',
         ]);
     }
+	
+	protected function getValidateUpdateData(\Illuminate\Http\Request $request) {
+		$data = [];
+		
+		if (!blank($request->input('password'))) {
+			$data['password'] = $request->input('password');
+		}
+		
+		if (!blank($request->input('password_confirmation'))) {
+			$data['password_confirmation'] = $request->input('password_confirmation');
+		}
+		
+		$data['profile_id'] = $request->input('profile_id');
+		
+		$data['email'] = $request->input('email');
+		
+		return $data;
+	}
+	
+	/**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function passwordValidator(array $data)
+    {
+		return Validator::make($data, [
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+    }
+	
+	protected function updateCommand(\Illuminate\Http\Request $request, $id) {
+		Log::info($request->all());
+		Log::info('UserController updateCommand');
+		$command = $this->repository->find($id);
+		
+		$command->fill($this->getValidateUpdateData($request));
+		
+		if (!blank($request->input('password'))) {
+			$command->password = bcrypt($request->input('password'));
+		}
+		
+		$command->save();
+		
+		return $command;
+	}
 	
     public function store(\Illuminate\Http\Request $request)
     {	
 		return redirect('/');
     }
 	
-	 public function create(\Illuminate\Http\Request $request)
+	 public function useraccount(\Illuminate\Http\Request $request)
     {	
+		$collectionCreate = collect([]);
+        
+		$command = Auth::user();
+		$collectionCreate->put('command', $command);
+		
+		$action = action('UserController@saveuseraccount');
+		$collectionCreate->put('action', $action);
+		
+		$actionBack = route('main');
+		$collectionCreate->put('actionBack', $actionBack);
+		$collectionCreate->put('method', 'POST');
+		
+		$this->referenceData($request, $collectionCreate);
+        return view('admin.users.useraccount', $collectionCreate->all());
+    }
+	
+	public function saveuseraccount(\Illuminate\Http\Request $request)
+    {	
+		$collectionCreate = collect([]);
+		$command = Auth::user();
+		
+		$validator = $this->passwordValidator($request->all());
+		
+		if (isset($validator)) {
+			$validator->validate();
+		}
+		
+		$command->password = bcrypt($request->input('password'));
+		
+		$command = Auth::user();
+		$collectionCreate->put('command', $command);
+		
+		$action = action('UserController@saveuseraccount');
+		$collectionCreate->put('action', $action);
+		
+		$actionBack = route('main');
+		$collectionCreate->put('actionBack', $actionBack);
+		$collectionCreate->put('method', 'POST');
+		
+		$this->referenceData($request, $collectionCreate);
+		
+		if ($command->save()) {
+			$collectionCreate->put('status', __('messages.Guardado'));
+		} else {
+			$collectionCreate->put('statusError', 'Error al actualizar');
+		}
+		
+		return view('admin.users.useraccount', $collectionCreate->all());
+		
+	}
+	
+	public function create(\Illuminate\Http\Request $request) {
 		$collectionCreate = collect([]);
         
 		$command = new User();
@@ -58,8 +160,8 @@ class UserController extends BaseController
 		$collectionCreate->put('filters', $collectionFilterAttributes);
 		
 		$this->referenceData($request, $collectionCreate);
-        return view('auth.register', $collectionCreate->all());
-    }
+        return view('auth.register', $collectionCreate->all()); 
+	}
 	
 	/**
      * Update the specified resource in storage.

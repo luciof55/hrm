@@ -135,7 +135,7 @@ class RegisterController extends Controller
 			$controller = resolve('App\Http\Controllers\HomeController');
 		}
 		
-		return $controller->index($request, __('messages.Guarado'));
+		return $controller->index($request, __('messages.Guardado'));
     }
 	
 	/**

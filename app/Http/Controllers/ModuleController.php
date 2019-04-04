@@ -146,7 +146,7 @@ class ModuleController extends BaseController
 			
 			$this->repository->create($data);
 			Log::debug('Module Created');
-			return $this->index($request, __('messages.Guarado'));
+			return $this->index($request, __('messages.Guardado'));
 		} catch (Exception $e) {
 			Log::debug('Error');
 			$collectionStore->put('alertSuccess', 'ERROR');
