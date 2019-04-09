@@ -72,12 +72,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\UpsalesUser::class,
+            'model' => App\HRMUser::class,
         ],
 		
 		'ldapusers' => [
             'driver' => 'adldap',
-            'model' => App\UpsalesUser::class,
+            'model' => App\HRMUser::class,
         ],
 
         // 'users' => [

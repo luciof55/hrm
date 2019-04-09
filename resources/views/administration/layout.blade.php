@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('header')
-<div class='thetop'></div>
+<div id="thetop" class='thetop'></div>
 <ul class="navbar-nav mr-auto">
-	@if (Gate::allows('module', 'workflows'))
-		@if(Request::path() == 'workflows')
+	@if (Gate::allows('module', 'sellers'))
+		@if(Request::path() == 'sellers')
 			<li class="nav-item nav-link active">Comerciales</li>
 		@else
-			<li class="nav-item"><a class="nav-link" href="{{route('administration.workflows.index')}}">Comerciales</a></li>
+			<li class="nav-item"><a class="nav-link" href="{{route('administration.sellers.index')}}">Comerciales</a></li>
 		@endif
 	@endif
 	@if (Gate::allows('module', 'accounts'))

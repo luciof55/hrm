@@ -56,7 +56,7 @@
 								</thead>
 								<tbody>
 									@foreach ($list as $command)
-										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) bg-light text-muted @endif" onclick="potencialInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
+										<tr id="{{$entity}}_{{$command->id}}" class="@if ($command->trashed()) bg-light text-muted @endif" onclick="crudInstance.setCurrentRowId('{{$entity}}_{{$command->id}}');">
 											<td>{{ $command->name }}</td>
 										</tr>
 									@endforeach

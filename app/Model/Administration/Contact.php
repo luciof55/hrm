@@ -46,7 +46,7 @@ class Contact extends Model
 	}
 	
 	public function user() {
-		 return $this->belongsTo('App\UpsalesUser')->withTrashed();
+		 return $this->belongsTo('App\HRMUser')->withTrashed();
 	}
 	
 	public function canDelete() {

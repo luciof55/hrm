@@ -27,27 +27,6 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1020,'contacts_admin','Super Admin Contactos',NULL,NULL);
 
 /*
-//Estados
-*/
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1014,'businessrecordstates','Administrar Estados',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1015,'businessrecordstates_create','Crear Estados',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1016,'businessrecordstates_view','Ver Estados',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1017,'businessrecordstates_edit','Editar Estados',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1018,'businessrecordstates_enable','Habilitar/Deshabilitar Estados',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1019,'businessrecordstates_remove','Borrar Estados',NULL,NULL);
-
-/*
-//Potenciales
-*/
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1022,'businessrecords','Administrar Potenciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1023,'businessrecords_create','Crear Potenciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1024,'businessrecords_view','Ver Potenciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1025,'businessrecords_edit','Editar Potenciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1026,'businessrecords_enable','Habilitar/Deshabilitar Potenciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1027,'businessrecords_remove','Borrar Potenciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1028,'businessrecords_admin','Super Admin Potenciales',NULL,NULL);
-
-/*
 // HOME
 */
 INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1029,'principal','Principal',NULL,NULL);
@@ -55,13 +34,13 @@ INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at
 /*
 //Comerciales
 */
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1030,'workflows','Administrar Comerciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1031,'workflows_create','Crear Comerciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1032,'workflows_view','Ver Comerciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1033,'workflows_edit','Editar Comerciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1034,'workflows_enable','Habilitar/Deshabilitar Comerciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1035,'workflows_remove','Borrar Comerciales',NULL,NULL);
-INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1036,'workflows_admin','Super Admin Comerciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1030,'sellers','Administrar Comerciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1031,'sellers_create','Crear Comerciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1032,'sellers_view','Ver Comerciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1033,'sellers_edit','Editar Comerciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1034,'sellers_enable','Habilitar/Deshabilitar Comerciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1035,'sellers_remove','Borrar Comerciales',NULL,NULL);
+INSERT INTO `resources` (`id`,`key_name`,`display_name`,`created_at`,`updated_at`) VALUES (1036,'sellers_admin','Super Admin Comerciales',NULL,NULL);
 
 /*
 //Categories

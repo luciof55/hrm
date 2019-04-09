@@ -91,17 +91,17 @@
 	text-align: center;
 	margin: 0 0 0 0;
 	cursor:pointer;
-	transition: 0.5s;
-	-moz-transition: 0.5s;
-	-webkit-transition: 0.5s;
-	-o-transition: 0.5s; 		
+	interview: 0.5s;
+	-moz-interview: 0.5s;
+	-webkit-interview: 0.5s;
+	-o-interview: 0.5s; 		
 }
 .scroll:hover {
 	background:rgba(0,59,127,1.0);
-	transition: 0.5s;
-	-moz-transition: 0.5s;
-	-webkit-transition: 0.5s;
-	-o-transition: 0.5s; 		
+	interview: 0.5s;
+	-moz-interview: 0.5s;
+	-webkit-interview: 0.5s;
+	-o-interview: 0.5s; 		
 }
 .scroll:hover .fa {
 	padding-top:-10px;
@@ -111,8 +111,8 @@
 	font-size:30px;
 	margin-top:-5px;
 	margin-left:1px;
-	transition: 0.5s;
-	-moz-transition: 0.5s;
-	-webkit-transition: 0.5s;
-	-o-transition: 0.5s; 	
+	interview: 0.5s;
+	-moz-interview: 0.5s;
+	-webkit-interview: 0.5s;
+	-o-interview: 0.5s; 	
 }

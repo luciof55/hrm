@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\UpsalesBaseController;
+use App\Http\Controllers\HRMBaseController;
 use App\Repositories\Contracts\Administration\AccountRepository;
 use App\Http\MiddleWare\OwnerAuthorize;
 
-class AccountController extends UpsalesBaseController
+class AccountController extends HRMBaseController
 {
 	
 	/**

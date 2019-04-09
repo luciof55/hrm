@@ -20,6 +20,19 @@ class EloquentCategoryRepository extends EloquentBaseRepository implements Categ
 		return new Category();
 	}
 	
+	public function canDelete($account) {
+		$result = collect([]);
+		$result->put('message', null);
+		$result->put('status', true);
+		
+		if ($account->interviews->isNotEmpty() || !$account->canDelete()) {
+			$result->put('message', "Existen entrevistas relacionadas, no se puede eliminar el puesto.");
+			$result->put('status', false);
+		}
+		
+		return $result;
+	}
+	
 	public function canRestore($category) {
 		Log::info('EloquentCategoryRepository - canRestore');
 		$result = collect([]);

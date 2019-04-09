@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\UpsalesBaseController;
+use App\Http\Controllers\HRMBaseController;
 
-class CategoryController extends UpsalesBaseController
+class CategoryController extends HRMBaseController
 {
 	
 	/**
@@ -28,7 +28,7 @@ class CategoryController extends UpsalesBaseController
     }
 	
 	/**
-     * Get a validator for an incoming businessRecord request.
+     * Get a validator for an incoming Category request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator

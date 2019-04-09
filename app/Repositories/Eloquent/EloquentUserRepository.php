@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\UpsalesUser;
+use App\HRMUser;
 use App\Repositories\Contracts\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -11,7 +11,7 @@ class EloquentUserRepository extends EloquentBaseRepository implements UserRepos
 {
     public function entity()
     {
-        return UpsalesUser::class;
+        return HRMUser::class;
     }
 	
 	public function getInstance() {

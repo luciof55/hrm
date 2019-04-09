@@ -15,8 +15,8 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
-			$table->integer('workflow_id')->unsigned()->index();
-			$table->foreign('workflow_id')->references('id')->on('workflows')->onDelete('cascade');
+			$table->integer('seller_id')->unsigned()->index();
+			$table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
             $table->string('filename');
 			$table->string('original_filename');
             $table->timestamps();

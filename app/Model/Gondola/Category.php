@@ -41,6 +41,10 @@ class Category extends Model
      */
     protected $filterAttributes = ['name', ];
 	
+	public function interviews() {
+		 return $this->hasMany('App\Model\Administration\Interview');
+	}
+	
 	public function canDelete() {
 		return true;
 	}

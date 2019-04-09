@@ -9,14 +9,14 @@
 @endif
 <div class="dropdown-menu">
   @if($orders->get($column_order) == '')
-    <a class="dropdown-item" onclick="potencialInstance.columnOrder('{{$column_order}}')" href="#">Asc<i class="pointer pl-2 fa fa-chevron-up" ></i></a>
+    <a class="dropdown-item" onclick="crudInstance.columnOrder('{{$column_order}}')" href="#">Asc<i class="pointer pl-2 fa fa-chevron-up" ></i></a>
   @endif
   @if($orders->get($column_order) == 'desc')
-    <a class="dropdown-item" onclick="potencialInstance.columnOrder('{{$column_order}}')" href="#">Asc<i class="pointer pl-2 fa fa-chevron-down"></i></a>
+    <a class="dropdown-item" onclick="crudInstance.columnOrder('{{$column_order}}')" href="#">Asc<i class="pointer pl-2 fa fa-chevron-down"></i></a>
   @endif
   @if($orders->get($column_order) == 'asc')
-    <a class="dropdown-item" onclick="potencialInstance.columnOrder('{{$column_order}}')" href="#">Desc<i class="pointer pl-2 fa fa-chevron-up"></i></a>
+    <a class="dropdown-item" onclick="crudInstance.columnOrder('{{$column_order}}')" href="#">Desc<i class="pointer pl-2 fa fa-chevron-up"></i></a>
   @endif
   <div class="dropdown-divider"></div>
-    <a class="dropdown-item" onclick="potencialInstance.removeColumnOrder('{{$column_order}}')" href="#">Quitar orden<i class="pointer pl-2 fa fa-minus-square"></i></a>
+    <a class="dropdown-item" onclick="crudInstance.removeColumnOrder('{{$column_order}}')" href="#">Quitar orden<i class="pointer pl-2 fa fa-minus-square"></i></a>
   </div>

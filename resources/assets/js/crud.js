@@ -40,6 +40,22 @@ function crud() {
 
 		$('#' + id).addClass('table-active');
 	};
+	
+	this.columnOrder = function (columnName) {
+		$('#columnOrder').val(columnName);
+		if ($('#'+columnName).val() == 'asc') {
+			$('#'+columnName).val('desc');
+		} else {
+			$('#'+columnName).val('asc');
+		}
+		this.executeAction();
+	};
+
+	this.removeColumnOrder = function (columnName) {
+		$('#columnOrder').val('');
+		$('#'+columnName).val('');
+		this.executeAction();
+	};
 
 	this.postForm = function (action, method) {
 		//alert('uno ' + $('#method').val());

@@ -45,8 +45,8 @@ class Account extends Model
 		 return $this->hasMany('App\Model\Administration\Contact')->withTrashed();
 	}
 	
-	public function businessRecords() {
-		return $this->hasMany('App\Model\Administration\BusinessRecord')->withTrashed();
+	public function interviews() {
+		 return $this->hasMany('App\Model\Administration\Interview');
 	}
 	
 	public function canDelete() {
@@ -68,12 +68,6 @@ class Account extends Model
 		if ($this->contacts->isNotEmpty()) {
 			foreach($this->contacts as $contact) {
 				$contact->delete();
-			}
-		}
-		
-		if ($this->businessRecords->isNotEmpty()) {
-			foreach($this->businessRecords as $businessRecord) {
-				$businessRecord->delete();
 			}
 		}
 		

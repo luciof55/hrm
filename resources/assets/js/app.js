@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('./framework');
-require('./upsales');
+require('./hrm');
 
 window.Vue = require('vue');
 

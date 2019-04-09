@@ -28,7 +28,7 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    App\Http\UpsalesKernel::class
+    App\Http\HRMKernel::class
 );
 
 $app->singleton(

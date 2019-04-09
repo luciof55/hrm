@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\UpsalesController;
+use App\Http\Controllers\HRMController;
 
-class HomeController extends UpsalesController
+class HomeController extends HRMController
 {
 	protected $repository;
-	protected $transitionRepository;
+	protected $interviewRepository;
 	protected $accountRepository;
 	protected $categoryRepository;
 	
@@ -19,12 +19,12 @@ class HomeController extends UpsalesController
      *
      * @return void
      */
-    public function __construct(\App\Repositories\Contracts\Administration\WorkflowRepository $repository,
-	\App\Repositories\Contracts\Administration\TransitionRepository $transitionRepository,
+    public function __construct(\App\Repositories\Contracts\Administration\SellerRepository $repository,
+	\App\Repositories\Contracts\Administration\InterviewRepository $interviewRepository,
 	\App\Repositories\Contracts\Gondola\CategoryRepository $categoryRepository, \App\Repositories\Contracts\Administration\AccountRepository $accountRepository) {
 		
 		$this->repository = $repository;
-		$this->transitionRepository = $transitionRepository;
+		$this->interviewRepository = $interviewRepository;
 		$this->categoryRepository = $categoryRepository;
 		$this->accountRepository = $accountRepository;
         $this->middleware('auth');
@@ -33,12 +33,12 @@ class HomeController extends UpsalesController
 	public function index(\Illuminate\Http\Request $request) {
 		$collection = collect([]);
 		
-		$entity = 'workflows';
+		$entity = 'sellers';
 		$collection->put('entity', $entity);
 		
-		$actionCreate = 'administration.workflows.create';
+		$actionCreate = 'administration.sellers.create';
 		$collection->put('actionCreate', $actionCreate);
-		$actionEdit = action('Administration\WorkflowController@index').'/|id|/edit/';
+		$actionEdit = action('Administration\SellerController@index').'/|id|/edit/';
 		$collection->put('actionEdit', $actionEdit);
 		
 		$page = $request->input('page');
@@ -52,7 +52,7 @@ class HomeController extends UpsalesController
 		$orders = collect([]);
 		$orders->put('updated_at', 'updated_at'); 
 		
-		$query = $this->repository->getInstance()->join('transitions', 'workflows.id', '=', 'transitions.workflow_id')->select('workflows.*')->distinct();
+		$query = $this->repository->getInstance()->join('interviews', 'sellers.id', '=', 'interviews.seller_id')->select('sellers.*')->distinct();
 		
 		if (isset($collectionFilter) && $collectionFilter->isNotEmpty()) {
 			$totalItems = $this->repository->countWithTrashed($query, $collectionFilter);

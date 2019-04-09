@@ -85,8 +85,8 @@ return [
 	
 	'Entrevistado' => 'Entrevistado',
 	
-	'Transitions' => 'Entrevistas',
-	'Transition' => 'Entrevista',
+	'Interviews' => 'Entrevistas',
+	'Interview' => 'Entrevista',
 	
 	'Categories' => 'Puestos',
 	'Category' => 'Puesto',

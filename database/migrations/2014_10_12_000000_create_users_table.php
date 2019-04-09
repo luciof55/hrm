@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email', 100)->unique();
             $table->string('password');
             $table->rememberToken();
+			$table->boolean('ldap_login')->default(0);
+			$table->timestamp('last_login_at')->nullable();
             $table->timestamps();
         });
     }

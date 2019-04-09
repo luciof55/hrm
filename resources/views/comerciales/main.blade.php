@@ -34,19 +34,19 @@
 							<div class="col-3">
 								{{ Form::select('entrevistado_filter', $entrevistadoOptions, $filters->get('entrevistado_filter'), ['placeholder' => 'Entrevistado...', 'class' => 'form-control', 'id' => 'entrevistado_filter'])}}
 							</div>
-							<div class="col-1"><label for="transitions-account_id_filter" class="col-form-label text-md-right">@lang('messages.Account')</label></div>
+							<div class="col-1"><label for="interviews-account_id_filter" class="col-form-label text-md-right">@lang('messages.Account')</label></div>
 							<div class="col-3">
-								{{ Form::select('transitions-account_id_filter', $accounts, $filters->get('transitions-account_id_filter'), ['placeholder' => 'Empresa...', 'class' => 'form-control', 'id' => 'transitions-account_id_filter'])}}
+								{{ Form::select('interviews-account_id_filter', $accounts, $filters->get('interviews-account_id_filter'), ['placeholder' => 'Empresa...', 'class' => 'form-control', 'id' => 'interviews-account_id_filter'])}}
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="col-1"><label for="transition-zonas_filter" class="col-form-label text-md-right">@lang('messages.Zonas')</label></div>
+							<div class="col-1"><label for="interview-zonas_filter" class="col-form-label text-md-right">@lang('messages.Zonas')</label></div>
 							<div class="col-3">
-								<input class="form-control" type="text" placeholder="@lang('messages.Zonas')" id="transitions-zonas_filter" name="transitions-zonas_filter" value="{{ $filters->get('transitions-zonas_filter') }}">
+								<input class="form-control" type="text" placeholder="@lang('messages.Zonas')" id="interviews-zonas_filter" name="interviews-zonas_filter" value="{{ $filters->get('interviews-zonas_filter') }}">
 							</div>
-							<div class="col-1"><label for="transition-anio_filter" class="col-form-label text-md-right">@lang('messages.Anio')</label></div>
+							<div class="col-1"><label for="interview-anio_filter" class="col-form-label text-md-right">@lang('messages.Anio')</label></div>
 							<div class="col-3">
-								<input class="form-control" type="text" placeholder="@lang('messages.Anio')" id="transitions-anio_filter" name="transitions-anio_filter" value="{{ $filters->get('transitions-anio_filter') }}">
+								<input class="form-control" type="text" placeholder="@lang('messages.Anio')" id="interviews-anio_filter" name="interviews-anio_filter" value="{{ $filters->get('interviews-anio_filter') }}">
 							</div>
 							<div class="col-4">
 								<div class="d-flex justify-content-end">
@@ -69,7 +69,7 @@
 					<div class="d-flex w-100">
 						<div class="mr-auto p-2"><h5>{{$resultMessage}}</h5></div>
 						<div class="">
-							<button class="d-none d-sm-block btn btn-outline-success" type="button" onclick="location.href='{{route('administration.workflows.create')}}'"><i class="pr-2 fa fa-plus"></i>@lang('messages.New')</button>
+							<button class="d-none d-sm-block btn btn-outline-success" type="button" onclick="location.href='{{route('administration.sellers.create')}}'"><i class="pr-2 fa fa-plus"></i>@lang('messages.New')</button>
 							<button class="d-block d-sm-none btn btn-info" type="reset"><i class="fa fa-undo"></i></button>
 						</div>
 					</div>
@@ -88,20 +88,20 @@
 									<div class="card-header">
 										<div class="d-flex">
 											<div class="mr-auto">
-												<a href="{{route('administration.workflows.edit', ['id' => $command->id])}}">{{ $command->name }}</a> - <span class="badge badge-light">{{count($command->transitions)}} Entrevistas</span>
+												<a href="{{route('administration.sellers.edit', ['id' => $command->id])}}">{{ $command->name }}</a> - <span class="badge badge-light">{{count($command->interviews)}} Entrevistas</span>
 											</div>
 											<div class="">
 												@if (!blank($command->files))
-													<a href="{{route('administration.workflows_download')}}?id={{$command->id}}"><i class="fa fa-download"></i></a>
+													<a href="{{route('administration.sellers_download')}}?id={{$command->id}}"><i class="fa fa-download"></i></a>
 												@endif
 											</div>
 										</div>
 									</div>
 									<div class="card-body" style="padding: 0px">
-										@if ($command->transitions)
+										@if ($command->interviews)
 											<ul class="list-group list-group-flush">
-											@foreach ($command->transitions as $transition)
-												<li class="list-group-item">{{$transition->anio}} - {{$transition->account->name}} - {{$transition->zonas}}</li>
+											@foreach ($command->interviews as $interview)
+												<li class="list-group-item">{{$interview->anio}} - {{$interview->account->name}} - {{$interview->zonas}}</li>
 											@endforeach
 											</ul>
 										@endif

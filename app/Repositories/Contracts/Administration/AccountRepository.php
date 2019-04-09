@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Contracts\Administration;
 
-use App\Repositories\Contracts\UpsalesBaseRepository;
+use App\Repositories\Contracts\HRMBaseRepository;
 
-interface AccountRepository extends UpsalesBaseRepository
+interface AccountRepository extends HRMBaseRepository
 {
 	//
 }

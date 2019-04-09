@@ -4,7 +4,7 @@ return [
 
 	'files_directory' => env('FILES_DIRECTORY', 'files'),
 
-	'user_class' => 'App\UpsalesUser',
+	'user_class' => 'App\HRMUser',
 
 	'default_public_profile' => env('DEFAULT_PUBLIC_PROFILE', '2'),
 
@@ -167,11 +167,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppUpsalesServiceProvider::class,
+        App\Providers\AppHRMServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteUpsalesServiceProvider::class,
+        App\Providers\RouteHRMServiceProvider::class,
 		//App\Providers\GoogleServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		App\Providers\RequestUtilsServiceProvider::class,

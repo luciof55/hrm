@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Administration;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\UpsalesController;
+use App\Http\Controllers\HRMController;
 
-class AdministrationController extends UpsalesController
+class AdministrationController extends HRMController
 {	
     /**
      * Create a new controller instance.

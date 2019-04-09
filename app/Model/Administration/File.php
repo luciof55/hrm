@@ -12,10 +12,10 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'filename', 'id', 'workflow_id', 'original_filename'
+        'filename', 'id', 'seller_id', 'original_filename'
     ];
 	
-	public function workflow() {
-		 return $this->belongsTo('App\Model\Administration\Workflow')->withTrashed();
+	public function seller() {
+		 return $this->belongsTo('App\Model\Administration\Seller')->withTrashed();
 	}
 }

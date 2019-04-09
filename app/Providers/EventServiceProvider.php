@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        //
+		//
     ];
 	
 	/**
@@ -22,7 +22,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        'App\Listeners\BusinessRecordEventSubscriber',
+        'App\Listeners\UserEventSubscriber',
     ];
 
     /**

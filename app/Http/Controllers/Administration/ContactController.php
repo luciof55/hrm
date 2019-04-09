@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\UpsalesBaseController;
+use App\Http\Controllers\HRMBaseController;
 use App\Repositories\Contracts\Administration\ContactRepository;
 use App\Repositories\Contracts\Administration\AccountRepository;
 use App\Repositories\Contracts\UserRepository;
 
-class ContactController extends UpsalesBaseController
+class ContactController extends HRMBaseController
 {
 
 	protected $userRepository;

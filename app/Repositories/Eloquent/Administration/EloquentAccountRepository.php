@@ -29,12 +29,12 @@ class EloquentAccountRepository extends EloquentBaseRepository implements Accoun
 		$result->put('status', true);
 		
 		if ($account->contacts->isNotEmpty() || !$account->canDelete()) {
-			$result->put('message', "Existen contactos relacionados, no se puede eliminar");
+			$result->put('message', "Existen contactos relacionados, no se puede eliminar la empresa.");
 			$result->put('status', false);
 		}
 		
-		if ($account->businessRecords->isNotEmpty() || !$account->canDelete()) {
-			$result->put('message', "Existen potenciales relacionados, no se puede eliminar");
+		if ($account->interviews->isNotEmpty() || !$account->canDelete()) {
+			$result->put('message', "Existen entrevistas relacionadas, no se puede eliminar la empresa.");
 			$result->put('status', false);
 		}
 		
